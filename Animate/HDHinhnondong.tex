@@ -1,0 +1,60 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\a{3}
+\def\hh{5}
+\pgfmathsetmacro\b{\a/3}
+\def\sfa{180}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\sfa}{i=0+1}{
+%\foreach \i in {0,1,...,179,180,179,...,0}{
+\begin{tikzpicture}[transform shape,join=round,cap=round,thick,white]
+\pgfmathsetmacro\h{\b+\hh *\i/\sfa}
+\pgfmathsetmacro\yo{(\b^2)/\h}
+\pgfmathsetmacro\go{asin(\yo/\b)}
+\pgfmathsetmacro\xo{\a *cos(\go)}
+\pgfmathsetmacro\r{sqrt(\a^2 + .4*(\hh+\b)^2)}
+\pgfmathsetmacro\gm{2*\i}
+\pgfmathsetmacro\gn{\gm+180}
+\pgfmathsetmacro\ktm{int(mod(\gm,360))}
+\pgfmathsetmacro\ktn{int(mod(\gn,360))}
+\path
+(0:0) coordinate (O)
+(\xo,\yo) coordinate (Mo) 
+(180:\a) coordinate (A)
+(90:\h) coordinate (S)
+(0:\a) arc (0:\gm:{\a} and {\b}) coordinate (M)
+(0:\a) arc (0:\gn:{\a} and {\b}) coordinate (N)
+;
+\clip (90:.5*\hh+.5*\b) circle (\r+1);
+\fill[cyan] (90:.5*\hh+.5*\b) circle (\r);
+\fill[brown!50,opacity=.5] (O) ellipse ({\a} and {\b});
+\fill[orange,opacity=.5] (S)--(M)--(N);
+\ifnum \ktm>\go
+		\ifnum \ktm <180-\go \draw[dashed] (S)--(M);
+		\else	\draw (S)--(M);
+		\fi
+\else
+\draw (S)--(M);
+\fi 
+\ifnum \ktn>\go
+		\ifnum \ktn <180-\go \draw[dashed] (S)--(N);
+		\else	\draw (S)--(N);
+		\fi
+\else
+\draw (S)--(N);
+\fi 
+\draw[dashed] 
+(Mo) arc (\go:180-\go:{\a} and {\b})
+(O) node[below]{$O$}--(S)node[above]{$S$} node[pos=.5,left]{$h$}
+(O)--(A)node[left]{$A$}
+(N)node[below right]{$N$}--(M)node[above left]{$M$}
+;
+\draw (S) --(\xo,\yo)node[pos=.5,above right]{$l$} arc (\go:-180-\go:{\a} and {\b})--cycle;
+\foreach \x in {A,O,M,N,S}\fill[ball color=orange] (\x) circle (.05);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

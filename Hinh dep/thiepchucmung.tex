@@ -1,0 +1,44 @@
+\documentclass[tikz,border=1mm]{standalone}
+%\usepackage[utf8]{vietnam}
+\usepackage{fontspec}
+\usepackage{tikz}
+\usetikzlibrary{calc,decorations.text,intersections}
+%==============
+\begin{document}
+	\pagecolor{red}
+	\def\doanvan{\begin{minipage}[]{1.0\textwidth}
+			\fontspec{UVN Buc Thu}
+			\begin{center}
+				\bfseries Chúc mừng năm mới\\
+				{\fontspec{UTM Azuki} XUÂN CANH TÝ}
+			\end{center}
+	\end{minipage}}
+	\begin{tikzpicture}[line cap=round,line join=round,scale=1.0, font=\footnotesize,>=stealth]
+		\clip (0,0) rectangle (16,9);
+		\path (8,4.5) node[violet,font={\fontsize{50pt}{10pt}\selectfont}]
+		(box)
+		{\doanvan
+		};
+		\foreach \bankinh/\mau in {
+			6.0/yellow,
+			5.5/green,
+			5.0/gray,
+			4.5/green,
+			4.0/white,
+			3.5/yellow,
+			3.0/violet,
+			2.5/cyan,
+			2.0/blue,
+			1.5/yellow,
+			1.0/blue,
+			0.5/black}
+		{
+			\begin{scope}
+				\clip (box.center) circle (\bankinh cm);
+				\path (8,4.5) node[\mau,font={\fontsize{50pt}{10pt}\selectfont}]
+				(box)
+				{\doanvan};
+			\end{scope}
+		}
+	\end{tikzpicture}
+\end{document}

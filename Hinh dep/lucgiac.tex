@@ -1,0 +1,17 @@
+%\documentclass[tikz,border=2mm,convert={density=960,outfile=\jobname.png}]{standalone}
+\documentclass[tikz,border=2mm]{standalone}
+\usetikzlibrary{calc}
+\begin{document}
+	\begin{tikzpicture}[line join=round]
+		\def\a{2}
+		\pgfmathsetmacro{\c}{\a *sqrt(2)}
+		\def\g{-30}
+		\foreach \i in {1,...,6}{
+			\pgfmathsetmacro{\gocm}{\g +\i *60}
+			\pgfmathsetmacro{\goch}{\g +(\i+1)*60 }
+			\draw[fill=cyan!50] (\gocm:\a)coordinate(A\i)--(\goch:\a)coordinate(B\i)--($(A\i)!2!(B\i)$)--([turn]-135:\c)coordinate(D\i)--cycle;
+			\draw(A\i)--(D\i)--([turn]-150:\a/2+.03);
+		}
+		\draw[fill=yellow!50](A1)--(A2)--(A3)--(A4)--(A5)--(A6)--cycle;
+	\end{tikzpicture}
+\end{document}

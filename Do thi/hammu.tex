@@ -1,0 +1,31 @@
+\documentclass[border=0.1pt,tikz]{standalone}
+\usetikzlibrary{calc,patterns,decorations.text,backgrounds}
+\usepackage[utf8]{vietnam}
+\usepackage{expl3}
+\ExplSyntaxOn
+\cs_set_eq:NN \fpeval \fp_eval:n
+\ExplSyntaxOff
+\begin{document}
+	%\pagecolor{yellow!30}
+	\def\xt{0.6}
+	\pgfmathsetmacro{\yt}{4*exp(-\xt^2)}
+	\tikzset{
+		background rectangle/.style={
+			draw=teal,
+			fill=yellow!35,
+			line width=1pt
+		}
+	}
+	\begin{tikzpicture}[framed,line join=round, line cap=round,>=stealth,color=teal]
+		\draw[thick,->] (-3.25,-0.05)--(3.5,-0.05) node[below] {$x$};
+		\draw[thick,->] (0,-0.6)--(0,4.5) node[right] {$y$};
+		\path (0,0) node [below left] {$O$};
+		\draw[pattern=north west lines,pattern color=teal,thick] (-\xt,-0.05) rectangle (\xt,\yt);
+		\draw[samples=200,domain=-3:3,variable=\x,violet,thick,smooth] plot ({\x}, {\fpeval{4/exp((\x*\x))}});
+		\draw[fill=white] (-\xt,\yt) circle (1pt) node[above left]{$ A $}
+		(\xt,\yt) circle (1pt) node[above right]{$ B $};
+		\path[decorate,decoration={text along path,text color=red!65!white, raise=1.25mm,
+			text={|\fontsize{10pt}{10pt}\selectfont|{Đ\,}{ồ} th{ị} {$y$}{$=$}{{$4e^{-x^2}$}} } }]
+		plot[domain=-2:-0.5] (\x,{\fpeval{4/exp((\x*\x))}});
+	\end{tikzpicture}
+\end{document}

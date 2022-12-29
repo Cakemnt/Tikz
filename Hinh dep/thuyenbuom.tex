@@ -1,0 +1,55 @@
+\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+%\documentclass[tikz,border=5mm]{standalone}
+\usetikzlibrary{calc}
+\definecolor{chim}{RGB}{18, 76, 154}
+\definecolor{buom}{RGB}{11, 64, 119}
+\begin{document} 
+	\begin{tikzpicture}
+		\draw
+		(-4,-5) rectangle(4,5) ;
+		\fill[chim]
+		(-2.8,1.22) 
+		..controls +(0:.4) and +(120:.4)..(-1.55,.78) 
+		..controls +(40:.4) and +(180:.4)..(-.3,1.17) 
+		..controls +(160:.4) and +(20:.4)..(-1.55,1.07) 
+		..controls +(150:.4) and +(30:.4)..(-2.8,1.22) ;
+		\fill[chim]
+		(-.3,2.2) 
+		..controls +(-25:.4) and +(120:.4)..(.21,1.72) 
+		..controls +(15:.4) and +(170:.4)..(.95,1.66) 
+		..controls +(140:.3) and +(0:.3)..(.27,1.86) 
+		..controls +(120:.25) and +(0:.25)..(-.3,2.2) ;
+		\fill[buom]
+		(0,0) 
+		..controls +(20:1) and +(-105:1)..(2.03,2.4) 
+		..controls +(-60:.6) and +(60:.6)..(1.83,.18) 
+		..controls +(160:.4) and +(30:.7)..(0,0) ;
+		\fill[buom]
+		(1.91,.21) 
+		..controls +(45:1) and +(-72:.6)..((2.08,2.5) 
+		..controls +(-35:1) and +(62:1)..(3.05,.05) 
+		..controls +(120:.55) and +(30:.5)..(1.91,.21) ;
+		\fill[buom]
+		(0,-.13) 
+		..controls +(-20:.3) and +(120:.3)..(.62,-.59) 
+		..controls +(-12:1.2) and +(-120:.😎..(3.05,-.03) 
+		..controls +(175:.6) and +(15:.4)..(0,-.13) ;
+		\fill[buom]
+		(-3.36,-.77) 
+		..controls +(-55:1) and +(-170:1)..(0,-1.47) 
+		..controls +(10:1.4) and +(150:1.2)..(3.78,-1.53) 
+		..controls +(115:1.2) and +(5:1.3)..(0,-.97) 
+		..controls +(-170:.6) and +(-24:1.3)..(-3.36,-.77) ;
+		\fill[buom]
+		(-1.48,-1.58) 
+		..controls +(-30:.6) and +(-165:.4)..(1,-1.6) 
+		..controls +(15:.4) and +(160:.4)..(3.35,-1.46) 
+		..controls +(130:.55) and +(5:.4)..(0,-1.58) 
+		..controls +(-170:.4) and +(-10:.4)..(-1.48,-1.58) ;
+		\fill[buom]
+		(.5,-1.74) 
+		..controls +(-20:.9) and +(175:1)..(3.12,-1.55) 
+		..controls +(150:.5) and +(-20:.43)..(.5,-1.74) ;
+		\node at (-2,3)[scale=.05]{\includegraphics{MYANH}};
+	\end{tikzpicture}
+\end{document}

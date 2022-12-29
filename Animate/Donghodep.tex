@@ -1,0 +1,64 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\a{1}%
+\def\n{8}
+\pgfmathsetmacro{\r}{\a *sqrt(2)}
+\pgfmathsetmacro{\goc}{90/(\n-1)}%Góc chia
+\pgfmathsetmacro{\m}{4*(\n-1)}%Số điểm chia
+\pgfmathsetmacro{\l}{4*(\n-1)-1}
+\pgfmathsetmacro{\s}{\n-1}
+\pgfmathsetmacro{\b}{\a *(1+sqrt(2)) *sin(0.5*\goc)*sec(\goc)}%Độ dài cạnh hình bình hành ngoài
+\begin{animateinline}[controls,autoplay,loop]{16}
+\multiframe{360}{i=0+1}{
+%\foreach \i in {0,1,...,359}{
+\begin{tikzpicture}[line cap=round,line width=2]
+\pgfmathsetmacro{\h}{sqrt(\r^2-\a^2 *(cos(-\i))^2)+\a *(sin(-\i))}
+\pgfmathsetmacro{\g}{acos(\h *sin(\goc/2)/\b)}
+\pgfmathsetmacro{\hm}{\h *cos(0.5*\goc)+\b *sin(\g)}
+\pgfmathsetmacro{\hh}{\h+2*\b *cos(90+0.5*\goc-\g)}
+\path 
+(0:0) coordinate (O)
+(-\i:\a) coordinate (A)
+(90:\h) coordinate (B)
+(-\i+90:\a/16) coordinate (A1)
+(-\i-90:\a/16) coordinate (A2)
+;
+\foreach \k in {1,...,\m}{
+\path 
+(\k *\goc:\h) coordinate (B\k)
+(\k *\goc-0.5*\goc:\hm) coordinate (C\k)
+(\k *\goc:\hh) coordinate (D\k)
+;
+}
+\clip (-2.1*\r,-2.1*\r) rectangle (2.1*\r,2.1*\r);
+\fill[black] (-2.1*\r,-2.1*\r) rectangle (2.1*\r,2.1*\r);
+\foreach \i in {1,...,\m}{
+\draw[blue] (B\i)--(C\i);
+\draw[violet] (C\i)--(D\i);
+}
+\foreach \i in {1,...,\l}{
+\pgfmathsetmacro{\j}{\i+1}
+\draw[red] (B\i)--(C\j);
+\draw[yellow] (C\j)--(D\i);
+}
+\draw[red] (B\m)--(C1);
+\draw[yellow] (D\m)--(C1);
+\foreach \i in {1,...,\m}{
+\fill[white] (B\i) circle (0.8pt);
+\fill[white] (C\i) circle (0.8pt);
+\fill[white] (D\i) circle (0.8pt);
+}
+\fill[blue!50!red!50] (-\i :1.5*\a)--(-\i+90:\a/8)--(-\i+180:\a/8)--(-\i-90:\a/8)--cycle;
+\foreach \x in {A1,A2}{\fill[white] (\x) circle (0.8pt);}
+\draw[gray] (A)--(B\s);
+\foreach \x in {A,B\s}{\fill[white] (\x) circle (0.8pt);}
+\end{tikzpicture}
+}
+\end{animateinline}
+
+\end{document}
+%%9:42:7 12/8/2019Last Modification of contents

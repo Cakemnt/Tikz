@@ -1,0 +1,13 @@
+%\documentclass[tikz,border=1cm,convert={density=600,outfile=\jobname.png}]{standalone}
+\documentclass[tikz,border=1cm]{standalone}
+\begin{document}
+	% Vở ô ly
+	\begin{tikzpicture}[line join=round,line cap=round]
+		\draw[very thin,gray,step=.2,opacity=.5] (0,0) grid (8,8);
+		\draw[thick,gray,opacity=.5] (0,0) grid (8,8);
+	\end{tikzpicture}
+	% Cờ caro
+	\begin{tikzpicture}[line join=round,line cap=round]
+		\draw[thin,magenta,step=.5,opacity=.5] (0,0) grid (8,8);
+	\end{tikzpicture}
+\end{document}

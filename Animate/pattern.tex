@@ -1,0 +1,36 @@
+%\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+\documentclass{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{animate}
+\usepackage{ifthen}
+\begin{document}
+\def\hinhvuong(#1,#2){
+\draw (#1,#2) rectangle (#1+1,#2+1);
+\draw[fill=red] (#1,#2+0.75) rectangle (#1+0.25,#2+1);
+\draw[fill=blue] (#1,#2) rectangle (#1+0.25,#2+0.25);
+\draw[fill=orange] (#1+0.75,#2) rectangle (#1+1,#2+0.25);
+\draw[fill=yellow] (#1+0.75,#2+0.75) rectangle (#1+1,#2+1);
+}
+\def\n{30}
+\def\m{7}
+\pgfmathsetmacro{\mm}{\m-1}
+\pgfmathsetmacro{\cao}{div(\n,\m)+1.5}
+%==================
+\begin{animateinline}[controls,autoplay,loop]{4}
+\multiframe{\n}{i=0+1}{
+%\foreach \i in {1,...,200}{
+\pgfmathsetmacro{\k}{div(\i,\m)}
+\pgfmathsetmacro{\h}{mod(\i,\m)}
+\begin{tikzpicture}
+\clip (0,-0.5) rectangle (\m+0.5,\cao);
+\ifthenelse{\k<1}{\foreach \x in {0,...,\h}{\hinhvuong(\x,0)}}{}
+\ifthenelse{\k >0}{\pgfmathsetmacro{\km}{\k-1}
+\foreach \y in {0,...,\km}{\foreach \x in {0,...,\mm}{\hinhvuong(\x,\y)}}
+\foreach \x in {0,...,\h}{\hinhvuong(\x,\k)}
+}{}
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

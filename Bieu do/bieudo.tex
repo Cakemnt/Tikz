@@ -1,0 +1,28 @@
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage[utf8]{vietnam}
+\setlength{\parskip}{1em}
+\begin{document}
+	\definecolor{maua}{RGB}{150,64,129}
+	\definecolor{maub}{RGB}{207,100,28}
+	\definecolor{mauc}{RGB}{0,134,179}
+	\definecolor{maud}{RGB}{147,204,221}
+	\def\a{5}
+	\begin{tikzpicture}[font=\footnotesize,mauc]
+		\path
+		(-\a,0) node[above=5mm,text width=4.5cm,align=center] (A1){{\bfseries Hiểu biết nền tảng} \\ Để ứng dụng giải quyết những vấn đề thường ngày.}
+		(0,0) node[above=5mm,text width=4.5cm,align=center] (B1){{\bfseries Năng lực} \\ Giúp đối mặt với những thách thức phức tạp.}
+		(\a,0) node[above=5mm,text width=4.5cm,align=center] (C1){{\bfseries Phẩm chất} \\ Nhằm hoạt động trong những môi trường liên tục biến đổi.}
+		;
+		\renewcommand{\baselinestretch}{2.0}
+		\path
+		(-\a,0) node[below,white,text width=4.5cm, fill=maua,rounded corners=10](A){1. Đọc viết. \\ 2. Tính toán. \\ 3. Hiểu biết về nghiên cứu khoa học. \\ 4. Hiểu biết về ICT (CNTT và truyền thông). \\ 5. Hiểu biết kỹ năng tài chính cơ bản. \\ 6. Hiểu biết về văn hóa và quyền/nghĩa vụ công dân.}
+		(0,0) node[below,white,text width=4.5cm, fill=maub,rounded corners=10](B){7. Tư duy phản biện/ \\ giải quyết vấn đề. \\ 8. Sáng tạo. \\ 9. Giao tiếp. \\ 10. Hợp tác với nhau. }
+		(\a,0) node[below,white,text width=4.5cm, fill=mauc,rounded corners=10](C){11. Sự tò mò. \\ 12. Chủ động khởi xướng. \\ 13. Bền bỉ, kiên trì. \\ 14. Thích nghi. \\ 15. Lãnh đạo. \\ 16. Nhận biết được các vấn đề văn hóa xã hội. }
+		;
+		\fill[maua] (A1.north west) to[out=90, in =-135] (-1.5,4)--(-.75,4) to[out=-120,in=90] ([xshift=-.75cm]A1.north east)--cycle;
+		\fill[maub] ([xshift=.75cm]B1.north west) to[out=90, in =-90] (-.4,4)--(.4,4) to[out=-90,in=90] ([xshift=-.75cm]B1.north east)--cycle;
+		\fill[mauc] ([xshift=.75cm]C1.north west) to[out=90, in =-60] (.75,4)--(1.5,4) to[out=-45,in=90] (C1.north east)--cycle;
+		\path (0,4) node[above=3mm]{\bfseries NHỮNG KỸ NĂNG CHO THẾ KỶ 21};
+		\path ([yshift=-4cm]B.south)node[below,fill=maud, text width=14.5cm, align=center]{\bfseries\normalsize Học tập suốt đời.};
+	\end{tikzpicture}
+\end{document}

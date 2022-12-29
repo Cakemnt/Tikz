@@ -1,0 +1,36 @@
+\documentclass[tikz,border=5mm]{standalone}
+%\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\begin{document}
+	\begin{tikzpicture}
+		\begin{axis}[samples=200]
+			\addplot[blue,domain=-3:1.85] {1/(x-2) +3 };
+			\addplot[blue,domain=2.15:6] {1/(x-2) + 3};
+			\draw[red] (axis cs:2,-4) -- (axis cs:2,10);
+		\end{axis}
+	\end{tikzpicture}
+	\begin{tikzpicture}
+		\begin{axis}[axis lines=middle,samples=200]
+			\addplot[blue,domain=-3:1.85] {1/(x-2) +3 };
+			\addplot[blue,domain=2.15:6] {1/(x-2) + 3};
+			\draw[red!20,dashed] (axis cs:2,-4) -- (axis cs:2,10);
+		\end{axis}
+	\end{tikzpicture}
+	\begin{tikzpicture}[yscale=.4,xscale=.7]
+		\draw[->] (-3,0)--(6,0) node[below]{$x$};
+		\draw[->] (0,-4)--(0,10) node[left]{$y$};
+		\draw[blue,smooth]
+		plot[domain=-3:1.85] (\x,{1/(\x-2)+3})
+		plot[domain=2.15:6] (\x,{1/(\x-2)+3});
+		\draw[red,dashed] (2,-4)--(2,10) (-3,3)--(6,3);
+		\path
+		(0,0) node[below left]{O}
+		(4.5,5) node[blue]{$y=3+\dfrac{1}{x-2}$}
+		(0,2.5) node[scale=.7,blue,below left]{$5/2$}
+		(5/3,0) node[scale=.7,blue,below left]{$5/3$}
+		(2,0) node[red,below right]{$2$}
+		(0,3) node[red,above left]{$3$}
+		;
+	\end{tikzpicture}
+\end{document}

@@ -1,0 +1,32 @@
+\documentclass[border=5mm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{animate}
+\begin{document}
+	\def\goc{30}
+	\def\h{5}
+	\pgfmathsetmacro{\l}{\h/sin(\goc)}
+	\pgfmathsetmacro{\a}{\l *cos(\goc)}
+	\pgfmathsetmacro{\r}{\h/10}
+	\pgfmathsetmacro{\lm}{\l+\r *sec(\goc)}
+	\pgfmathsetmacro{\hm}{\h+(\lm-\l)*sin(\goc)}
+	\begin{animateinline}[controls,autoplay,loop,palindrome]{16}
+		\multiframe{100}{i=0+1}{
+			\begin{tikzpicture}
+				\pgfmathsetmacro{\s}{3*\r+\i *(\h-2*\r)/100}
+				\pgfmathsetmacro{\hv}{\r+(100-\i)*(\h-2*\r)/100}
+				\pgfmathsetmacro{\quay}{-\i *4}
+				\begin{scope}[shift={(\goc:\lm)}]
+					\draw(0:0) circle (\r);
+					\foreach \k in {0,30,...,150}{\draw (\k+\quay:\r)--(\k+180+\quay:\r);}
+					\fill[black] (0:0) circle (\r/10);
+				\end{scope}
+				\draw[fill=gray!20] (\goc:\lm)--(0:0)--(0:\a)--([turn]90:\h-\r)--cycle;
+				\draw[fill=gray!80] (\goc:\s-\r)--(\goc:\s) --([turn]90:2*\r)--([turn]90:\r)--cycle;
+				\draw[shift={(90+\goc:\r)}] (\goc:\s)--(\goc:\lm);
+				\draw[shift={(0:\a+2*\r)}] (90:\hv)--(90:\hm);
+				\draw[shift={(0:\a+2*\r)},fill=gray!80] (-\r,\hv)--(\r,\hv)--([turn]-90:\r)--([turn]-90:2*\r)--cycle;
+			\end{tikzpicture}
+		}
+	\end{animateinline}
+\end{document}

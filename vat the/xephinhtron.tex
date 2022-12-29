@@ -1,0 +1,17 @@
+\documentclass[a4paper]{book}
+\usepackage[utf8]{vietnam}
+\usepackage{tikz}
+\begin{document}
+	\begin{tikzpicture}
+		\def\n{4}
+		\foreach \x in {1,...,\n}{
+			\begin{scope}[shift={(2*\x,0)}]
+				\draw (0,0) circle(1)
+				(60:2) circle(1)
+				(120:2) circle(1)
+				(240:2) circle(1)
+				(300:2) circle(1);
+			\end{scope}
+		}
+	\end{tikzpicture}
+\end{document}

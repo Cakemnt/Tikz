@@ -1,0 +1,17 @@
+\documentclass[border=2mm]{standalone} 
+\usepackage{tikz} 
+\pagecolor{yellow!5} 
+\begin{document} 
+	\def\n{8} 
+	\foreach \factor in {1,.5,rnd}
+	{ \pgfmathsetseed{2022} \begin{tikzpicture} 
+			\foreach \i in {0,...,\n} \foreach \j in {0,...,\n}
+			{ \pgfmathsetmacro{\R}{rnd} 
+				\pgfmathsetmacro{\G}{rnd} 
+				\pgfmathsetmacro{\B}{rnd} 
+				\definecolor{randcolor}{rgb}{\R,\G,\B} 
+				\pgfmathsetmacro{\randradius}{rnd*1pt} 
+				\coordinate (randcenter) at (\i+rnd,\j+rnd); 
+				\fill[randcolor,fill opacity=\factor] (randcenter) circle(\randradius); } 
+			\end{tikzpicture} } 
+	\end{document}

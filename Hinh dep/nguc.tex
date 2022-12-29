@@ -1,0 +1,56 @@
+\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+%\documentclass[tikz,border=5]{standalone}
+\begin{document}
+	\definecolor{nentrai}{RGB}{243, 212, 183}
+	\definecolor{nengiua}{RGB}{252, 225, 204}
+	\begin{tikzpicture}
+		\fill[shading=radial,color= nentrai,outer color= nengiua,inner color=white!20]
+		(-2,-4.5)rectangle (3,5);
+		\begin{scope}
+			\draw
+			(2.2,1.6) .. controls +(110:.25) and +(-110:.25) .. (2.1,2.2)
+			.. controls +(130:.4) and +(-160:.15) .. (2.1,2.7)
+			;
+			\draw (2.1,1.4) .. controls +(120:.2) and +(-90:.2) .. (2,1.7);
+			\draw
+			(.15,-4.5)--(0,-1.5)
+			.. controls +(110:.5) and +(-135:1.5) .. (.9,1)
+			.. controls +(45:.75) and +(-120:.5) .. (1.6,2)
+			.. controls +(70:.5) and +(70:.5) .. (2.1,1.9)
+			.. controls +(-110:.5) and +(85:.5) .. (1.5,.5)
+			(1.55,.75) .. controls +(-10:.5) and +(-150:.5) .. (2.1,1.1)
+			..controls +(90:.25) and +(-120:.25) .. (2.3,1.9)
+			.. controls +(110:.25) and +(-100:.25) .. (2.2,2.4)
+			.. controls +(125:.4) and +(-150:.2) .. (2.3,3.05)
+			.. controls +(-50:.5) and +(110:.5) .. (2.75,1.75)
+			.. controls +(-120:.25) and +(90:.25) .. (2.5,.4)
+			(2.3,3.05) .. controls +(90:.1) and +(170:.2) .. (2.6,3.2)
+			.. controls +(-90:.2) and +(120:.25) .. (2.8,1.75)
+			.. controls +(-90:.1) and +(90:.5) .. (2.55,.4)
+			.. controls +(-90:.4) and +(45:1.5) .. (1.4,-.7)
+			.. controls +(-130:.5) and +(100:.5) .. (1.05,-1.5)
+			-- (1.8,-4.5)
+			;
+			\draw[fill=brown!50!red!50]
+			(1.65,2) .. controls +(68:.6) and +(70:.6) .. (2.05,1.85)
+			.. controls +(180:.15) and +(-30:.15) .. (1.65,2)
+			;
+			\draw[fill=brown!50!red!50]
+			(2.475,2.7) ..controls +(100:.1) and +(-85:.2) .. (2.25,3.2)
+			.. controls +(-120:.2) and +(140:.25) .. (2.4,2.75)--cycle
+			;
+			\draw[fill=brown!50!red!50]
+			(2.63,2.9) .. controls +(95:.2) and +(-110:.1) .. (2.65,3.4)
+			.. controls +(190:.1) and +(100:.4) .. (2.55,2.9)--cycle
+			;
+		\end{scope}
+		\begin{scope}
+			\draw
+			(-2,5) .. controls +(-30:1) and +(120:1) .. (0,3)
+			.. controls +(-60:.05) and +(200:.1) .. (.2,3)
+			.. controls +(30:.3) and +(-30:.3) .. (.2,2.5)
+			.. controls +(-120:1.5) and +(0:1) .. (-2,0)
+			;
+		\end{scope}
+	\end{tikzpicture}
+\end{document}

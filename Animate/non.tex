@@ -1,0 +1,37 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,angles}
+\usepackage{animate}
+\begin{document}
+	\def\a{3}
+	\def\b{1}
+	\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+	\multiframe{100}{i=1+1}{
+		%\foreach \i in {1,...,49,50,49,...,1}{
+			\begin{tikzpicture}
+				\pgfmathsetmacro\ha{1+\i/25}
+				\pgfmathsetmacro\hb{5-\i/25}
+				\pgfmathsetmacro\gA{asin(\b/\ha)}
+				\pgfmathsetmacro\gB{asin(\b/\hb)}
+				\path
+				(0,0) coordinate (O)
+				(0:\a) coordinate (A)
+				(90:\ha) coordinate (S_a)
+				(270:\hb) coordinate (S_b)
+				(0:\a) arc (0:\gA:{\a} and {\b}) coordinate (Ma)
+				arc (\gA:180-\gA:{\a} and {\b}) coordinate (Na)
+				(0:\a) arc (0:-\gB:{\a} and {\b}) coordinate (Mb)
+				arc (-\gB:-180+\gB:{\a} and {\b}) coordinate (Nb);
+				\clip (-\a-1,-6) rectangle (\a+1,6);
+				\draw[dashed] 
+				(Ma) arc (\gA:180-\gA:{\a} and {\b}) (S_a)--(S_b) (0:\a)--(180:\a)
+				(Na)--(S_b);
+				\draw (0:\a) arc (0:\gA:{\a} and {\b})--(S_a)--(Na) arc (180-\gA:360:{\a} and {\b})
+				(Mb) --(S_b)--(Nb);
+				\pic[draw,angle radius=2mm]{right angle=S_a--Na--S_b};
+				\pic[draw,angle radius=2mm]{right angle=S_a--O--A};
+				\foreach \x/\g in {O/135,S_a/90,S_b/-90} \draw[fill=white] (\x) circle (.03pt) +(\g:.3) node{$\x$};
+			\end{tikzpicture}
+		}
+		\end{animateinline}
+	\end{document}

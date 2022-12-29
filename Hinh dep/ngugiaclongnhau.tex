@@ -1,0 +1,28 @@
+\documentclass[border=5mm]{standalone}
+\usepackage{tikz}
+\begin{document}
+	\def\pos{.2}
+	\colorlet{mycolor}{orange}
+	\begin{tikzpicture}[scale=3]
+		\path
+		(0:1) coordinate (A)
+		(60:1) coordinate (B)
+		(120:1) coordinate (C)
+		(180:1) coordinate (D)
+		(240:1) coordinate (E)
+		(300:1) coordinate (F);
+		\draw[fill=mycolor!10] (A)--(B)--(C)--(D)--(E)--(F)--cycle;
+		\foreach \i in {1,2,...,40}{
+			\pgfmathsetmacro{\j}{10+5*\i}
+			\path (A) coordinate (T);
+			\path (A)
+			--(B) coordinate[pos=\pos] (A)
+			--(C) coordinate[pos=\pos] (B)
+			--(D) coordinate[pos=\pos] (C)
+			--(E) coordinate[pos=\pos] (D)
+			--(F) coordinate[pos=\pos] (E)
+			--(T) coordinate[pos=\pos] (F);
+			\draw[fill=mycolor!\j] (A)--(B)--(C)--(D)--(E)--(F)--cycle;
+		}
+	\end{tikzpicture}
+\end{document}

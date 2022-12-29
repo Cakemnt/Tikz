@@ -1,0 +1,26 @@
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage[utf8]{vietnam}
+%==============
+\begin{document}
+	
+	\begin{tikzpicture}
+		\def\f(#1){4*exp(-(#1)^2)}
+		\def\a{0.5}
+		\def\b{}
+		\pgfmathsetmacro{\fa}{\f(\a)}
+		\draw[-stealth,yshift=-0.5mm] (-5,0)--(5,0)node[below left]{$x$};
+		\draw[-stealth] (0,-1)--(0,5)node[below left]{$y$};
+		\draw[smooth,blue] plot[domain=-4:4,samples=100] (\x,{\f(\x)});
+		%\draw[dashed] (-\a,0)--(-\a,\fa)--(\a,\fa)--(\a,0);
+		\path 
+		(0,0) node[below left]{$O$}
+		(-\a,\fa) node[above left]{$A$}
+		(\a,\fa)node[above right]{$B$}
+		;
+		\foreach \x in {0.25,0.5,...,2}{
+			\def\b{\x}
+			\pgfmathsetmacro{\fb}{\f(\b)} \draw[dashed] ([yshift=-0.5mm]-\b,0)--(-\b,\fb)--(\b,\fb)--([yshift=-0.5mm]\b,0);
+			\pgfmathsetmacro{\y}{4*\x} \path (-1,-\y) node{f(\x)=\fb};
+		}
+	\end{tikzpicture}
+\end{document}

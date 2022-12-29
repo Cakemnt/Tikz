@@ -1,0 +1,33 @@
+\documentclass{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{animate}
+\begin{document}
+%==================
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{100}{i=2+1}{
+%\foreach \i in {2,3,...,100,100,99,...,2}{
+\begin{tikzpicture}[line cap=round]
+\def\r{3}
+\path 
+(18:\r) coordinate (A)
+(90:\r) coordinate (B)
+(162:\r) coordinate (C)
+(234:\r) coordinate (D)
+(306:\r) coordinate (E)
+;
+\clip ($(A)+(18:5mm)$)--($(B)+(90:5mm)$)--($(C)+(162:5mm)$)--($(D)+(234:5mm)$)--($(E)+(306:5mm)$)--cycle;
+\draw[orange!50] (C)--(B);
+\draw[violet!50] (B)--(A);
+\foreach \x in {0,...,\i}{
+\pgfmathsetmacro{\k}{\x/\i}
+\draw[red!50] ($(E)!\k!(D)$)--($(D)!\k!(C)$);
+\draw[orange!50] ($(E)!\k!(D)$)--($(C)!\k!(B)$);
+\draw[violet!50] ($(E)!\k!(D)$)--($(B)!\k!(A)$);
+\draw[blue!50] ($(E)!\k!(D)$)--($(A)!\k!(E)$);
+}
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

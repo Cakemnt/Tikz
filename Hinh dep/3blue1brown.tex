@@ -1,0 +1,23 @@
+\documentclass[tikz,border=5mm]{standalone}
+%==============
+\begin{document}
+	\definecolor{nen}{RGB}{117,191,226}
+	\definecolor{col1}{RGB}{80,140,160}
+	\definecolor{col2}{RGB}{60,100,120}
+	\definecolor{col3}{RGB}{35,75,95}
+	\definecolor{col4}{RGB}{0,0,0}
+	\begin{tikzpicture}
+		\def\r{3}
+		\def\n{28}
+		\pgfmathsetmacro\g{360/\n}
+		\pgfmathsetmacro\rm{5*\r/6}
+		\fill[nen] (0:0) circle (\r);
+		\fill[col1] (\g/2:5*\r/6)\foreach \i in {1,...,\n}{--(\i *\g:5*\r/9)--(\i *\g+\g/2:5*\r/6)};
+		\fill[col2] (0:\r)\foreach \i in {1,...,\n}{--(\i *\g-\g/2:2*\r/3)--(\i *\g:\r)};
+		\fill[col3] (0:3*\r/4)\foreach \i in {1,...,\n}{--(\i *\g-\g/2:\r/2)--(\i *\g:3*\r/4)};
+		\fill[col4] (0:7*\r/12)\foreach \i in {1,...,\n}{--(\i *\g-\g/2:7*\r/18)--(\i *\g:7*\r/12)};
+		\fill[brown,opacity=.65] (0:0)--(90:\r) arc (90:180:\r)--cycle;
+		\fill[col4] (0:0) circle (\r/2);
+	\end{tikzpicture}
+	%=============
+\end{document}

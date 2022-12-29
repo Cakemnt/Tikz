@@ -1,0 +1,23 @@
+\documentclass[tikz,border=2mm]{standalone}
+\usetikzlibrary{calc,patterns}
+\usepackage[utf8]{vietnam}
+\begin{document}
+	\begin{tikzpicture}
+		\fill[pattern=north east lines,pattern color=cyan] (0:0)--(0:3) arc (0:100:3)--cycle;
+		\draw[double,double distance=1.5,line width=.5pt,color=cyan] (0:3) arc (0:100:3);
+		\path (50:1.75) node[fill=white,text=cyan,inner sep=1pt]{Âm nhạc};
+		\begin{scope}
+			\clip (0:0)--(100:3) arc (100:172:3)--(0,0);
+			\foreach \i in {-3,-2.8,...,3}\draw[double,color=magenta] (-3+\i,3+\i)--(3+\i,-3+\i);
+			\path (140:1.75) node[fill=white,text=magenta,inner sep=1pt]{Hội họa};
+		\end{scope}
+		\draw[double,double distance=1.5,line width=.5pt,color=magenta](100:3) arc (100:172:3);
+		\fill[pattern=fivepointed stars,pattern color=teal] (0,0)--+(172:3) arc (172:252:3)--cycle;
+		\draw[double,double distance=1.5,line width=.5pt,color=teal] (172:3) arc (172:252:3);
+		\path ($(212:1.65)-(6pt,0)$) node[fill=white,text=teal,inner sep=1pt] {Y.T khác};
+		\fill[pattern=crosshatch dots,pattern color=brown] (0,0)--(252:3) arc (252:360:3)--cycle;
+		\draw[double,double distance=1.5,line width=.5pt,color=brown] (252:3) arc (252:360:3);
+		\path (306:1.75) node[fill=white,text=brown,inner sep=1pt] {Thể thao};
+		\draw[double,double distance=1.5,line width=.5pt](0:0)--(0:2.95)(0:0)--(100:2.95)(0:0)--(172:2.95)(0:0)--(252:2.95);
+	\end{tikzpicture}
+\end{document}

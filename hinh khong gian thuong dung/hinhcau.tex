@@ -1,0 +1,34 @@
+\documentclass[tikz,border=3mm]{standalone}
+\usetikzlibrary{3dtools}% https://github.com/marmotghost/tikz-3dtools
+\begin{document}
+	\pgfdeclarelayer{background} 
+	\pgfdeclarelayer{foreground}
+	\pgfsetlayers{background,main,foreground}  
+	\begin{tikzpicture}[3d/install view={phi=100,theta=70},scale=1,line cap=butt,line join=round,visible/.style={draw,solid},hidden/.style={draw,very thin,cheating dash},declare function={a=4;b=4;r=sqrt(a^2+b^2)/2;h=5;}]
+		\path
+		({r*cos(0)},{r*sin(0)},h)coordinate(A) 
+		({r*cos(0)},{r*sin(0)},0)coordinate(A1)
+		({r*cos(60)},{r*sin(60)},0)coordinate(A2)
+		({r*cos(120)},{r*sin(120)},0)coordinate(A3)
+		({r*cos(180)},{r*sin(180)},0)coordinate(A4)
+		({r*cos(240)},{r*sin(240)},0)coordinate(A5)
+		({r*cos(300)},{r*sin(300)},0)coordinate(A6)
+		({r*cos(30)/4},{r*sin(30)/4},h/2)coordinate(S)
+		(0,0,{h/2+r/4})coordinate(So);
+		\path[3d/circumsphere center={A={(A1)},B={(A2)},C={(A3)},D={(A)}}]coordinate (O); 
+		\pgfmathsetmacro{\Ri}{sqrt(TD("(O)-(A1)o(O)-(A1)"))} ; 
+		\path[3d/circumcircle center={A={(A1)},B={(A2)},C={(A3)}}]coordinate(H);
+		\shade[ball color=white,3d/screen coords,opacity=.3](O)circle(\Ri);
+		\draw[3d/screen coords,ultra thin,gray](O)circle(\Ri); 
+		\shade[ball color=white,3d/screen coords,opacity=.3](O)circle(r/4);
+		\draw[3d/screen coords,ultra thin,gray](O)circle(r/4); 
+		\path  pic{3d/circle on sphere={R=\Ri,C={(O)}, P={(H)},fore layer=foreground,back layer=background}};
+		\path(-1/sqrt 2,1/sqrt 2,0)coordinate(n0) (1/sqrt 2,1/sqrt 2,0)coordinate(n1);
+		\path pic{3d/circle on sphere={R=\Ri,C={(O)},P={(O)},fore layer=foreground,back layer=background}};
+		\path pic{3d/circle on sphere={R=r/4,C={(O)},P={(O)},fore layer=foreground,back layer=background}};
+		\draw[hidden] (So)--(O)--(H);
+		\draw[hidden,blue] (A1)--(A2)--(A3)--(A4)--(A5)--(A6)--cycle (A1)--(S)--(A2) (A3)--(S)--(A4) (A5)--(S)--(A6);
+		\foreach \p/\g in {O/180,A1/-90,A2/-90,A3/-90,A4/-90,A5/-90,A6/-90,S/90,So/90,H/-90}
+		\shade[ball color=gray,3d/screen coords](\p)circle(.6pt) +(\g:.15)node[scale=.6]{$\p$};
+	\end{tikzpicture}
+\end{document} 

@@ -1,0 +1,48 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{animate}
+\begin{document}
+%==================
+%\pagecolor{green}
+\def\a{2}
+\def\h{9}
+\def\f(#1){.02*(#1) *(#1-7) *(#1-\h)+\a}
+\def\go{30}
+\pgfmathsetmacro\xo{\a *cos(\go)}
+\pgfmathsetmacro\yo{\a *sin(\go)/3}
+\pgfmathsetmacro\tlo{\xo/\a}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{16}
+\multiframe{180}{i=0+1}{
+%\foreach \i in {0,...,179,180,179,...,0}{
+\begin{tikzpicture}[join=round,cap=round,scale=.5]
+\pgfmathsetmacro\ga{\go+2*\i}
+\pgfmathsetmacro\ktra{int(\ga)}
+\pgfmathsetmacro\xa{\a *cos(\ga)}
+\pgfmathsetmacro\ya{\a *sin(\ga)/3}
+\pgfmathsetmacro\tlx{\xa/\a}
+\clip (-5,-1) rectangle (5,12);
+\draw (0,-.25*\h) -- (0,1.25*\h) node[above]{$\Delta$};
+\draw[smooth,dotted] plot[domain=0:\h] ({\f(\x)},\x);
+\draw[smooth,xscale=-1,dotted] plot[domain=0:\h] ({\f(\x)},\x);
+\draw[dotted] (0:0) ellipse ({\a} and {\a/3}) (0,9) ellipse ({\a} and {\a/3});
+\draw[thick,red,fill=blue!30,opacity=.25] (0:0) --(3*\xa,3*\ya) --++(90:\h)--(90:\h)--cycle;
+\fill[gray!50,opacity=.5] (0,0)--(\xo,\yo) arc (\go:\ga:{\a} and {\a/3}) --cycle;
+\fill[green!50,opacity=.5] (\xo,\yo+\h)--(0,\h)--(0,0)--
+ plot[smooth,domain=0:\h,shift={(0,\yo)}] ({\tlo *(\f(\x))},\x);
+\fill[brown!30,opacity=.5] (0,\h)--(\xo,\yo+\h) arc (\go:\ga:{\a} and {\a/3}) --cycle;
+\ifnum \ktra <181
+\else
+\ifnum \ktra <361
+\fill[green,opacity=.5] (-\a,\h) arc (180:\ga:{\a} and {\a/3})-- plot[domain=\h:0] ({\tlx *(\f(\x))},{\x+\ya}) arc(\ga:180:{\a} and {\a/3}) -- plot[domain=0:\h] ({-(\f(\x))},\x);
+\else
+\fill[green,opacity=.5] (-\a,\h) arc (180:360:{\a} and {\a/3})-- plot[domain=\h:0] ({\f(\x)},\x) arc(360:180:{\a} and {\a/3}) -- plot[domain=0:\h] ({-(\f(\x))},\x);
+\fi
+\fi
+\draw[smooth,thick,blue,fill=yellow,opacity=.5] (\xa,\h+\ya)--(0,\h)--(0,0) --  plot[domain=0:\h,shift={(0,\ya)}] ({\tlx *(\f(\x))},\x);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}
+
+%%23:36:1 28/9/2020Last Modification of contents

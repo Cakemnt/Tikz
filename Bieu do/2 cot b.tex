@@ -1,0 +1,23 @@
+\documentclass[tikz,border=1cm]{standalone}
+\usepackage[utf8]{vietnam}
+\usetikzlibrary{patterns}
+\begin{document}
+	\begin{tikzpicture}[teal,font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\def\l{10}
+		\def\xx{1.8}
+		\def\r{0.35*\xx}
+		\foreach \trai/\phai/\mon [count=\x]in{8.2/6.5/Ngữ văn,6.3/9.3/Toán,9.1/9.1/Tiếng Anh,8.4/8.2/Giáo dục công dân,9.2/6.9/Lịch sử và Địa lí,7.7/8.8/Khoa học tự nhiên,8.9/7.5/Công nghệ,8.5/8.7/Tin học}{
+			\pgfmathsetmacro{\ntrai}{int(\trai)}
+			\pgfmathsetmacro{\ttrai}{int(10*(\trai-\ntrai+0.05))}
+			\pgfmathsetmacro{\nphai}{int(\phai)}
+			\pgfmathsetmacro{\tphai}{int(10*(\phai-\nphai+0.05))}
+			\fill[pattern= dots,draw](\x*\xx,0)rectangle({\x*\xx-\r},\trai);
+			\fill[pattern= north west lines,draw](\x*\xx,0)rectangle({\x*\xx+\r},\phai);
+			\path({\x*\xx-0.5*\r},\trai)node[above]{\color{magenta}$\ntrai{,}\ttrai$}({\x*\xx+0.5*\r},\phai)node[above]{\color{magenta}$\nphai{,}\tphai$}(\x*\xx,0)node[below,text width=1.75cm,align=center]{\color{magenta}\textbf{\mon}};
+		}
+		\draw[->](0,-1)--(0,11)node[right]{\textbf{Điểm trung bình môn}};
+		\draw[->](-1,0)--({9*\xx},0)node[below]{\textbf{Môn}};
+		\foreach \i in{1,...,10}
+		\draw[fill=black](0,\i)circle(1pt)node[left]{$\i$};
+	\end{tikzpicture}
+\end{document}

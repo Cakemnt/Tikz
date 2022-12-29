@@ -1,0 +1,19 @@
+\documentclass[tikz,border=5mm]{standalone}
+\begin{document}
+	\begin{tikzpicture}[smooth,domain=0:9.2]
+		\draw[->] (-.5,-1.5)--(10.8,-1.5) node[below=1mm]{$x$};
+		\draw[->] (0,-1.6)--(0,1.5) node[left]{$y$};
+		\foreach \i in {0,...,10}
+		\draw (\i,-1.5)--(\i,-1.6) node[below]{$\i$};
+		\foreach \j in {-1,0,1}
+		\draw (0,\j)--(-.1,\j) node[left]{$\j$};
+		\draw[cyan,dashed] plot (\x,{sin(2*\x r)})
+		node[right]{$\sin (2x)$};
+		\draw[magenta,dashed] plot (\x,{cos(2*\x r)})
+		node[right]{$\cos (2x)$};
+		\draw[cyan,thick] plot (\x,{sin(\x r)})
+		node[right]{$\sin x$};
+		\draw[magenta,thick] plot (\x,{cos(\x r)})
+		node[right]{$\cos x$};
+	\end{tikzpicture}
+\end{document}

@@ -1,0 +1,63 @@
+\documentclass[border=2mm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections,angles,quotes}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\r{1.5}
+\def\sfa{80}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\sfa}{i=0+1}{
+%\foreach \i in {0,1,...,79,80,79,...,0}{
+\begin{tikzpicture}[join=round,cap=round,font=\scriptsize,blue]
+\pgfmathsetmacro\d{\i/40}
+\pgfmathsetmacro{\rr}{sqrt(abs(\r^2-\d^2))}
+\path
+(0:0) coordinate (O)
+(-90:\d) coordinate (H)
+($(H)+(180:\rr)$) coordinate (A)
+($(H)+(180:\r+.25)+(60:.75)$) coordinate (H1)
+($(H1)+(-120:1.75)$) coordinate (H2)
+($(H1)+(0:2*\r+.75)$) coordinate (H4)
+($(H2)+(0:2*\r+.75)$) coordinate (H3)
+;
+\clip (-3,-3) rectangle (3,2);
+\fill[ball color=blue!20,opacity=.5] (O) circle (\r);
+\draw[dotted] 
+($(O)+(90:\r)$) arc (90:-90:{\r/5} and {\r})
+($(O)+(180:\r)$) arc (180:0:{\r} and {\r/5})
+;
+\draw
+($(O)+(90:\r)$) arc (90:270:{\r/5} and {\r})
+($(O)+(180:\r)$) arc (180:360:{\r} and {\r/5})
+(O) circle (\r)
+;
+\ifnum\i<60
+\begin{scope}
+\clip (O) circle (\r);
+\draw[dotted] (O)--(H)node[midway,right]{$d$}
+(A)--(H)node[midway,above]{$r$}
+(A)--(O)node[midway,sloped,above]{$R$}
+;
+\fill[orange!50,opacity=.5] (H) let \p1=($(A)-(H)$),\n1={scalar(veclen(\x1,\y1)/1cm)} in ellipse ({\n1} and {\n1/5});
+\draw[dotted] (A) let \p1=($(A)-(H)$),\n1={scalar(veclen(\x1,\y1)/1cm)} in arc (180:0:{\n1} and {\n1/5});
+\draw (A) let \p1=($(A)-(H)$),\n1={scalar(veclen(\x1,\y1)/1cm)} in arc (180:360:{\n1} and {\n1/5});
+\end{scope}
+\else
+\draw[dotted] (O)--($(O)+(-90:\r)$);
+\draw ($(O)+(-90:\r)$)--(H);
+\fi
+\begin{scope}
+\clip (O) circle (\r);
+\draw[dotted] (H2)--(H1)--(H4);
+\end{scope}
+\begin{scope}
+\clip ($(O)+(90:\r)$) arc (90:450:\r)--(3,2)--(3,-3)--(-3,-3)--(-3,2)--cycle;
+\draw (H2)--(H1)--(H4);
+\end{scope}
+\draw (H2)--(H3)--(H4);
+\foreach \x in {O,H}\fill[ball color=red] (\x) circle (1pt);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

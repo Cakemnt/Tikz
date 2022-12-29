@@ -1,0 +1,26 @@
+\documentclass[tikz,border=2mm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections,angles,quotes}
+\usepackage{animate}
+\begin{document}
+	%==================
+	\def\dai{2}
+	\def\rong{.2}
+	\def\goc{60}
+	\pgfmathsetmacro\hs{sqrt(3)}
+	\def\hh{5}
+	\def\sfa{180}
+	%\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+	%\multiframe{\sfa}{i=0+1}{
+		%\foreach \i in {0,1,...,179,180,179,...,0}{
+			\begin{tikzpicture}
+				\foreach \x in {0,...,10}{
+					\foreach \y in {0,1,2}{
+						\draw[gray!50,fill=gray!80] 
+						(\x,\y *\hs+\rong *\hs)--++(\goc:\dai)--++(180-\goc:\rong)--++(180+\goc:\dai)--cycle
+						($(\x,\y *\hs+\rong *\hs)+(180-\goc:\rong)+(\goc:.5*\dai-.5*\rong)$) --++(180-\goc:\dai)--++(\goc:\rong)--++(-\goc:\dai)--cycle
+						;
+					}
+				}
+			\end{tikzpicture}
+\end{document}

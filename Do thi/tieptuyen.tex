@@ -1,0 +1,45 @@
+\documentclass[tikz,border=5mm]{standalone}
+\usetikzlibrary{calc}
+%==============
+\everymath{\displaystyle}
+\begin{document}
+	\begin{tikzpicture}[>=stealth, tang/.pic={\draw[->,blue] (0,0) coordinate (M)--(2,0) coordinate (v) node[pos=1.1,sloped]{$\vec v$};}]
+		\draw[->] (0,0) coordinate (O)--(4,0) node[below,blue]{$x$};
+		\draw[->] (O)--(0,4) node[left]{$y$};
+		\draw[->] (O)--(1,0) node[below left,blue]{$\vec\imath$};
+		\draw[->] (O)--(0,1) node[below left]{$\vec\jmath$};
+		\draw[red,semithick] (.2,3.6) to[bend left] pic[pos=.4,sloped]{tang} (3.8,1);
+		\path
+		(M)++(0,-1.5) coordinate (a)
+		($(a)+(v)-(M)$) coordinate (aux1)
+		($(a)+(O)-(M)$) coordinate (aux2)
+		(intersection of a--aux1 and M--O) coordinate (n)
+		(intersection of M--v and a--aux2) coordinate (tau)
+		;
+		\draw[densely dashed] (O)--(M) (n)--(a)--(tau);
+		\draw[->,brown] (M)--(tau) node[above right]{$\vec \tau$};
+		\draw[->,green!60!black] (M)--(n) node[left]{$\vec n$};
+		\draw[->,purple] (M)--(a) node[below]{$\vec a$};
+		\draw[fill=white] (M) node[above right]{$M$} circle (.03);
+	\end{tikzpicture}
+	%=============
+	\begin{tikzpicture}[>=stealth, tang/.pic={\draw[->,blue] (0,0) coordinate (M)--(2,0) coordinate (v) node[pos=1.1,sloped]{$\vec v$};}]
+		\draw[->] (0,0) coordinate (O)--(4,0) node[below,blue]{$x$};
+		\draw[->] (O)--(0,4) node[left]{$y$};
+		\draw[->] (O)--(1,0) node[below left,blue]{$\vec\imath$};
+		\draw[->] (O)--(0,1) node[below left]{$\vec\jmath$};
+		\draw[red,semithick] (.2,3.6) to[bend right] pic[pos=.7,sloped]{tang} (3.8,1);
+		\path
+		(M)++(0,-1.5) coordinate (a)
+		($(a)+(v)-(M)$) coordinate (aux1)
+		($(a)+(O)-(M)$) coordinate (aux2)
+		(intersection of a--aux1 and M--O) coordinate (n)
+		(intersection of M--v and a--aux2) coordinate (tau)
+		;
+		\draw[densely dashed] (O)--(M) (n)--(a)--(tau);
+		\draw[->,brown] (M)--(tau) node[above right]{$\vec \tau$};
+		\draw[->,green!60!black] (M)--(n) node[left]{$\vec n$};
+		\draw[->,purple] (M)--(a) node[below]{$\vec a$};
+		\draw[fill=white] (M) node[above right]{$M$} circle (.03);
+	\end{tikzpicture}
+\end{document}

@@ -1,0 +1,72 @@
+%\documentclass[tikz,border=1mm,convert={outfile=\jobname.png}]{standalone}
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage[utf8]{vietnam}
+\usetikzlibrary{calc, fadings}
+\definecolor{nen}{RGB}{239, 239, 239}
+\definecolor{mauh1}{RGB}{245, 39, 157}
+\definecolor{mauh2}{RGB}{186, 32, 120}
+\definecolor{maucuongtren}{RGB}{125, 17, 77}
+\definecolor{maucuongduoi}{RGB}{9, 5, 6}
+\tikzset{mynode/.style={scale=1,
+		yscale=1.5,
+		xscale=1.5,
+		anchor=south,
+		inner sep=0,
+		font={\ttfamily\bfseries}}}
+\begin{document}
+	\begin{tikzpicture}
+		%\draw
+		\fill[nen]
+		(-4,-5)rectangle(4,5);
+		\fill[top color= maucuongtren, bottom color =maucuongduoi]
+		(.15,-.2)
+		..controls +(-60:.3) and +(60:.3)..(0.03,-1)
+		..controls +(-110:.9) and +(135:1)..(.22,-3.3)--(.15,-3.53)
+		..controls +(150:.9) and +(-120:.6)..(-.13,-1)
+		..controls +(63:.5) and +(-50:.2)..(-.03,-.2)--(.15,-.2);
+		\def\A{
+			(0,3.9)
+			..controls +(-90:.4) and +(100:.4)..(1.33,3)
+			..controls +(-80:1.2) and +(0:1)..(0,-.28)--(0,3.8)}
+		\fill[top color = mauh1, bottom color= mauh2]\A;
+		\fill[top color = mauh1, bottom color= mauh2,xscale=-1]\A;
+		\fill[top color = mauh1, bottom color= mauh2]\A ;
+		\def\B{
+			(1.9,3.08)
+			..controls +(-83:.6) and +(90:.83)..(2.45,2)
+			..controls +(-90:1.1) and +(0:1.1)..(.62,-.1)
+			..controls +(30:.6) and +(-90:.6)..(1.52,2)
+			..controls +(90:.4) and +(-130:.4)..(1.9,3.08)}
+		\fill[top color = mauh1, bottom color= mauh2]\B;
+		\fill[top color = mauh1, bottom color= mauh2,xscale=-1] \B;
+		\def\C{
+			(3.58,1.9)
+			..controls +(180:.4) and +(60:.4)..(2.9,1)
+			..controls +(-120:.63) and +(-20:.6)..(1,-.2)
+			..controls +(20:.6) and +(-120:.5)..(2.4,1)
+			..controls +(60:.6) and +(160:.6)..(3.58,1.8)}
+		\fill[top color = mauh1, bottom color= mauh2]\C;
+		\fill[top color = mauh1, bottom color= mauh2,xscale=-1] \C;
+		\path (1.5,-1.25)
+		node[mynode]{flowers}
+		node[yshift=-3pt,
+		scope fading=south,
+		opacity=0.5,
+		yscale=-1,
+		mynode]{flowers};
+		\path (1.5,-2.25)
+		node[mynode]{for every}
+		node[yshift=-1pt,
+		scope fading=south,
+		opacity=0.5,
+		yscale=-1,
+		mynode]{for every};
+		\path (1.5,-3.15)
+		node[mynode]{occasion}
+		node[yshift=-3pt,
+		scope fading=south,
+		opacity=0.5,
+		yscale=-1,
+		mynode]{occasion};
+	\end{tikzpicture}
+\end{document}

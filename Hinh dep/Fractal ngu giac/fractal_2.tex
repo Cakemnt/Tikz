@@ -1,0 +1,28 @@
+\documentclass[tikz,border=2mm]{standalone}
+
+\begin{document}
+	\newcommand{\sao}[1]{
+		\ifnum#1=0
+		\else
+		\foreach\i in{0,...,4}
+		\draw[join=round,cap=round,ultra thin,brown] (90+144*\i:1)--(234+144*\i:1)(90+72*\i:1)--(162+72*\i:1);
+		\pgfmathtruncatemacro{\k}{#1-1}
+		\pgfmathsetmacro{\tile}{2/(1+sqrt(5))}
+		\pgfmathsetmacro{\tilenguoc}{1-\tile}
+		\begin{scope}[rotate=180,scale=\tilenguoc]
+			\sao{\k}
+		\end{scope}
+		\foreach \i in {0,...,4}{
+			\begin{scope}[shift={(18+72*\i:\tile)},scale=\tilenguoc]
+				\sao{\k}
+			\end{scope}
+			\begin{scope}[shift={(-18+72*\i:\tile)},scale=\tile *\tilenguoc]
+				\sao{\k}
+			\end{scope}
+		}
+		\fi
+	}
+	\begin{tikzpicture}
+		\sao{4}
+	\end{tikzpicture}
+\end{document}

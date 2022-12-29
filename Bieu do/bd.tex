@@ -1,0 +1,56 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{amsmath,amssymb}
+%\usepackage{fouriernc}
+\usepackage{tkz-euclide,tkz-tab,pgfplots}
+\pgfplotsset{compat=newest}
+\usetikzlibrary{math,through,calc,fadings,intersections,shadings,angles,quotes,shapes,shapes.geometric,arrows,patterns,snakes,decorations.text,matrix,chains}
+\usetkzobj{all}
+\begin{document}
+	\begin{tikzpicture}
+		\tikzset{
+			every node/.style={font=\footnotesize,transform shape},
+			%
+			tugiac/.pic={\draw[fill=pink!50] (-1.5,-.5)--(-.5,.5)--(1.5,.25)--(.25,-.5)--cycle (0,0)node{Tứ giác};},
+			%
+			thang/.pic={\draw[fill=green!50] (-1.5,-.5)--(-1.25,.5)--(.5,.5)--(1.5,-.5)--cycle (-.2,0)node{Hình thang};},
+			%
+			thangvuong/.pic={\draw[fill=yellow!50] (-1.5,-.5)--(-1.5,.5)--(.5,.5)--(1.5,-.5)--cycle (0-.2,0)node[align=center]{Hình\\thang vuông};},
+			%
+			thangcan/.pic={\draw[fill=teal!50] (-1.5,-.5)--(-1,.5)--(1,.5)--(1.5,-.5)--cycle (0,0)node[align=center]{Hình\\thang cân};},
+			%
+			binhhanh/.pic={\draw[fill=purple!50] (-1,-.5)--(-1.5,.5)--(1,.5)--(1.5,-.5)--cycle (0,0)node[align=center]{Hình\\bình hành};},
+			% Hình chữ nhật
+			chunhat/.pic={\draw[fill=violet!50] (-1,-.5)--(-1,.5)--(1,.5)--(1,-.5)--cycle (0,0)node[align=center]{Hình\\chữ nhật};},
+			%Hình thoi
+			thoi/.pic={\draw[fill=orange!50] (-1.2,0)--(0,.7)--(1.2,0)--(0,-0.7)--cycle (0,0)node[align=center]{Hình\\thoi};},
+			%Hình vuông
+			vuong/.pic={\draw[fill=red!50] (-1,-.5)--(-1,1)--(0.5,1)--(0.5,-.5)--cycle (-.2,.2)node[align=center]{Hình\\vuông};}
+		}
+		%
+		\draw
+		(0,0)pic[local bounding box=Tg]{tugiac}
+		(0,-2)pic[local bounding box=Th]{thang}
+		(0,-4)pic[local bounding box=Thv]{thangvuong}
+		(-5,-4)pic[local bounding box=Thc]{thangcan}
+		(5,-4)pic[local bounding box =Bh]{binhhanh}
+		(-1,-7)pic[local bounding box =Cn]{chunhat}
+		(4,-7)pic[local bounding box =Thoi]{thoi}
+		(2,-10)pic[local bounding box =Vg]{vuong}
+		;
+		%
+		\draw[-latex](Tg)--(Th)node[midway,align=center,left]{2 cạnh đối\\song song};
+		\draw[-latex](Th)--(Thv)node[midway,align=left,right]{một góc\\vuông};
+		\draw[-latex](Th)--(Thc)node[midway,align=center,sloped]{-2 góc kề một đáy\\bằng nhau\\ -hai đường chéo\\bằng nhau};
+		\draw[-latex](Th)--(Bh)node[midway,align=center,sloped]{2 cạnh bên\\song song};
+		\draw[-latex](Tg)--(Bh)node[pos=.15,right]{- các cạnh đối song song} node[pos=.3,right]{- các cạnh đối bằng nhau} node[pos=.45,right]{- hai cạnh đối song song và bằng nhau} node[pos=.6,right]{- các góc đối bằng nhau}node[pos=.75,right]{- hai đường chéo cắt nhau}node[pos=.9,right]{tại trung điểm mỗi đường};
+		\draw[-latex](Thc)--(Cn)node[midway,align=center,sloped]{một góc vuông\\~};
+		\draw[-latex](Bh)--(Cn)node[midway,align=center,sloped]{- một góc vuông\\ - hai đường chéo bằng nhau};
+		\draw[-latex](Thv)--(Cn)node[midway,align=center,sloped]{2 cạnh bên\\song song};
+		\draw[-latex](Bh)--(Thoi)node[midway,align=left,right]{~~- 2 cạnh kề bằng nhau\\ ~- hai đường chéo vuông góc\\ - 1 đường chéo là đường phân giác\\ của một góc};
+		\draw[-latex](Cn)--(Vg)node[midway,align=right,left]{- 2 cạnh kề bằng nhau~~~~~~~~\\ - 2 đường chéo vuông góc~~~~~~~\\ - 1 đường chéo là đường phân giác\\ của một góc};
+		\draw[-latex](Thoi)--(Vg)node[midway,align=left,right]{~~~- một góc vuông\\ - hai đường chéo bằng nhau};
+	\draw[-latex,rounded corners=10](Tg)--(-7,0)node[midway,align=center,below]{ba góc vuông}--(-7,-7)--(Cn);
+	\draw[-latex,rounded corners=10](Tg)--(10,0)node[midway,align=center,below]{bốn cạnh bằng nhau}--(10,-7)--(Thoi);
+	\end{tikzpicture}
+\end{document}

@@ -1,0 +1,16 @@
+%\documentclass[tikz,border=1mm,convert={density=960,outfile=\jobname.png}]{standalone}
+\documentclass[tikz,border=1mm]{standalone}
+\begin{document}
+	\begin{tikzpicture}[x=1mm,y=1mm]
+		\def\a{10} % bán kính (theo mm)
+		\draw[line width=1] (0,0) circle(\a);
+		\foreach \i in {0,6,...,360}
+		\fill (\i:\a-1) circle(.15);
+		\foreach \i in {0,30,...,360}
+		\draw[line width=1] (\i:\a)--+(\i+180:1.5);
+		\draw[-latex] (0,0)--+(72:\a-1.5);
+		\draw[-latex] (0,0)--+(36:\a-4.5);
+		\draw[densely dotted] (0,0) +(36:\a-4.5)--+(36:\a-1.6);
+		\fill (0,0) circle(.5);
+	\end{tikzpicture}
+\end{document}

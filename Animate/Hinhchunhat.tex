@@ -1,0 +1,48 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,patterns,angles,quotes}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\a{5}
+\def\b{8}
+\def\sfa{90}
+\pgfmathsetmacro\c{sqrt(\a^2+\b^2)}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\sfa}{i=0+1}{
+%\foreach \i in {0,1,...,\sfa}{
+\begin{tikzpicture}[join=round,cap=round]
+\pgfmathsetmacro\gB{int(90-\i)}
+\path
+(0:0) coordinate (A)
+--++(0:\a) coordinate (B)
+--([turn]90:\b) coordinate (C)
+--([turn]90:\a) coordinate (D)
+(B)--++(180-\i:\a) coordinate (A')
+--([turn]-90:\b) coordinate (D')
+--([turn]-90:\a) coordinate (C')
+($(A)!(A')!(B)$) coordinate (H)
+($(D)!(A')!(C)$) coordinate (K)
+($(A)!(C')!(B)$) coordinate (E)
+;
+\clip (-1,-1.5) rectangle (\a+\b+1,\c+1);
+\draw[pattern=north east lines,pattern color=red] (A)--(H)--(K)--(D)--cycle;
+\pic["\tiny $\i^{\circ}$",draw,angle radius=6mm,fill=yellow]{angle=A'--B--A};
+\pic[draw,fill=yellow,angle radius=3mm]{right angle=C'--E--B};
+\pic["\tiny $\gB^{\circ}$",draw,fill=yellow,angle radius=6mm]{angle=E--B--C'};
+\draw[dashed]
+(A)--++(-90:1.25) (E)--++(-90:1.25) (B)--++(-90:.75)
+(B)--(E)--(C')--(C)
+;
+\draw[blue] (A')--(B)--(C')--(D')--cycle;
+\draw (A)--(B)--(C)--(D)--cycle;
+\draw[stealth-stealth] ($(A)+(180:.5)$)--++(90:\b) node[sloped,pos=.5,fill=white,circle]{$b$};
+\draw[stealth-stealth] ($(A)+(-90:.75)$)--++(0:\a) node[sloped,pos=.5,fill=white,circle]{$a$};
+\draw[stealth-stealth,dashed] ($(A)+(-90:1.25)$)--($(E)+(-90:1.25)$) node[sloped,pos=.5,fill=white,circle]{$a+b\cos\gB^{\circ}$};
+\draw[stealth-stealth,dashed] (C)--(D') node[sloped,pos=.5,fill=white,circle]{$?$};
+
+\foreach \x/\g in {A/215,B/-45,C/45,D/135,A'/135,D'/90,C'/45,H/-90,K/90,E/-45}\draw[fill=white] (\x) circle (.05) +(\g:.3) node{$\x$};
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

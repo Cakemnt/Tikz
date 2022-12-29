@@ -1,0 +1,24 @@
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage[utf8]{vietnam}
+\begin{document}
+	\begin{tikzpicture}[>=stealth,thick,opt/.style={
+			circle,draw,fill=green!50,minimum size=1.5cm}]
+		\def\a{3}
+		\path
+		(90:\a) node[opt] (khi) {Khí}
+		(210:\a) node[opt] (lon) {Lỏng}
+		(-30:\a) node[opt] (ran) {Rắn};
+		\draw[->] (lon.-10)--(ran.-170)
+		node[midway,below]{Đông đặc};
+		\draw[<-] (lon.10)--(ran.170)
+		node[midway,above]{Nóng chảy};
+		\draw[<-] (lon.70)--(khi.-130)
+		node[midway,above,sloped]{Ngưng tụ};
+		\draw[->] (lon.50)--(khi.-110)
+		node[midway,below,sloped]{Hóa hơi};
+		\draw[<-] (ran.130)--(khi.-70)
+		node[midway,below,sloped]{Ngưng kết};
+		\draw[->] (ran.110)--(khi.-50)
+		node[midway,above,sloped]{Thăng hoa};
+	\end{tikzpicture}
+\end{document}

@@ -1,0 +1,27 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{animate}
+\begin{document}
+	%==================
+	\def\r{1}
+	\def\sfa{180}
+	\pgfmathsetmacro\l{\sfa *pi *\r/180}
+	\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+		\multiframe{\sfa}{i=0+1}{
+			%\foreach \i in {0,...,\sfa}{
+				\begin{tikzpicture}[join=round,cap=round]
+					\pgfmathsetmacro\la{\i *pi*\r/180}
+					\clip (-.5*\l-.5,-\r-.5) rectangle (\r+1,\l+.5);
+					\draw[-stealth] (-\r-.5,0)--(\r+.5,0) node[below]{$x$};
+					\draw[-stealth] (0,-\r-.5)--(0,\r+.5) node[left]{$y$};
+					\draw[dashed] (0,0) node[below left]{$O$}--(\i:\r) ++(\i:.3)node{$M$};
+					\draw (0:0) circle (\r);
+					\ifnum \i=0
+					\draw[blue,thick,-stealth] (0:\r)node[below right]{$A$}--++(90:\l);
+					\else
+					\draw[blue,thick,-stealth] (0:\r)node[below right]{$A$} arc (0:\i:\r)--([turn]0:\l-\la);
+					\fi
+				\end{tikzpicture}
+			}
+		\end{animateinline}
+	\end{document}

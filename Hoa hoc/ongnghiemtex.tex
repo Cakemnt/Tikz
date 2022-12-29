@@ -1,0 +1,42 @@
+\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{tikz}
+\usetikzlibrary{calc,patterns}
+\begin{document}
+	\pgfdeclarepatternformonly{dung dich}
+	{\pgfqpoint{0 mm}{0 mm}}%Dưới trái
+	{\pgfqpoint{10 mm}{20 mm}}
+	{\pgfqpoint{10 mm}{20 mm}}
+	{\pgfsetlinewidth{0.2pt}
+		\foreach \i in {1,...,50}{
+			\pgfmathsetmacro{\x}{10*rand }
+			\pgfmathsetmacro{\y}{10*rand}
+			\pgfmathsetmacro{\xm}{\x+rand}
+			\pgfpathmoveto{\pgfqpoint{\x mm}{\y mm}}
+			\pgfpathlineto{\pgfqpoint{\xm mm}{\y mm}}
+			\pgfusepath{stroke}
+		}
+	}
+	\pgfdeclarepatternformonly{bot khi}
+	{\pgfqpoint{0 mm}{0 mm}}%Dưới trái
+	{\pgfqpoint{10 mm}{20 mm}}
+	{\pgfqpoint{10 mm}{20 mm}}
+	{\pgfsetlinewidth{0.2pt}
+		\foreach \i in {1,...,50}{
+			\pgfmathsetmacro{\x}{10 *rand}
+			\pgfmathsetmacro{\y}{10 *rand}
+			\pgfpathcircle{\pgfqpoint{\x mm}{\y mm}}{sin (\i) *rand}
+			\pgfusepath{stroke}
+		}
+	}
+	\begin{tikzpicture}
+		\def\ongnghiem(#1)(#2,#3){
+			\draw[scale=#2,pattern=#3,shift={(#1)}] (-1,4)--(-1,0) arc(180:360:1)--(1,4)--cycle;
+			\draw[scale=#2,shift={(#1)}] (-1,6)--(-1,0) arc(180:360:1)--(1,6);
+		}
+		%\ongnghiem(tọa độ điểm)(tỉ lệ to nhỏ,kiểu pattern)
+		\ongnghiem(2,0)(0.25,bot khi)
+		\ongnghiem(4,0)(0.5,dung dich)
+	\end{tikzpicture}
+\end{document}

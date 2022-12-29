@@ -1,0 +1,49 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{animate}
+\begin{document}
+%==================
+\begin{animateinline}[controls,autoplay,loop]{8}
+\multiframe{170}{i=10+1}{
+%\foreach \i in {10,11,...,170,169,168,...,10}{
+\begin{tikzpicture}[line join=round,font=\scriptsize]
+\def\r{4}
+\clip (-1.2*\r,-1) rectangle (1.2*\r,1.2*\r);
+\path
+(180:\r) coordinate (B)
+(0:\r) coordinate (C)
+(\i:\r) coordinate (A)
+(270:\r) coordinate (DD)
+(intersection of A--DD and B--C) coordinate (D)
+($(A)!(D)!(B)$) coordinate (M)
+($(A)!(D)!(C)$) coordinate (N)
+(intersection of B--N and C--M) coordinate (H)
+(intersection of B--N and D--M) coordinate (E)
+(intersection of C--M and D--N) coordinate (F)
+(intersection of M--N and A--D) coordinate (K)
+;
+
+\draw
+(A)--(B)--(C)--cycle
+(M)--(D)--(N)--cycle
+(B)--(N) (C)--(M) (A)--(D) (E)--(A)--(F) (A)--(H)
+;
+\draw[red] (K) let \p1=($(K)-(A)$) in circle ({veclen(\x1,\y1)});
+\foreach \x in {A,B,C,D,E,F,M,N,H,K}{\fill[red] (\x) circle (1pt);}
+\path
+(A) node[above left]{$A$}
+(B)node[below left]{$B$}
+(C)node[below right]{$C$}
+(D)node[below]{$D$}
+(M)node[above left]{$M$}
+(N)node[above right]{$N$}
+(E)node[below]{$E$}
+(F)node[below]{$F$}
+(H)node[below]{$H$}
+(K)node[above left]{$K$}
+;
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

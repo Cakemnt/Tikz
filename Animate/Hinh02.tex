@@ -1,0 +1,30 @@
+%\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+\documentclass{standalone}
+%\usepackage[utf8]{vietnam}
+\usepackage{tikz}
+%\usetikzlibrary{calc,shadings}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\h{4}
+\def\a{1}
+\def\y{2}
+\pgfmathsetmacro{\b}{\a/3}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{60}{ic=0+1}{
+%\foreach \ic in {1,...,\n}{
+\begin{tikzpicture}[line join=round]
+\def\g{\ic}
+\clip (-2*\a-0.5,-\a-0.5)rectangle (\h+\b+0.5,\h+1);
+\pgfmathsetmacro{\x}{\a *sec(\g)-0.05*sec(\g)}
+\begin{scope}[rotate=-\g]
+\draw (-\a,0) ellipse ({\a} and {\b}) (-\a,\h) ellipse ({\a} and {\b});
+\draw (0:0)--++(90:\h) (-2*\a,0)--++(90:\h);
+\path (-\a,\y) coordinate (A);
+\end{scope}
+\draw (A) ellipse ({\x} and {\b});
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}
+

@@ -1,0 +1,103 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\a{4}
+\def\h{5}
+\pgfmathsetmacro\b{\a/3}
+\def\sfa{580}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{16}
+\multiframe{\sfa}{i=0+1}{
+%\foreach \i in {0,1,...,\sfa}{
+\begin{tikzpicture}[join=round,cap=round,transform shape,scale=.3]
+\clip (-\a-1,-2*\b) rectangle (4*\a,\h+2*\b);
+\ifnum \i <481
+\pgfmathsetmacro\gA{\i}
+\pgfmathsetmacro\kiemtra{int(mod(\gA,360))}
+\path
+(0:\a) arc (0:\gA:{\a} and {\b}) coordinate (A)
+arc (\gA:\gA+90:{\a} and {\b}) coordinate (B)
+arc (\gA+90:\gA+180:{\a} and {\b}) coordinate (C)
+arc (\gA+180:\gA+270:{\a} and {\b}) coordinate (D)
+($(A)!.5!(B)$) coordinate (I)
+($(I)+(90:\h)$) coordinate (S)
+($(S)!.5!(A)$) coordinate (M)
+($(S)!.75!(B)$) coordinate (E)
+($(S)!.75!(D)$ ) coordinate (H)
+($(B)!.5!(C)$) coordinate (N)
+($(C)!.5!(D)$) coordinate (K)
+;
+	\ifnum \kiemtra <36 
+			\foreach \x/\y in {S/B,A/B,B/C,M/E,N/K,E/N}{\draw[dashed] (\x)--(\y);}
+			\foreach \x/\y in {S/A,S/C,S/D,C/D,D/A,K/H,H/M}{\draw (\x)--(\y);}
+	\else \ifnum \kiemtra <57 
+					\foreach \x/\y in {A/B,M/E,N/K}{\draw[dashed] (\x)--(\y);}
+					\foreach \x/\y in {S/A,S/B,S/C,S/D,B/C,C/D,E/N,K/H,D/A,H/M}{\draw (\x)--(\y);}
+			\else \ifnum \kiemtra <135
+							\foreach \x/\y in {S/A,A/B,D/A,M/E,N/K,H/M}{\draw[dashed] (\x)--(\y);}
+							\foreach \x/\y in {S/B,S/C,S/D,B/C,C/D,E/N,K/H}{\draw (\x)--(\y);}
+					\else \ifnum \kiemtra< 157
+				\foreach \x/\y in {D/A,N/K,H/M}{\draw[dashed] (\x)--(\y);}
+				\foreach \x/\y in {S/A,S/B,S/C,S/D,A/B,B/C,C/D,M/E,E/N,K/H}{\draw (\x)--(\y);}
+							\else \ifnum \kiemtra <214 
+				\foreach \x/\y in {S/D,C/D,D/A,N/K,K/H,H/M}{\draw[dashed] (\x)--(\y);}
+				\foreach \x/\y in {S/A,S/B,S/C,A/B,B/C,M/E,E/N}{\draw (\x)--(\y);}
+									\else \ifnum \kiemtra <238
+				\foreach \x/\y in {C/D,N/K,K/H}{\draw[dashed] (\x)--(\y);}
+				\foreach \x/\y in {S/A,S/B,S/C,A/B,B/C,M/E,E/N,H/M,S/A,A/D,S/D}{\draw (\x)--(\y);}
+											\else \ifnum \kiemtra <298
+				\foreach \x/\y in {S/C,C/D,B/C,N/E,K/H,K/N}{\draw[dashed] (\x)--(\y);}
+				\foreach \x/\y in {S/A,S/B,S/D,A/B,D/A,M/E,M/H}{\draw (\x)--(\y);}
+													\else \ifnum \kiemtra <304
+				\foreach \x/\y in {B/C,N/E,K/N}{\draw[dashed] (\x)--(\y);}
+				\foreach \x/\y in {S/A,S/B,S/C,S/D,A/B,D/A,C/D,M/E,M/H,K/H}{\draw (\x)--(\y);}
+															\else
+				\foreach \x/\y in {N/K,N/E,E/M,A/B,B/C,S/B}{\draw[dashed] (\x)--(\y);}
+				\foreach \x/\y in {S/C,S/D,S/A,C/D,D/A,K/H,H/M}{\draw (\x)--(\y);}
+															\fi 
+													\fi
+											\fi 
+									\fi
+							\fi 
+					\fi 
+			\fi 
+	\fi
+\foreach \x/\g in {A/135,B/135,C/-45,D/-45,S/90,M/135,E/135,H/45,N/-135,K/-135}\fill (\x) circle (.05) +(\g:.4) node{$\x$};
+\fill[brown!80,opacity=.5] (M)--(E)--(N)--(K)--(H)--cycle;
+\else
+\def\gA{120}
+\pgfmathsetmacro\xsh{2*\a *(\i-480)/100}
+\path
+(0:\a) arc (0:\gA:{\a} and {\b}) coordinate (A)
+arc (\gA:\gA+90:{\a} and {\b}) coordinate (B)
+arc (\gA+90:\gA+180:{\a} and {\b}) coordinate (C)
+arc (\gA+180:\gA+270:{\a} and {\b}) coordinate (D)
+($(A)!.5!(B)$) coordinate (I)
+($(I)+(90:\h)$) coordinate (S)
+($(S)!.5!(A)$) coordinate (M)
+($(S)!.75!(B)$) coordinate (E)
+($(S)!.75!(D)$ ) coordinate (H)
+($(B)!.5!(C)$) coordinate (N)
+($(C)!.5!(D)$) coordinate (K)
+;
+\draw[dashed] (E)--(M)--(A) -- (B) (H)--(M) (A)--(D);
+\draw 
+(B)--(E)
+(D)--(H) (E)--(B)--(N)--cycle (N)--(K)--(D)
+;
+\draw[fill=brown!80,opacity=.5] (M)--(E)--(N)--(K)--(H)--cycle;
+\foreach \x/\g in {A/135,B/135,D/-45,M/135,E/135,H/45,N/-135,K/-45}\fill (\x) circle (.05) +(\g:.4) node{$\x$};
+\begin{scope}
+\foreach \x/\y in {S/M,M/E,M/H,K/N}{\draw[dashed] ([shift={(\xsh,0)}]\x)--([shift={(\xsh,0)}]\y); }
+\foreach \x/\y in {S/E,S/C,S/H,E/N,N/C,C/K,K/H}{\draw ([shift={(\xsh,0)}]\x)--([shift={(\xsh,0)}]\y); }
+\draw[fill=brown!80,opacity=.5] ([shift={(\xsh,0)}]M)--([shift={(\xsh,0)}]E)--([shift={(\xsh,0)}]N)--([shift={(\xsh,0)}]K)--([shift={(\xsh,0)}]H)--cycle;
+\foreach \x/\g in {C/-45,M/135,E/135,H/45,N/-135,K/-45,S/90}\fill ([shift={(\xsh,0)}]\x) circle (.05) +(\g:.4) node{$\x$};
+\end{scope}
+\fi
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}
+

@@ -1,0 +1,40 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\a{5}
+\def\h{4}
+\def\sfa{180}
+%\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+%\multiframe{\sfa}{i=0+1}{
+\foreach \i in {0,1,...,\sfa}{
+\begin{tikzpicture}[join=round,cap=round,brown]
+\path
+(0:0) coordinate (B)
+(0:\a) coordinate (C)
+(1,\h) coordinate (A)
+($(B)!.5!(C)$) coordinate (M)
+($(A)!.5!(C)$) coordinate (N)
+;
+\clip (-1,-1) rectangle (\a+1,\h+1);
+\draw (A)--(B)--(C)--cycle (A)--(M);
+\ifnum \i<30
+\else
+\ifnum \i <80
+\pgfmathsetmacro\hs{(\i-30)*\a/100}
+\path 
+(A)--++(180:\hs) coordinate (A1)
+(M)--++(180:\hs) coordinate (M1)
+(C)--++(180:\hs) coordinate (C1)
+;
+\fill[yellow] (A1)--(M1)--(C1);
+\else
+\fi
+\fi
+\end{tikzpicture}
+}
+%\end{animateinline}
+\end{document}
+

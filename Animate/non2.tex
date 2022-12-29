@@ -1,0 +1,44 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{animate}
+\begin{document}
+	\def\a{4}
+	\def\h{5}
+	\def\n{10}
+	\pgfmathsetmacro\b{\a/3}
+	\pgfmathsetmacro\goc{360/\n}
+	\pgfmathsetmacro\yo{(\b^2)/\h}
+	\pgfmathsetmacro\go{asin(\yo/\b)}
+	\pgfmathsetmacro\xo{\a *cos(\go)}
+	\def\sfa{180}
+	\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+		\multiframe{\sfa}{i=0+1}{
+			%\foreach \i in {0,1,...,\sfa}{
+				\begin{tikzpicture}[join=round,cap=round,brown]
+					\ifnum\i<90\pgfmathsetmacro\hs{(90-\i) /90}\else \pgfmathsetmacro\hs{(\i-90)/90}\fi
+					\pgfmathsetmacro\ax{\a *\hs}
+					\pgfmathsetmacro\bx{\ax/3}
+					\path
+					(0:0) coordinate (O)
+					--++(90:\h-\hs *\h) coordinate (Ox)
+					(90:\h) coordinate (S)
+					\foreach \j in {1,...,\n}{
+						(0:\a) arc (0:2*\i+\j *\goc:{\a} and {\b}) coordinate (A\j)
+						(0:\ax) arc (0:2*\i+\j *\goc:{\ax} and {\bx}) coordinate (B\j)
+						(B\j)--++(90:\h-\hs *\h) coordinate (C\j)
+					};
+					\clip (-\a-1,-\b-1) rectangle (\a+1,\h+1);
+					\foreach \j in {1,...,\n}{
+						\pgfmathsetmacro\ktra{int(mod(2*\i+\j *\goc,360))}
+						\ifnum \ktra >\go \ifnum \ktra <180-\go \draw[dotted] (A\j)--(S);\else \draw (A\j)--(S); \fi \else \draw (A\j)--(S);\fi
+						\draw[dotted] (A\j)--(B\j) (B\j)--(C\j);
+					}
+					\draw (-\xo,\yo)--(S)--(\xo,\yo) arc (\go:-180-\go:{\a} and {\b});
+					\draw[dotted]
+					(O) ellipse ({\ax} and {\bx})
+					(Ox) ellipse ({\ax} and {\bx})
+					(\xo,\yo) arc (\go:180-\go:{\a} and {\b});
+				\end{tikzpicture}
+			}
+		\end{animateinline}
+	\end{document}

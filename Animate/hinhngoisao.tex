@@ -1,0 +1,30 @@
+Code của tôi thế này:
+
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\r{3}
+\def\sfa{44}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\sfa}{i=1+1}{
+%\foreach \i in {1,...,44}{
+\begin{tikzpicture}[join=round,cap=round]
+\path
+\foreach \goc/\ten in {\i/N,90-\i/B,90+\i/A,180-\i/M,180+\i/Q,270-\i/D,270+\i/C,-\i/P}{(\goc:\r) coordinate (\ten) +(\goc:.3)node{$\ten$}}
+;
+\clip (0:0) circle (1.2*\r);
+\draw[pattern=sixpointed stars,pattern color=orange]
+(N)-|(B) arc (90-\i:90+\i:\r)|-(M) arc (180-\i:180+\i:\r)-|(D) arc (270-\i:270+\i:\r)|-(P) arc (-\i:\i:\r)
+;
+\draw (0:0) circle (\r);
+\foreach \x in {A,B,C,D,M,N,P,Q}\draw[fill=white] (\x) circle (.03);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}
+
+
+%%17:35:39 29/4/2021Last Modification of contents

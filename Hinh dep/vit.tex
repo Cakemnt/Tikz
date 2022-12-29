@@ -1,0 +1,84 @@
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage[utf8]{vietnam}
+\usetikzlibrary{calc}
+\definecolor{nen}{RGB}{201, 205, 214}
+\definecolor{mo}{RGB}{255, 214, 73}
+\definecolor{dau}{RGB}{81, 140, 120}
+\definecolor{co dit da}{RGB}{140, 61, 54}
+\definecolor{bung}{RGB}{190, 157, 136}
+\definecolor{thancanh}{RGB}{230, 213, 206}
+\begin{document}
+	\begin{tikzpicture}
+		\fill[nen!10]
+		(-4,0)rectangle(4,5);
+		\fill[blue!10]
+		(-4,0)rectangle(4,-5);
+		\def \A
+		{
+			(2.1,0)
+			..controls +(60:.6) and +(-50:.7)..(1.95,1.55)--(1.05,1.55) --(1.66,0)-- (2.1,0)
+			(-2.42,.32)--(-3.45,1.05)--(-2.15,.73)--(-2.42,.32)
+			(-2.9,1.28)--(-2.15,.73)--(-3.1,1.2)--(-2.9,1.28)
+		}
+		\fill[co dit da] \A;
+		\fill[co dit da!30] [yscale=-1]\A;
+		\def \B
+		{
+			(1.95,1.55)
+			..controls +(130:.1) and +(-50:.7)..(1.78,1.74) --(.98,1.72) --(1.05,1.55)--(1.95,1.55);
+		}
+		\fill[thancanh] \B;
+		\fill[thancanh!30] [yscale=-1]\B;
+		\def \C
+		{
+			(.98,1.72)--(.5,2.😎
+			..controls +(120:.3) and +(180:.3) .. (1,3.52)
+			..controls +(10:.2) and +(120:.1) .. (1.48,3.3)
+			..controls +(-70:.5) and +(0:.1) .. (1.2,2.68)
+			..controls +(-90:.5) and +(120:.1) .. (1.78,1.74)--(.98,1.72)
+		}
+		\fill[dau] \C;
+		\fill[dau!30] [yscale=-1]\C;
+		\def \D
+		{
+			(1.48,3.3)
+			..controls +(-70:.5) and +(0:.1)..(1.2,2.68)--(2.3,2.7)
+			to[out=120,in=0] (2.1,2.83)
+			..controls +(175:.3) and +(-70:.1)..(1.48,3.3)
+		}
+		\fill[mo]\D;
+		\fill[mo!30][yscale=-1]\D;
+		\def\E
+		{
+			(1.24,3.12) circle (3.5pt)
+		}
+		\fill[red]\E;
+		\fill[red!30][yscale=-1] \E;
+		\def\F
+		{
+			(1.24,3.12) circle (1.5pt)
+		}
+		\fill[black]\F;
+		\fill[black!30][yscale=-1] \F;
+		\def\G
+		{
+			(1.3,.9) --(-.2,.9) to[out=2,in=60] (-.6,.78)
+			..controls +(-140:.6) and +(-30:.2)..(-2.15,.73)--(-3.2,1.45)
+			..controls +(20:.7) and +(178:.3)..(-.5,1.85)
+			..controls +(0:.7) and +(150:.3)..(1.05,1.55)--(1.3,.9)
+			(-3.1,1.2)--(-3.45,1.05)--(-2.15,.73)--(-3.1,1.2)
+		}
+		\fill[thancanh]\G;
+		\fill[thancanh!30][yscale=-1]\G;
+		\def\H
+		{
+			(-2,0)--(1.66,0)--(1.3,.9)--(-.2,.9) to[out=2,in=60] (-.6,.78)
+			..controls +(-140:.6) and +(-30:.2) .. (-2.15,.73)--(-2.42,.32)--(-2,0)
+		}
+		\fill[bung]\H;
+		\fill[bung!30][yscale=-1]\H;
+		\foreach \x in {-5.0,-4.8,...,0}
+		{\draw[gray!30, dash pattern = on 7pt off 7pt] ([xshift = 7pt] + -4cm, \x cm) -- ++([xshift = 7pt]7.5cm, 0);}
+		\node at (-2,4)[scale=.04]{\includegraphics{MYANH}};
+	\end{tikzpicture}
+\end{document}

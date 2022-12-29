@@ -1,0 +1,29 @@
+%\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{animate}
+\begin{document}
+%==================
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{90}{i=0+1}{
+%\foreach \i in {0,...,90}{
+\begin{tikzpicture}
+\def\a{3}
+\pgfmathsetmacro{\od}{\a *sqrt(2)/2}
+\def\g{\i}
+\pgfmathsetmacro{\d}{2*\a *cos(\g)}
+\pgfmathsetmacro{\goc}{acos(\od/(2 *\a))}
+\pgfmathsetmacro{\h}{\d-\od}
+\clip (-\a-0.5,-\od-0.5) rectangle (\a+0.5,2*\a);
+\draw[-stealth] (0:0)--(90-\g:\a)coordinate[label=above right:$A$] (A) node[midway,sloped,below]{$10$(N)};
+\draw[-stealth] (0:0)--(90+\g:\a)coordinate[label=above left:$B$] (B)node[midway,sloped,below]{$10$(N)};
+\draw[-stealth] (0:0)--(270:\od)coordinate[label=left:$D$] (D)node[pos=0.5,sloped,above]{$5\sqrt{2}$(N)};
+\draw[dashed] (0,\a)--(0,0)--(0,\h);
+\draw[fill=black] (0:0)coordinate[label=below left:$O$](O) circle (0.03);
+\draw (90-\g:0.5) arc (90-\g:90:0.5) (90-\g/2:1)node{$\g^{\circ}$};
+\draw (0,\h)node[rectangle,fill=gray!50]{$V$};
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

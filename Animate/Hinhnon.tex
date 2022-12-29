@@ -1,0 +1,41 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\a{3}
+\def\hh{4}
+\pgfmathsetmacro\b{\a/3}
+\def\sfa{100}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\sfa}{i=0+1}{
+%\foreach \i in {0,1,...,99,100,99,...,0}{
+\begin{tikzpicture}[join=round,cap=round]
+\pgfmathsetmacro\h{\b+\hh *\i/\sfa}
+\pgfmathsetmacro\yo{(\b^2)/\h}
+\pgfmathsetmacro\go{asin(\yo/\b)}
+\pgfmathsetmacro\xo{\a *cos(\go)}
+\pgfmathsetmacro\r{sqrt(\a^2 + .4*(\hh+\b)^2)}
+\path
+(0:0) coordinate (O)
+(\xo,\yo) coordinate (Mo) arc (\go:120:{\a} and {\b}) coordinate (M)
+(0:\a) arc (0:-60:{\a} and {\b}) coordinate (N)
+(180:\a) coordinate (A)
+(90:\h) coordinate (S)
+;
+\clip (90:.5*\hh+.5*\b) circle (\r+1);
+\fill[cyan] (90:.5*\hh+.5*\b) circle (\r);
+\fill[brown!50,opacity=.5] (O) ellipse ({\a} and {\b});
+\fill[orange,opacity=.5] (S)--(M)--(N);
+\draw[dashed,thick] 
+(Mo) arc (\go:180-\go:{\a} and {\b})
+(O) node[below]{$O$}--(S)node[above]{$S$} node[pos=.5,left]{$h$}
+(O)--(A)node[left]{$A$}
+(N)node[below right]{$N$}--(M)node[above]{$M$} --(S)
+;
+\draw[thick] (S)--(N) (S) --(\xo,\yo)node[pos=.5,above right]{$l$} arc (\go:-180-\go:{\a} and {\b})--cycle;
+\foreach \x in {A,O,M,N,S}\fill[orange] (\x) circle (.025);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

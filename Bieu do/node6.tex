@@ -1,0 +1,149 @@
+\documentclass{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{vietnam}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz,lipsum}
+\usepackage{SIunitx}
+\begin{document}
+	%\lipsum[1]
+	\begin{center}
+		\begin{tikzpicture}
+			[mybox/.style={rounded corners=4mm,fill=cyan!30},
+			rectangle box/.style={mybox,minimum width=55mm,minimum height=70mm},
+			square box/.style={mybox,minimum size=55mm},chunhat box/.style={mybox,minimum width=100mm,minimum height=10mm}]
+			\tikzset{triangle/.pic={
+					\draw[thick,fill=white] (90:1)--(210:1)--(-30:1)--cycle;
+			}}
+			\tikzset{hexagon/.pic={
+					\draw[thick,fill=white]
+					(0:1)--(60:1)--(120:1)--(180:1)--(240:1)--(300:1)--cycle;
+					\draw[thick] (0:1)--(180:1) (60:1)--(240:1) (-60:1)--(120:1);
+			}}
+			\tikzset{thick,declare function={a=2;b=4;h=1.5;},
+				trapzium/.pic={
+					\draw[fill=white]
+					(a/2,h/2)--(-a/2,h/2) node[midway,above,red]{$a$}
+					--(-b/2,-h/2)--(b/2,-h/2) node[midway,below,red]{$b$}
+					--cycle;
+					\draw[dashed] (a/2,h/2)--(-b/2,-h/2) (-a/2,h/2)--(b/2,-h/2);
+					\draw (-a/2,h/2)--(-a/2,-h/2) node[midway,left,red]{$h$};
+					\draw (-a/2,-h/2) rectangle +(45:.3);
+			}}
+			\tikzset{hbh/.pic={
+					\draw[thin,fill=white]
+					(-2.6,.5)--(1.4,.5)node[midway,below,red]{$a$}--(2.4,2.5)--(-1.6,2.5)--cycle node[midway,left,red]{$b$};
+					\draw[dashed,thin] (-2.6,.5)--(2.4,2.5) (1.4,.5)--(-1.6,2.5);
+					\draw (-1.6,2.5)--(-1.6,.5)node[midway,right,red]{$h$};
+					\draw (-1.6,.5) rectangle +(45:.3);
+			}}
+			\tikzset{hcn/.pic={
+					\draw[thin,fill=white]
+					(-2.1,.5)--(1.9,.5)node[midway,below,red]{$a$}--(1.9,2.5)--(-2.1,2.5)--cycle node[midway,left,red]{$b$};
+					\draw[dashed,thin] (-2.1,.5)--(1.9,2.5) (1.9,.5)--(-2.1,2.5);
+			}}
+			\tikzset{thick,declare function={x=4;y=2;},
+				vuong/.pic={
+					\draw[fill=white]
+					(-x/2,-x/2+y)--(x/2,-x/2+y) node[midway,below,red]{$a$}
+					--(x/2,x/2+y)--(-x/2,x/2+y)--cycle node[midway,left,red]{$a$};
+					\draw[dashed] (-x/2,-x/2+y)--(x/2,x/2+y) (x/2,-x/2+y)--(-x/2,x/2+y);
+			}}
+			\tikzset{thick,declare function={m=4;n=2;t=.2;v=1.7;},
+				thoi2/.pic={
+					\draw[fill=white]
+					(-m/2,0+v)--(0,-n/2+v) --(m/2,0+v)--(0,n/2+v)--cycle node[midway,above,red]{$m$};
+					\draw[dashed] (-m/2,0+v)--(m/2,0+v) (0,-n/2+v)--(0,n/2+v);
+					\draw[dashed,thin,latex-latex] (-m/2,-n/2+v-t/2)--(m/2,-n/2+v-t/2)node[midway,below,red]{$b$};
+					\draw[dashed,thin,latex-latex] (-m/2-t/2,-n/2+v)--(-m/2-t/2,n/2+v)node[midway,left,red]{$a$} ;
+			}}
+		\path[nodes={above}] % để dóng ngang các node
+		(0,0) node[square box] (C) {}
+		(-6,0) node[rectangle box] (Cl) {}
+		(6,0) node[rectangle box] (Cr) {}
+		(-6,8) node[rectangle box] (Cl1) {}
+		(6,8) node[rectangle box] (Cr1) {}
+		(-6,17.5) node[rectangle box] (Cl2) {}
+		(6,17.5) node[rectangle box] (Cr2) {}
+		(0,15.7) node[chunhat box] (C2) {}
+		;
+		\draw[cyan,latex-latex,line width=1.5pt] (Cl.45)--(Cr.135);%Mũi tên ngang 2 chiều nối Hình thang cân <-> Hình lục giác đều
+		\draw[midway,cyan,latex-latex,line width=1.5pt] (Cl1.east)--(Cr1.west);
+		\draw[midway,cyan,latex-latex,line width=1.5pt] (Cl2.east)--(Cr2.west);
+		\draw[cyan,latex-,line width=1.5pt] (C.north)--(C2.south);
+		\draw[cyan,line width=1.5pt] (C2.north)--++(90:4.3);
+		\draw[cyan,-latex,line width=1.5pt] (Cl1.north)--(Cl2.south);
+		\draw[cyan,-latex,line width=1.5pt] (Cr1.north)--(Cr2.south);
+		\path
+		(C.north) node[below,teal,font=\bfseries]{HÌNH TAM GIÁC ĐỀU}
+		+(-90:2.5) pic[scale=1.5]{triangle}
+		(C.south) node[above=6mm,align=left,text width=38mm]{
+			- Ba cạnh bằng nhau\\
+			- Ba góc bằng nhau và bằng $\ang{60}$}
+		;
+		\path
+		(Cr.north) node[below,teal,font=\bfseries]{HÌNH LỤC GIÁC ĐỀU}
+		+(-90:2.5) pic[scale=1.5]{hexagon}
+		(Cr.south) node[above=3mm,align=left,text width=38mm]{
+			- Sáu cạnh bằng nhau\\
+			- Sáu góc bằng nhau và bằng $\ang{120}$\\
+			- Ba đường chéo chính bằng nhau}
+		;
+		\path
+		(Cl.north) node[below,teal,font=\bfseries]{HÌNH THANG CÂN}
+		+(-90:2.2) pic[scale=1.2]{trapzium}
+		(Cl.south) node[above=3mm,align=left,text width=50mm]{
+			- Hai cạnh bên bằng nhau\\
+			- Hai đường chéo bằng nhau\\
+			- Hai cạnh đáy song song với nhau\\
+			- Hai góc kề một đáy bằng nhau\\[1mm]
+			Diện tích \color{red} $S=\dfrac{(a+b)h}{2}$}
+		;
+		\path
+		(Cl1.north) node[below,teal,font=\bfseries]{HÌNH BÌNH HÀNH}
+		+(-90:3.2) pic[scale=.8]{hbh}
+		(Cl1.south) node[above=3mm,align=left,text width=50mm]{
+			- Các cạnh đối bằng nhau\\
+			- Các góc đối bằng nhau\\
+			- Hai đường chéo cắt nhau tại trung điểm mỗi đường\\
+			- Các cạnh đối song song với nhau\\[1mm]
+			Diện tích $S=ah$\\
+			Chu vi \color{red} $C=2(a+b)$}
+		;
+		\path
+		(Cr1.north) node[below,teal,font=\bfseries]{HÌNH CHỮ NHẬT}
+		+(-90:3.2) pic[scale=.85]{hcn}
+		(Cr1.south) node[above=3mm,align=left,text width=38mm]{
+			- Bốn góc bằng nhau và bằng $\ang{90}$\\
+			- Các cạnh đối bằng nhau\\
+			- Hai đường chéo bằng nhau\\
+			Diện tích $S=ab$\\
+			Chu vi \color{red} $C=2(a+b)$}
+		;
+		\path
+		(Cl2.north) node[below,teal,font=\bfseries]{HÌNH THOI}
+		+(-90:3.2) pic[scale=.9]{thoi2}
+		(Cl2.south) node[above=3mm,align=left,text width=50mm]{
+			- Bốn cạnh bằng nhau\\
+			- Hai đường chéo vuông góc với nhau\\
+			- Các cạnh đối song song với nhau\\
+			- Các góc đối bằng nhau\\[1mm]
+			Diện tích $S=\dfrac{1}{2}ab$\\
+			Chu vi \color{red} $C=4m$}
+		;
+		\path
+		(Cr2.north) node[below,teal,font=\bfseries]{HÌNH VUÔNG}
+		+(-90:3.2) pic[scale=.6]{vuong}
+		(Cr2.south) node[above=3mm,align=left,text width=38mm]{
+			- Bốn cạnh bằng nhau\\
+			- Bốn góc bằng nhau và bằng $\ang{90}$\\
+			- Hai đường chéo bằng nhau\\
+			Diện tích $S=a^2$\\
+			Chu vi \color{red} $C=4a$}
+		;
+		\path
+		(C2.north) node[below,teal,font=\bfseries]{MỘT SỐ HÌNH PHẲNG TRONG THỰC TIỄN}
+		;
+	\end{tikzpicture}
+\end{center}
+%\lipsum[2]
+\end{document}

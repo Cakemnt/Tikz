@@ -1,0 +1,43 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{animate}
+\begin{document}
+%==================
+%\pagecolor{green}
+\def\a{3}
+\def\h{5}
+\pgfmathsetmacro\b{\a/3}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{180}{i=0+1}{
+%\foreach \i in {0,...,360}{
+\begin{tikzpicture}[join=round,cap=round,thick,blue]
+\pgfmathsetmacro\socanh{int(3+div(\i,15))}
+\pgfmathsetmacro\gx{360/\socanh}
+\clip (-1.25*\a,-.5*\a) rectangle (1.25*\a,1.5*\h);
+\fill[brown!50,opacity=.5] 
+(0:0) ellipse ({\a} and {\b})
+(90:\h) ellipse ({\a} and {\b})
+;
+\fill[left color=green!50,right color=yellow!80, middle color=white, opacity=.5] (-\a,0) arc (180:360:{\a} and {\b})--++(90:\h) arc (360:180:{\a} and {\b})--cycle;
+
+\foreach \j in {0,...,\socanh}{
+\pgfmathsetmacro\ga{\j *\gx+\i}
+\pgfmathsetmacro\gb{\ga +\gx}
+\pgfmathsetmacro\kta{int(mod(\ga,360))}
+\path
+ (0:\a) arc (0:\ga:{\a} and {\b}) coordinate (A)
+(0:\a) arc (0:\gb:{\a} and {\b}) coordinate (B)
+(A)+(90:\h) coordinate (A1)
+(B)+(90:\h) coordinate (B1)
+;
+\ifnum \kta <180 \draw[dotted,opacity=.5] (A)--(A1);  \else \draw[opacity=.5] (A)--(A1);\fi
+\draw[dotted,opacity=.5](A)--(B);
+\draw[opacity=.5] (A1)--(B1);
+\fill[ball color=orange] (A) circle (.03);
+\fill[ball color=orange] (A1) circle (.03);
+}
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

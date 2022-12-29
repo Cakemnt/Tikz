@@ -1,0 +1,44 @@
+\documentclass[tikz]{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{animate}
+\everymath{\displaystyle}
+\begin{document}
+%==================
+\def\a{3}
+\def\b{2}
+\pgfmathsetmacro\c{sqrt(abs(\a^2-\b^2))}
+\def\sfa{360}
+%\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+%\multiframe{\sfa}{i=0+1}{
+\foreach \i in {0,1,...,\sfa}{
+\begin{tikzpicture}[join=round,cap=round]
+\pgfmathsetmacro\gM{\i}
+\path
+(0:0) coordinate (O)
+(0:\a) coordinate (A)
+(180:\a) coordinate (A')
+(90:\b) coordinate (B)
+(270:\b) coordinate (B')
+(0:\c) coordinate (F_1)
+(180:\c) coordinate (F_2)
+(A) arc (0:\gM:{\a} and {\b}) coordinate (M) 
+(\a+1,\b+1) coordinate (X)
+;
+\clip (-\a-1,-\b-1) rectangle (4*\a,2*\b);
+\draw[-stealth] (-\a-1,0)--(\a+1,0) node[below]{$x$};
+\draw[-stealth] (0,-\b-1)--(0,\b+1) node[left]{$y$};
+\draw[dotted] (O) ellipse ({\a} and {\b});
+\draw[thick,magenta,smooth] (A) arc (0:\gM:{\a} and {\b});
+\draw[red,thick] (M)--(F_1);
+\draw[blue,thick] (M)--(F_2);
+\draw[thick,red,|-|] let\p1=($(M)-(F_1)$) in (X)--++(0:{veclen(\x1,\y1)}) coordinate (Y) node[pos=.5,above]{\footnotesize $MF_1$};
+\draw[thick,blue,|-|] let\p1=($(M)-(F_2)$) in (Y)--++(0:{veclen(\x1,\y1)})node[pos=.5,above]{\footnotesize $MF_2$};
+\draw[thick,purple,|-|] (\a+1,\b)--++(0:2*\a)node[pos=.5,above]{\footnotesize $AA'=2a$};
+\foreach \x/\g in {A/-45,A'/-135,B/135,B'/-45,O/45,F_1/-90,F_2/-90,M/\gM}\fill[ball color=orange] (\x) circle (.04) +(\g:.4) node{$\x$};
+\end{tikzpicture}
+}
+%\end{animateinline}
+\end{document}
+

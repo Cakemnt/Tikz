@@ -1,0 +1,44 @@
+%\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+\documentclass{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{tikz}
+\usetikzlibrary{calc,patterns}
+\usepackage{amsmath}
+\usepackage{animate}
+\begin{document}
+%=====Các thông số thay đổi=============
+\def\f(#1){-0.25*(#1-4)^2+4.25}%Công thức hàm số
+\def\fdh(#1){-0.5 *(#1-4)}%Công thức đạo hàm
+\def\a{0.5}%Điểm vẽ tiếp tuyến
+\def\b{4}%Điểm kết thúc chạy 
+\def\n{50}
+\pgfmathsetmacro{\duoi}{-1}%Tung độ ymin của khung hình
+\pgfmathsetmacro{\tren}{7}%tung độ ymax của khung hình
+%===================
+\pgfmathsetmacro{\fa}{\f(\a)}
+\pgfmathsetmacro{\fb}{\f(\b)}
+\pgfmathsetmacro{\fdha}{\fdh(\a)}
+\pgfmathsetmacro{\gh}{(\a+\b)/2}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\n}{i=0+1}{
+\begin{tikzpicture}[>=stealth, line width=0.5]
+\clip (\a-1,\duoi) rectangle (\b+1.5,\tren+0.5);
+\draw[->] (\a-1,0)--(0,0)node[below right]{$O$}--(\b+1,0)node[below]{$x$};
+\draw[->] (0,\duoi)--(0,\tren)node[left]{$y$};
+\draw[blue,domain=\a-1:\b+1,smooth,samples=200] plot (\x,{\f(\x)})node[pos=1,above right]{$f(x)$};
+\draw[red,dashed,domain=\a-1:\b+1,smooth,samples=200] plot(\x,{\fdha *(\x-\a)+\fa});
+\pgfmathsetmacro{\xo}{\a+(\i+1) *(\b-\a)/(\n+2)}
+\pgfmathsetmacro{\fo}{\f(\xo)}
+\pgfmathsetmacro{\k}{(\fo-\fa)/(\xo-\a)}
+\pgfmathsetmacro{\m}{-(\fo-\fa)*\a/(\xo-\a)+\fa}
+\draw[orange,domain=\a-1:\b+1,smooth,samples=200]plot(\x,{\k *\x+\m});
+\draw[dashed,red] (\a,\fa)node[above left]{$f(c)$}--(\a,0) (\xo,\fa)--(\xo,0);
+\draw[red] (\a,\fa)--(\xo,\fa) node[midway,below]{$\Delta x$};
+\draw[red] (\xo,\fa)--(\xo,\fo)node[midway,right]{$\Delta y$};
+\fill[red] (\a,\fa) circle (0.05) (\xo,\fo) circle (0.05);
+\draw (\a,0) node[below]{$c$} (\xo,0) node[below]{$c+h$};
+\draw (\gh,\tren-0.5)node{$\lim\limits_{h\rightarrow 0}\dfrac{f(c+h)-f(c)}{c+h-c}\simeq \dfrac{\Delta y}{\Delta x}$};
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

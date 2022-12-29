@@ -1,0 +1,64 @@
+%\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+\documentclass{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{tikz}
+\usepackage{ifthen}
+\usetikzlibrary{calc,patterns}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\r{2}
+\def\tl{0.65}
+\pgfmathsetmacro{\a}{2*\r *sin(22.5)}
+\pgfmathsetmacro{\am}{\a *(1-\tl)}
+\pgfmathsetmacro{\rm}{\r *\tl}
+\pgfmathsetmacro{\rh}{(1-\tl)*\r}
+\def\thanhcau(#1:#2)(#3,#4){
+\begin{scope}[shift={(#1:#2)}]
+\draw (0:0)coordinate (#4a)--(120:\rm) coordinate(b1)
+--([turn]60:\am)coordinate(b2)--([turn]60:\rm)coordinate (#4b)
+--([turn] -165 + #3 :\rm)coordinate (b3)--([turn]60:\am) coordinate(b4)--([turn]60:\rm)coordinate(#4c)
+--([turn] -165 + #3 :\rm)coordinate (b5)--([turn]60:\am) coordinate(b6)--([turn]60:\rm)coordinate(#4d)
+--([turn] -165 + #3 :\rm)coordinate (b7)--([turn]60:\am) coordinate(b8)--([turn]60:\rm)coordinate(#4e)
+--([turn] -165 + #3 :\rm)coordinate (b9)--([turn]60:\am) coordinate(b10)--([turn]60:\rm)coordinate(#4f)
+--([turn] -165 + #3 :\rm)coordinate (b11)--([turn]60:\am) coordinate(b12)--([turn]60:\rm)coordinate(#4g)
+--([turn] -165 + #3 :\rm)coordinate (b13)--([turn]60:\am) coordinate(b14)--([turn]60:\rm)coordinate(#4h)
+--([turn] -165 + #3 :\rm)coordinate (b15)--([turn]60:\am) coordinate(b16)--([turn]60:\rm)coordinate(#4i)
+;
+\pgfmathsetmacro{\gm}{acos((\rm /\rh) *sin(7.5+#3/2))}
+\pgfmathsetmacro{\gh}{\gm+22.5-#3/2}
+\foreach \m/\j in {1/b,3/c,5/d,7/e,9/f,11/g,13/h}{
+\pgfmathsetmacro{\n}{\m+1}
+\draw (b\m)--(b\n)--([turn]-\gh:\rh) coordinate(c)--([turn]2*\gm:\rh);
+\draw[fill=white]  (#4\j)--(c) (c) circle (0.05);
+}
+\end{scope}
+}
+
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{110}{i=0+1}{
+%\foreach \i in {0,...,110}{
+\begin{tikzpicture}[line width=0.75,line join=round]
+\clip (-9*\r,-\r) rectangle (1.5*\r,9*\r);
+\draw[pattern=north east lines, draw=none](-9*\r,-\r/10) rectangle (-6.5*\r,0) (-\r,-\r/10) rectangle (\r,0);
+\draw (-9*\r,0)--(-6.5*\r,0) (-\r,0)--(\r,0);
+%========================
+\ifthenelse{\i<100}{\ifthenelse{\i<11}{\pgfmathsetmacro{\k}{0}}{\pgfmathsetmacro{\k}{\i/2-5}}}{\pgfmathsetmacro{\k}{45}}
+%=======================
+\thanhcau(60:\r/6)(\k,dm)
+\draw (dma)--(dmb)--(dmc) --(dmd) --(dme)--(dmf)--(dmg)--(dmh)--(dmi);
+\foreach \m in {1,...,16}{\draw[fill=white] (b\m) circle (0.05);}
+\foreach \m in {a,b,c,d,e,f,g,h,i}{\draw[fill=white](dm\m) circle (0.05);}
+%==============
+\thanhcau(0:0)(\k,dh)
+%=============
+\foreach \m/\n in {a/b,b/c,c/d,d/e,e/f,f/g,g/h,h/i}{\draw[black, fill=blue!20] (dm\m) --(dh\m)--(dh\n)--(dm\n)--cycle;}
+%============
+\thanhcau(0:0)(\k,dh)
+\draw (dha)--(dhb)--(dhc) --(dhd) --(dhe)--(dhf)--(dhg)--(dhh)--(dhi);
+\foreach \m in {1,...,16}{\draw[fill=white] (b\m) circle (0.05);}
+\foreach \m in {a,b,c,d,e,f,g,h,i}{\draw[fill=white](dh\m) circle (0.05);}
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

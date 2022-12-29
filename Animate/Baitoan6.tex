@@ -1,0 +1,38 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{ifthen}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\r{3}\def\rm{0.5}
+\pgfmathsetmacro{\b}{0.5*(\r+\rm)}
+\pgfmathsetmacro{\a}{sqrt(\r *\rm)}
+\pgfmathsetmacro{\c}{0.5*(\r-\rm)}
+\begin{animateinline}[controls,autoplay,loop]{8}
+\multiframe{360}{i=90+1}{
+%\foreach \i in {90,...,449}{
+\begin{tikzpicture}[thick,line join=round]
+%\def\i{240}
+\pgfmathsetmacro{\ioh}{sqrt((\a *cos(\i))^2 +(\b *sin (\i))^2)}
+\pgfmathsetmacro{\rh}{\r-sqrt( (\b *sin(\i-180)-\c)^2+(\a *cos(\i-180))^2)}
+\path 
+(0:0) coordinate (I)
+(90:\c+\rm) coordinate (A)
+(90:\c) coordinate (O1)
+(270:\c) coordinate (O)
+(A) arc (90:\i:{\a} and {\b}) coordinate (O2)
+;
+\clip (O) circle (1.2*\r);
+\draw (O)--(A) (O)--(O2)--(O1);
+\draw[blue] (A) arc (90:\i:{\a} and {\b});
+\draw 
+(O) circle (\r)
+(O1) circle (\rm)
+(O2) circle (\rh)
+;
+\foreach \x in {A,O,O1,O2}{\fill[orange] (\x) circle (1pt);}
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

@@ -1,0 +1,57 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{animate}
+\begin{document}
+%==================
+%\pagecolor{green}
+\def\r{2}
+\def\go{60}
+\pgfmathsetmacro\xo{\r *cos(\go)}
+\pgfmathsetmacro\yo{\r *sin(\go)/3}
+\pgfmathsetmacro\gy{asin(\yo/\r)}
+\pgfmathsetmacro\ao{\xo *abs(sec(\gy))}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{16}
+\multiframe{180}{i=0+1}{
+%\foreach \i in {0,...,179,180,179,...,0}{
+\begin{tikzpicture}
+\pgfmathsetmacro\ga{int(\go+2*\i)}
+\pgfmathsetmacro\xa{\r *cos(\ga)}
+\pgfmathsetmacro\ya{\r *sin(\ga)/3}
+\pgfmathsetmacro\gx{asin(\ya/\r)}
+\ifnum \ga=90 \pgfmathsetmacro\a{0}
+\else \ifnum \ga=180  \pgfmathsetmacro\a{\r}
+\else \ifnum \ga=270 \pgfmathsetmacro\a{0}
+\else \ifnum \ga=360 \pgfmathsetmacro \a{\r}
+\else \pgfmathsetmacro\a{\xa *abs(sec(\gx))}
+\fi
+\fi
+\fi
+\fi
+\clip (-1.25*\r,-1.25*\r) rectangle (1.25*\r,1.5*\r);
+\draw[dotted]
+(0,-1.25*\r) -- (0,1.25*\r) node[above]{$\Delta$}
+(0,0) circle (\r)
+(0,0) ellipse ({\r} and {\r/3})
+;
+\fill[top color=gray!50, bottom color=white,opacity=.25] (0,0) ellipse ({\r} and {\r/3});
+\fill[left color=green, right color=yellow,opacity=.5] (\r,0) arc (360:180:\r) arc (180:360:{\r} and {\r/3});
+\fill[brown,opacity=.25] (0,0)--(\xo,\yo) arc (\gy:90:{\ao} and {\r})--cycle;
+\ifnum \ga <181
+\draw[dotted] (0,-\r) arc (-90:\gx:{\a} and {\r});
+\draw[blue,opacity=.5] (0,\r) arc (90:\gx:{\a} and {\r});
+\else
+\ifnum \ga<361
+\fill[left color=green, right color=yellow,opacity=.5] (0,0)--(0,\r) arc (90:180:\r) arc (180:\ga:{\r} and {\r/3}) arc (\gx:90:{\a} and {\r});
+\draw[blue,opacity=.5] (0,\r) arc (90:-90:{\a} and {\r});
+\else
+\fill[left color=green, right color=yellow,opacity=.5] (\r,0) arc (0:180:\r) arc (180:360:{\r} and {\r/3});
+\draw[dotted] (0,-\r) arc (-90:\gx:{\a} and {\r});
+\draw[blue,opacity=.5] (0,\r) arc (90:\gx:{\a} and {\r});
+\fi
+\fi
+\fill[yellow,opacity=.25] (0,0)--(\xa,\ya) arc (\gx:90:{\a} and {\r});
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

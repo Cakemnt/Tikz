@@ -1,0 +1,64 @@
+\documentclass[tikz,border=5mm]{standalone}
+\begin{document}
+	\begin{tikzpicture}[blue!50!teal,scale=.75]
+		% A
+		\begin{scope}
+			\draw[-stealth] (-2.2,0)--(3.5,0) node[below left,black]{ $x$};
+			\draw[-stealth] (0,-1.5)--(0,3) node[below left,black]{$y$};
+			\draw
+			(-1,0) node[below,black]{-$1$}--+(90:1mm)--+(-90:1mm)
+			(2,0) node[above,black]{$2$}--+(90:1mm)--+(-90:1mm)
+			(0,1) node[left,black]{$1$}--+(0:1mm)--+(180:1mm)
+			(0,0) node[below right,black]{O} +(210:3) node{\bfseries A.};
+			% Vẽ đường cong (tự chỉnh các thông số cho đến khi ưng ý)
+			\draw[thick] (-2,2) to[out=-60,in=-125]
+			(-1,1) .. controls (0,2.4) ..
+			(1,.7) .. controls +(-60:2) and +(-100:3) .. (3,1);
+		\end{scope}
+		% B
+		\begin{scope}[shift={(8,0)}]
+			\draw[-stealth] (-2.2,0)--(3.5,0) node[below left,black]{$x$};
+			\draw[-stealth] (0,-1.5)--(0,3) node[below left,black]{$y$};
+			\draw
+			(-1,0) node[below left,black]{-$1$}--+(90:1mm)--+(-90:1mm)
+			(2,0) node[below,black]{$2$}--+(90:1mm)--+(-90:1mm)
+			(0,1) node[left,black]{$1$}--+(0:1mm)--+(180:1mm)
+			(0,0) node[above right,black]{O} +(210:3) node{\bfseries B.};
+			% Vẽ đường cong (tự chỉnh các thông số cho đến khi ưng ý)
+			\draw[thick] (-1.5,1.2) to[out=-70,in=120]
+			(-1,0) .. controls +(-60:2) and +(-120:1) .. (2.2,1.5);
+		\end{scope}
+		% C
+		\begin{scope}[shift={(0,-5.5)}]
+			\draw[-stealth] (-2.2,0)--(3.5,0) node[below left,black]{$x$};
+			\draw[-stealth] (0,-1.5)--(0,3) node[below left,black]{$y$};
+			\draw
+			(-1,0) node[below,black]{-$1$}--+(90:1mm)--+(-90:1mm)
+			(2,0) node[above,black]{$2$}--+(90:1mm)--+(-90:1mm)
+			(0,1) node[left,black]{$1$}--+(0:1mm)--+(180:1mm)
+			(0,0) node[below right,black]{O} +(210:3) node{\bfseries C.};
+			% Vẽ đường cong (tự chỉnh các thông số cho đến khi ưng ý)
+			\draw[thick]
+			(-2.5,2.5) .. controls +(-70:2) and +(170:1) ..
+			(1,1.5) to[out=-10,in=105]
+			(1.8,0) .. controls +(-75:2) and +(-100:2) .. (3,2);
+		\end{scope}
+		% D
+		\begin{scope}[shift={(8,-5.5)}]
+			\draw[-stealth] (-2.2,0)--(3.5,0) node[below left,black]{$x$};
+			\draw[-stealth] (0,-1.5)--(0,3) node[below left,black]{$y$};
+			\draw
+			(-1,0) node[below left,black]{-$1$}--+(90:1mm)--+(-90:1mm)
+			(2,0) node[above,black]{$2$}--+(90:1mm)--+(-90:1mm)
+			(0,1) node[left,black]{$1$}--+(0:1mm)--+(180:1mm)
+			(0,0) node[below right,black]{O} +(210:3) node{\bfseries D.};
+			% Vẽ đường cong (tự chỉnh các thông số cho đến khi ưng ý)
+			\draw[thick]
+			(-2,2.5) to[out=-70,in=120] (-1,0)
+			.. controls +(-60:.5) and +(-150:.3) .. (0,0)
+			.. controls +(45:1) and +(110:3) .. (1.9,0)
+			.. controls +(-70:1) and +(-105:1) .. (2.7,0)
+			to[out=75,in=-105] (3,1);
+		\end{scope}
+	\end{tikzpicture}
+\end{document}

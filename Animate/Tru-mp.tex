@@ -1,0 +1,37 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{animate}
+\begin{document}
+%==================
+\pagecolor{blue}
+\def\a{3}
+\def\hy{10}
+\def\sfa{100}
+\pgfmathsetmacro\b{\a/2}
+\pgfmathsetmacro\h{2*\hy}
+\def\i{50}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\sfa}{i=0+1}{
+%\foreach \i in {0,...,360}{
+\begin{tikzpicture}[join=round,cap=round,red,y=\hy]
+\pgfmathsetmacro\goc{20}
+\pgfmathsetmacro\ra{\a *sec(\goc)}
+\draw 
+(0,0,0) circle (\a)
+(0,\h,0) circle (\a)
+;
+\draw
+(\a,0,0) -- (\a,\h,0)
+(-\a,0,0) -- (-\a,\h,0)
+;
+\draw[rotate around={\goc:(0,.5*\h)}] (0,.5*\h,0) circle (\ra);
+\draw[dotted]
+ (0,0,0)--(\a,0,0) node[right]{$x$}
+ (0,0,0)--(0,\h,0) node[right]{$y$}
+ (0,0,0)--(0,0,\a) node[right]{$z$}
+;
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

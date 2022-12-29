@@ -1,0 +1,33 @@
+\documentclass[tikz,border=10pt]{standalone}
+\tikzset{
+	pics/.cd,
+	disc/.style = {code = {
+			\fill[rotate=\g] [white] ellipse [x radius = \a, y radius = \a/3];
+			\path[rotate=\g] [left color = black!50, right color = black!50, middle color = black!25]
+			(-\a+.05,-.1-\h) arc (180:360:\a-.05 and \a/3-.05*\a/3) -- cycle;
+			\path[rotate=\g] [top color = black!25, bottom color = white]
+			(0,.05*\a/3) ellipse [x radius = \a-.05, y radius = \a/3-.05*\a/3];
+			\path[rotate=\g] [left color = black!25, right color = black!25, middle color = white]
+			(-\a,0) -- (-\a,-\h) arc (180:360:{\a} and \a/3) -- (\a,0) arc (360:180:{\a} and \a/3);
+			\foreach \r in {225,315}
+			\foreach \i [evaluate = {\s=30;}] in {0,2,...,30}
+			\fill[rotate=\g] [black, fill opacity = 1/50]
+			(0,0) -- (\r+\s-\i:{\a} and \a/3) -- ++(0,-\h)
+			arc (\r+\s-\i:\r-\s+\i:{\a} and \a/3) -- ++(0,1) -- cycle;
+			\foreach \r in {45,135}
+			\foreach \i [evaluate = {\s=30;}] in {0,2,...,30}
+			\fill[rotate=\g] [black, fill opacity = 1/50]
+			(0,0) -- (\r+\s-\i:{\a} and \a/3)
+			arc (\r+\s-\i:\r-\s+\i:{\a} and \a/3) -- cycle;
+	}}
+}
+\begin{document}
+	\begin{tikzpicture}
+		\def\h{2.5}\def\a{2.5}\def\g{-120}
+		\path (-4.5,2.5) pic {disc};
+		\def\h{5}\def\a{.7}\def\g{-120}
+		\path (0,0) pic {disc};
+		\def\h{2.5}\def\a{2.5}\def\g{-120}
+		\path (2.5,-1.5) pic {disc};
+	\end{tikzpicture}
+\end{document}

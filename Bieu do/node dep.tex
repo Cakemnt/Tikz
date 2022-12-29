@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{vietnam}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz,lipsum}
+\usepackage{SIunitx}
+\begin{document}
+	%\lipsum[1]
+	\begin{center}
+		\begin{tikzpicture}
+			[mybox/.style={rounded corners=4mm,fill=cyan!30},
+			rectangle box/.style={mybox,minimum width=55mm,minimum height=70mm},
+			square box/.style={mybox,minimum size=55mm}]
+			\tikzset{triangle/.pic={
+					\draw[thick,fill=white] (90:1)--(210:1)--(-30:1)--cycle;
+			}}
+			\tikzset{hexagon/.pic={
+					\draw[thick,fill=white]
+					(0:1)--(60:1)--(120:1)--(180:1)--(240:1)--(300:1)--cycle;
+					\draw[thick] (0:1)--(180:1) (60:1)--(240:1) (-60:1)--(120:1);
+			}}
+			\tikzset{thick,declare function={a=2;b=4;h=1.5;},
+				trapzium/.pic={
+					\draw[fill=white]
+					(a/2,h/2)--(-a/2,h/2) node[midway,above,red]{$a$}
+					--(-b/2,-h/2)--(b/2,-h/2) node[midway,below,red]{$b$}
+					--cycle;
+					\draw[dashed] (a/2,h/2)--(-b/2,-h/2) (-a/2,h/2)--(b/2,-h/2);
+					\draw (-a/2,h/2)--(-a/2,-h/2) node[midway,left,red]{$h$};
+					\draw (-a/2,-h/2) rectangle +(45:.3);
+			}}
+			\path[nodes={above}] % để dóng ngang các node
+			(0,0) node[square box] (C) {}
+			(-6,0) node[rectangle box] (Cl) {}
+			(6,0) node[rectangle box] (Cr) {}
+			;
+			\draw[cyan,latex-latex,line width=1.5pt] (Cl.45)--(Cr.135);
+			\draw[cyan,latex-,line width=1.5pt] (C.north)--++(90:4);
+			\path
+			(C.north) node[below,teal,font=\bfseries]{HÌNH TAM GIÁC ĐỀU}
+			+(-90:2.5) pic[scale=1.5]{triangle}
+			(C.south) node[above=6mm,align=left,text width=38mm]{
+				- Ba cạnh bằng nhau\\
+				- Ba góc bằng nhau và bằng $\ang{60}$}
+			;
+			\path
+			(Cr.north) node[below,teal,font=\bfseries]{HÌNH LỤC GIÁC ĐỀU}
+			+(-90:2.5) pic[scale=1.5]{hexagon}
+			(Cr.south) node[above=3mm,align=left,text width=38mm]{
+				- Sáu cạnh bằng nhau\\
+				- Sáu góc bằng nhau và bằng $\ang{120}$\\
+				- Ba đường chéo chính bằng nhau}
+			;
+			\path
+			(Cl.north) node[below,teal,font=\bfseries]{HÌNH THANG CÂN}
+			+(-90:2.2) pic[scale=1.2]{trapzium}
+			(Cl.south) node[above=3mm,align=left,text width=50mm]{
+				- Hai cạnh bên bằng nhau\\
+				- Hai đường chéo bằng nhau\\
+				- Hai cạnh đáy song song với nhau\\
+				- Hai góc kề một đáy bằng nhau\\[1mm]
+				Diện tích \color{red} $S=\dfrac{(a+b)h}{2}$}
+			;
+		\end{tikzpicture}
+	\end{center}
+%	\lipsum[2]
+\end{document}

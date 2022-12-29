@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage[utf8]{vietnam}
+\usepackage{tikz}
+\usepackage[top=1.5cm, bottom=2cm, left=1.5cm, right=1cm] {geometry}
+\begin{document}
+	\begin{center}
+		\begin{tikzpicture}
+			\path
+			(0,0) coordinate (A1)
+			(2,1) coordinate (B1)
+			(-1.5,1.5) coordinate (C1);
+			\foreach \p in {A,B,C}
+			\path (\p1)+(90:3) coordinate (\p2);
+			\draw (A1)--(A2) (B1)--(B2) (C1)--(C2)
+			(C1)--(A1)--(B1)
+			(A2)--(B2)--(C2)--cycle;
+			\draw[dashed] (B1)--(C1);
+			\path (current bounding box.south) node[below] {Hình lăng trụ đứng tam giác};
+		\end{tikzpicture}
+		\hspace{2cm}
+		\begin{tikzpicture}
+			\path
+			(0,0) coordinate (A1)
+			(5,1) coordinate (B1)
+			(-1.5,1.5) coordinate (C1);
+			\foreach \p in {A,B,C}
+			\path (\p1)+(90:3) coordinate (\p2);
+			\draw (A1)--(A2) (B1)--(B2) (C1)--(C2)
+			(C1)--(A1)--(B1)
+			(A2)--(B2)--(C2)--cycle;
+			\draw[dashed] (B1)--(C1);
+			\path (current bounding box.south) node[below] {Hình lăng trụ đứng ngũ giác};
+		\end{tikzpicture}
+	\end{center}
+\end{document}

@@ -1,0 +1,369 @@
+\documentclass[tikz,border=2mm]{standalone}
+\usetikzlibrary{matrix, fit, shadows}
+\usepackage[utf8]{vietnam}
+\begin{document}
+	\mathversion{bold}
+	\pagecolor{white}
+	\begin{tikzpicture}[
+		font=\Large\bfseries\ttfamily,
+		head color/.style args={#1/#2}{
+			column #1/.append style={
+				row 1/.append style={nodes={fill=#2}}}}
+		]
+		\matrix[
+		matrix of nodes,
+		nodes in empty cells,
+		row sep=8\pgflinewidth,
+		column sep=8\pgflinewidth,
+		nodes={minimum size=0.17\linewidth,
+			text width=0.17\linewidth,
+			anchor=center,
+			align=center},
+		every even row/.style={
+			nodes={
+				fill=olive!50,
+				rounded corners =3mm,
+				drop shadow=gray
+			}
+		},
+		row 3/.style={
+			nodes={
+				fill=yellow!50,
+				rounded corners =3mm,
+				drop shadow=gray
+			}
+		},
+		row 5/.style={
+			nodes={
+				fill=yellow!50,
+				rounded corners =3mm,
+				drop shadow=gray
+			}
+		},
+		%
+		head color/.list = {
+			2/cyan,
+			3/teal,
+			4/olive,
+			5/magenta,
+			6/violet,
+			7/orange,
+			8/purple},
+		](m)
+		{
+			& Thứ Hai & Thứ Ba & Thứ Tư & Thứ Năm & Thứ Sáu & Thứ Bảy & Chủ nhật  \\
+			Tuần 5 & $1$ &  $2$ &  $3$ & $4$ & $5$ & $6$ & $7$ \\
+			Tuần 6 & $8$ &  $9$ &  $10$ & $11$ & $12$ & $13$ & $14$ \\
+			Tuần 7 & $15$ &  $16$ &  $17$ & $18$ & $19$ & $20$ & $21$ \\
+			Tuần 8 & $22$ &  $23$ &  $24$ & $25$ & $26$ & $27$ & $28$ \\
+		};
+		%các ngày âm
+		\foreach \i in {1,...,7}{
+			\pgfmathsetmacro\j{int(\i+1)}
+			\pgfmathsetmacro\ngayam{int(\i+19)}
+			\path(m-2-\j.south east)--++(135:0.65cm)node[
+			circle,inner sep=0.5mm,
+			fill=teal,
+			text=white,
+			scale=0.8,
+			rounded corners=3pt,
+			drop shadow=gray]{$\ngayam$};
+		}
+		\foreach \i in {1,...,4}{
+			\pgfmathsetmacro\j{int(\i+1)}
+			\pgfmathsetmacro\ngayam{int(\i+26)}
+			\path(m-3-\j.south east)--++(135:0.65cm)node[
+			circle,inner sep=0.5mm,
+			fill=teal,
+			text=white,
+			scale=0.8,
+			rounded corners=3pt,
+			drop shadow=gray]{$\ngayam$};
+		}
+		%ngày một Tết
+		\foreach \i in {1}{
+			\pgfmathsetmacro\j{int(\i+5)}
+			\pgfmathsetmacro\ngayam{int(\i)}
+			\path(m-3-\j.south east)--++(135:0.65cm)node[
+			circle,inner sep=1.5mm,
+			fill=red,
+			text=white,
+			scale=0.8,
+			rounded corners=3pt,
+			drop shadow=gray]{$\ngayam/1$};
+		}
+		%ngày hai ba Tết
+		\foreach \i in {2,3}{
+			\pgfmathsetmacro\j{int(\i+5)}
+			\pgfmathsetmacro\ngayam{int(\i)}
+			\path(m-3-\j.south east)--++(135:0.65cm)node[
+			circle,inner sep=1.0mm,
+			fill=red,
+			text=white,
+			scale=0.8,
+			rounded corners=3pt,
+			drop shadow=gray]{$\ngayam$};
+		}
+		%các ngày tiếp
+		\foreach \i in {1,...,7}{
+			\pgfmathsetmacro\j{int(\i+1)}
+			\pgfmathsetmacro\ngayam{int(\i+3)}
+			\path(m-4-\j.south east)--++(135:0.65cm)node[
+			circle,inner sep=1.0mm,
+			fill=teal,
+			text=white,
+			scale=0.8,
+			rounded corners=3pt,
+			drop shadow=gray]{$\ngayam$};
+		}
+		%các ngày tiếp
+		\foreach \i in {1,...,7}{
+			\pgfmathsetmacro\j{int(\i+1)}
+			\pgfmathsetmacro\ngayam{int(\i+10)}
+			\path(m-5-\j.south east)--++(135:0.65cm)node[
+			circle,inner sep=1.0mm,
+			fill=teal,
+			text=white,
+			scale=0.8,
+			rounded corners=3pt,
+			drop shadow=gray]{$\ngayam$};
+		}
+		%tiêu đề
+		\path(m.north)node[
+		above,
+		inner sep=1mm,
+		fill=teal,
+		text=white,
+		scale=2,
+		rounded corners=3pt,
+		drop shadow=gray]{Lịch nghỉ TẾT Tân Sửu};
+		\path(m.east)--+(0:1.0cm)node[
+		inner sep=1mm,
+		rounded corners=3mm,
+		fill=teal,
+		align=center,
+		anchor=center,
+		text=white,
+		rotate=90,
+		scale=2,
+		drop shadow=gray
+		]{Tháng 2-2021};
+		% bao ngày nghỉ
+		\node[fit={(m-2-2.north west)(m-2-8.south east)},
+		ultra thick,
+		inner sep=0,
+		align=center,
+		rounded corners=2mm,
+		draw=red,
+		label={[fill=red, text=white, align=center, anchor=center,rotate=0,shift={(0,-0.25)}]90:Nghỉ}
+		]{};
+		\node[fit={(m-3-2.north west)(m-3-8.south east)},
+		ultra thick,
+		inner sep=0,
+		align=center,
+		rounded corners=2mm,
+		draw=red,
+		label={[fill=red, text=white, align=center, anchor=center,rotate=0,shift={(0,-0.25)}]90:Nghỉ}
+		]{};
+		\node[fit={(m-4-2.north west)(m-4-8.south east)},
+		ultra thick,
+		inner sep=0,
+		align=center,
+		rounded corners=2mm,
+		draw=red,
+		label={[fill=red, text=white, align=center, anchor=center,rotate=0,shift={(0,-0.25)}]90:Nghỉ}
+		]{};
+		%ba ngày tết đi đâu ta
+		\node[fit={(m-3-6.north west)(m-3-8.south east)},
+		ultra thick,scale=0.95,
+		inner sep=0,
+		align=center,
+		rounded corners=2mm,
+		draw=blue,fill opacity=0.4,
+		label={[fill=purple,
+			text=white,
+			rounded corners=3mm,
+			drop shadow=gray,
+			align=center,
+			anchor=center,
+			rotate=0,shift={(0,-0.4)}]90:Ba ngày Tết đi đâu ta!}
+		]{};
+		%bao ngày học elearning
+		\node[fit={(m-5-2.north west)(m-5-8.south east)},
+		ultra thick,
+		inner sep=0,
+		align=center,
+		rounded corners=2mm,
+		draw=blue,fill opacity=0.4,
+		label={[blue,align=center,anchor=center,rotate=0,shift={(0,-0.5)}]90:Sv học Elearning, không tập trung tại trường}
+		]{};
+	\end{tikzpicture}
+	%Tháng 3
+	\begin{tikzpicture}[
+		font=\Large\bfseries\ttfamily,
+		head color/.style args={#1/#2}{
+			column #1/.append style={
+				row 1/.append style={nodes={fill=#2}}}}
+		]
+		\matrix[
+		matrix of nodes,
+		nodes in empty cells,
+		row sep=8\pgflinewidth,
+		column sep=8\pgflinewidth,
+		nodes={minimum size=0.17\linewidth,
+			text width=0.17\linewidth,
+			anchor=center,
+			align=center},
+		every even row/.style={
+			nodes={
+				fill=olive!50,
+				rounded corners =3mm,
+				drop shadow=gray
+			}
+		},
+		row 3/.style={
+			nodes={
+				fill=yellow!50,
+				rounded corners =3mm,
+				drop shadow=gray
+			}
+		},
+		row 5/.style={
+			nodes={
+				fill=yellow!50,
+				rounded corners =3mm,
+				drop shadow=gray
+			}
+		},
+		head color/.list = {
+			2/cyan,
+			3/teal,
+			4/olive,
+			5/magenta,
+			6/violet,
+			7/orange,
+			8/purple},
+		](m)
+		{
+			& Thứ Hai & Thứ Ba & Thứ Tư & Thứ Năm & Thứ Sáu & Thứ Bảy & Chủ nhật  \\
+			Tuần 9 & $1$ &  $2$ &  $3$ & $4$ & $5$ & $6$ & $7$ \\
+			Tuần 10 & $8$ &  $9$ &  $10$ & $11$ & $12$ & $13$ & $14$ \\
+			Tuần 11 & $15$ &  $16$ &  $17$ & $18$ & $19$ & $20$ & $21$ \\
+			Tuần 12 & $22$ &  $23$ &  $24$ & $25$ & $26$ & $27$ & $28$ \\
+			Tuần 13 & $29$ &  $30$ &  $31$  \\
+		};
+		%các ngày âm
+		\foreach \i in {1,...,7}{
+			\pgfmathsetmacro\j{int(\i+1)}
+			\pgfmathsetmacro\ngayam{int(\i+17)}
+			\path(m-2-\j.south east)--++(135:0.65cm)node[
+			circle,inner sep=0.5mm,
+			fill=teal,
+			text=white,
+			scale=0.8,
+			rounded corners=3pt,
+			drop shadow=gray]{$\ngayam$};
+		}
+		\foreach \i in {1,...,5}{
+			\pgfmathsetmacro\j{int(\i+1)}
+			\pgfmathsetmacro\ngayam{int(\i+24)}
+			\path(m-3-\j.south east)--++(135:0.65cm)node[
+			circle,inner sep=0.5mm,
+			fill=teal,
+			text=white,
+			scale=0.8,
+			rounded corners=3pt,
+			drop shadow=gray]{$\ngayam$};
+		}
+		%ngày một hai âm
+		\foreach \i in {1}{
+			\pgfmathsetmacro\j{int(\i+6)}
+			\pgfmathsetmacro\ngayam{int(\i)}
+			\path(m-3-\j.south east)--++(135:0.65cm)node[
+			circle,inner sep=1.5mm,
+			fill=teal,
+			text=white,
+			scale=0.8,
+			rounded corners=3pt,
+			drop shadow=gray]{$\ngayam/2$};
+		}
+		%ngày hai / tư
+		\foreach \i in {2}{
+			\pgfmathsetmacro\j{int(\i+6)}
+			\pgfmathsetmacro\ngayam{int(\i)}
+			\path(m-3-\j.south east)--++(135:0.65cm)node[
+			circle,inner sep=1.0mm,
+			fill=teal,
+			text=white,
+			scale=0.8,
+			rounded corners=3pt,
+			drop shadow=gray]{$\ngayam$};
+		}
+		%các ngày tiếp
+		\foreach \i in {1,...,7}{
+			\pgfmathsetmacro\j{int(\i+1)}
+			\pgfmathsetmacro\ngayam{int(\i+2)}
+			\path(m-4-\j.south east)--++(135:0.65cm)node[
+			circle,inner sep=1.0mm,
+			fill=teal,
+			text=white,
+			scale=0.8,
+			rounded corners=3pt,
+			drop shadow=gray]{$\ngayam$};
+		}
+		%các ngày tiếp
+		\foreach \i in {1,...,7}{
+			\pgfmathsetmacro\j{int(\i+1)}
+			\pgfmathsetmacro\ngayam{int(\i+9)}
+			\path(m-5-\j.south east)--++(135:0.65cm)node[
+			circle,inner sep=1.0mm,
+			fill=teal,
+			text=white,
+			scale=0.8,
+			rounded corners=3pt,
+			drop shadow=gray]{$\ngayam$};
+		}
+		%các ngày tiếp
+		\foreach \i in {1,...,3}{
+			\pgfmathsetmacro\j{int(\i+1)}
+			\pgfmathsetmacro\ngayam{int(\i+16)}
+			\path(m-6-\j.south east)--++(135:0.65cm)node[
+			circle,inner sep=1.0mm,
+			fill=teal,
+			text=white,
+			scale=0.8,
+			rounded corners=3pt,
+			drop shadow=gray]{$\ngayam$};
+		}
+		%tiêu đề tháng
+		\path(m.east)--+(0:1.0cm)node[
+		inner sep=1mm,
+		rounded corners=3mm,
+		fill=teal,
+		align=center,
+		anchor=center,
+		text=white,
+		rotate=90,
+		scale=2,
+		drop shadow=gray
+		]{Tháng 3-2021};
+		%bao ngày học elearning
+		\node[fit={(m-2-2.north west)(m-2-5.south east)},
+		ultra thick,
+		inner sep=0,
+		align=center,
+		rounded corners=2mm,
+		draw=blue,
+		label={[blue,align=center,anchor=center,rotate=0,shift={(0,-0.5)}]90:Sv học Elearning, không tập trung tại trường}
+		]{};
+		%ngày chính thức học tập trung
+		\node[fit={(m-2-6.north west)(m-2-6.south east)},
+		ultra thick,
+		inner sep=0,
+		align=center,
+		rounded corners=2mm,
+		draw=red,
+		label={[fill=cyan, rounded corners=3mm, drop shadow=gray, text=white,align=center,anchor=center,rotate=0,shift={(1.5,0)}]45:Trở lại học tại trường}
+		]{};
+	\end{tikzpicture}
+\end{document}

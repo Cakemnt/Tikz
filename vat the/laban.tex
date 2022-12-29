@@ -1,0 +1,68 @@
+\documentclass[12pt,a4paper,oneside]{article}
+\usepackage{animate}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=1.5cm] {geometry}
+\usepackage{xcolor}
+\definecolor{maudiacau}{HTML}{477CC2}
+\newcommand{\vekim}[3]{
+	\draw[fill=white,draw=none] ($(0,0)+(#3:#1)$)--($(0,0)+(#3-90:#2)$)--($(0,0)+(#3+90:#2)$)--cycle;
+	\draw[fill=red!80,draw=none,rotate=180] ($(0,0)+(#3:#1)$)--($(0,0)+(#3-90:#2)$)--($(0,0)+(#3+90:#2)$)--cycle;
+}
+\newcommand{\vekimtonua}[3]{
+	\draw[fill=white,draw=none] ($(0,0)+(#3:#1)$)--($(0,0)+(#3-90:#2)$)--(0,0)--cycle;
+	\draw[fill=none,draw=white] ($(0,0)+(#3:#1)$)--($(0,0)+(#3+90:#2)$)--(0,0)--cycle;	
+	\draw[fill=white,draw=none,rotate=180] ($(0,0)+(#3:#1)$)--($(0,0)+(#3-90:#2)$)--(0,0)--cycle;
+	\draw[fill=none,draw=white,rotate=180] ($(0,0)+(#3:#1)$)--($(0,0)+(#3+90:#2)$)--(0,0)--cycle;	
+}
+\begin{document}
+	\begin{animateinline}[autoplay,loop]{12}
+		\multiframe{36}{iGoc=80+1}{	
+			\begin{tikzpicture}[scale=0.8, line join=round, line cap=round]	
+				\def\r{5} %Ban kinh duong tron lon
+				%Decore khung ngoài
+				\draw[draw=none,fill=maudiacau!80!white,opacity=1] (0,0) circle (\r cm);
+				\draw[line width=0.6cm,fill=none,draw=black!20] (0,0) circle (\r cm);
+				\draw[line width=0.5cm,fill=none,draw=white!80!gray] (0,0) circle (\r cm);
+				\draw[line width=0.4cm,fill=none,draw=white!90!gray] (0,0) circle (\r cm);
+				\draw[line width=0.38cm,fill=none,draw=white!80!gray] (0,0) circle (\r cm);
+				\draw[line width=0.35cm,fill=none,draw=white!95!gray] (0,0) circle (\r cm);
+				\draw[line width=0.3cm,fill=none,draw=white!98!gray] (0,0) circle (\r cm);
+				\draw[line width=0.05cm,fill=none,draw=white!93!black] (0,0) circle (\r cm);
+				%Duong tron trong
+				\def\rt{2.5}	
+				\def\rtt{2.25}	
+				\foreach \j in {-11.25,11.25,...,348.75}{
+					\draw[draw=white!80!black] (0,0)--(\j:\rt);
+				}
+				\draw[line width=0.03cm,fill=none,draw=white!80!black] (0,0) circle (\rt cm);
+				\draw[line width=0.15cm,fill=none,draw=white!80!black] (0,0) circle (\rtt cm);
+				\foreach \i/\name in{90/N,180/W,270/S,0/E}{
+					\node at ($(0,0)+(\i:\r)-(\i:1.5)$)	{\fontfamily{qag}\fontsize{25pt}{1pt}\selectfont\color{white}\bfseries\name};
+				}
+				
+				%Ve kim
+				\def\dai{4}
+				\def\rong{0.5}	
+				%\def\gocn{\iGoc}	
+				\begin{scope}[opacity=.9]
+					\vekimtonua{3}{0.25}{90} %chieu dai kim, ban kinh kim, goc lech kim
+					\vekimtonua{3}{0.25}{0}
+					\foreach \k in {0,22.5,...,157.5}{
+						\vekimtonua{1.5}{0.2}{\k}
+					}
+					\foreach \z in {0,45,...,135}{
+						\vekimtonua{2}{0.25}{\z}
+					}
+				\end{scope}
+				\vekim{\dai}{\rong}{-\iGoc}
+				%Ve truc giua
+				\draw[line width=0.05cm,fill=white,draw=white!80!black] (0,0) circle (\rong cm);
+				\node at ($(0,0)+(-90:\r1)$) {\fontfamily{qag}\selectfont Ti\textit{k}Z by Ho Ha Dang};
+				\node at ($(0,0)+(-90:\r+1.5)$) {\fontfamily{qag}\selectfont Compass for FA};
+				\node[rotate=60] at ($(0,0)+(60:\r+2)$) {\bfseries\fontfamily{qag}\color{red}\selectfont CRUSH};
+			\end{tikzpicture}
+		}
+	\end{animateinline}
+	
+\end{document}

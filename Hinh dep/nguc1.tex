@@ -1,0 +1,76 @@
+
+\definecolor{vanglat}{RGB}{255, 218, 116}
+\definecolor{xanhlat}{RGB}{150, 223, 230}
+\definecolor{lam}{RGB}{198, 179, 173}
+\definecolor{vanh}{RGB} {218, 53, 83}
+\definecolor{num}{RGB}{229, 120, 140}
+\definecolor{luclat}{RGB}{201, 219, 75}
+\begin{document}
+	\begin{tikzpicture}
+		\fill[vang]
+		(-4,3) rectangle(4,4);
+		\fill[luc]
+		(-4,-4)rectangle(4,-2.5);
+		\fill[hongtr]
+		(-4,-2.5)rectangle(4,3);
+		\def\A{
+			(-3.6,3)
+			..controls +(-12:1) and +(95:.3)..(-2.48,2)
+			..controls +(-85:1.6) and +(150:1.6)..(-1,-.6)
+			to[out=10,in=90] (-.82,-.84)
+			..controls +(-95:1.35) and +(-15:.6)..(-2.48,-2)
+			--(-2.48,-2.5)
+			--(-0.88,-2.5)
+			--(-0.88,-2)
+			..controls +(-15:1.1) and +(-90:.9)..(.78,-.84)
+			..controls +(78:.1) and +(-18:.12)..(.65,-.6)
+			..controls +(162:1.5) and +(-82:.5)..(-.88,2)
+			..controls +(95:.9) and +(-12:.2)..(-2,3)
+			--(-3.6,3)
+		}
+		\fill[hongtr]\A;
+		\fill [xanhlat, shift = {(1.58,0)}]\A;
+		\fill [luclat, shift = {(3.1,0)}]\A;
+		\fill[vanglat]
+		(-3.6,3)
+		..controls +(-12:1) and +(95:.3)..(-2.48,2)
+		..controls +(-85:1.6) and +(150:1.6)..(-1,-.6)
+		to[out=10,in=90] (-.82,-.84)
+		..controls +(-95:1.35) and +(-15:.6)..(-2.48,-2)
+		--(-2.48,-2.5)
+		--(-4,-2.5)
+		--(-4,-2)
+		..controls +(-15:.6) and +(-95:1.35)..(-2.45,-.84)
+		..controls +(90:.2) and +(-15:.1)..(-2.62,-.58)
+		..controls +(150:.9) and +(-75:1.1)..(-4,1)
+		--(-4,3)
+		--(-3.6,3);
+		\fill[hongtr]
+		(-4,-2)
+		..controls +(-15:.6) and +(-95:1.35)..(-2.45,-.84)
+		..controls +(90:.2) and +(-15:.1)..(-2.62,-.58)
+		..controls +(150:1.2) and +(-70:.9)..(-4,1)
+		--(-4,-2);
+		\def\B{
+			(-2.85,-.46)
+			..controls +(-90:.3) and +(150:.3)..(-2.48,-1.13)
+			..controls +(82:.7) and +(-40:.3)..(-2.85,-.46);
+		}
+		\def\C{
+			(-2.62,-.58)
+			..controls +(-80:.2) and +(150:.1)..(-2.45,-.84)
+			..controls +(90:.2) and +(-15:.1)..(-2.62,-.58);
+		}
+		\fill[vanh]\B;
+		\fill[num]\C;
+		\fill [vanh, shift = {(1.61,0)}]\B;
+		\fill [num, shift = {(1.61,0)}]\C;
+		\fill [vanh, shift = {(3.21,0)}]\B;
+		\fill [num, shift = {(3.21,0)}]\C;
+		\fill [vanh, shift = {(4.72,0)}]\B;
+		\fill [num, shift = {(4.72,0)}]\C;
+		\fill [vanh, shift = {(6.32,0)}]\B;
+		\fill [num, shift = {(6.32,0)}]\C;
+		%\node at (3.2,1.5)[scale=.05]{\includegraphics{MYANH}};
+	\end{tikzpicture}
+\end{document}

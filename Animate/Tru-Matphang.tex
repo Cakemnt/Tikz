@@ -1,0 +1,37 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{animate}
+\begin{document}
+%==================
+%\pagecolor{green}
+\def\a{3}
+\def\h{3}
+\def\hs{.3}
+\def\sfa{80}
+\pgfmathsetmacro\b{\a *\hs}
+\def\i{50}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\sfa}{i=1+1}{
+%\foreach \i in {0,...,360}{
+\begin{tikzpicture}[join=round,cap=round,red]
+\pgfmathsetmacro\gq{\i}
+\pgfmathsetmacro\he{\a *sec(90-\gq)}
+\pgfmathsetmacro\ye{(\b^2)/\he}
+\pgfmathsetmacro\ge{asin(\b/\he)}
+\pgfmathsetmacro\xe{\ye/tan(\ge)}
+\pgfmathsetmacro\ae{(\xe *\b)/sqrt(\b^2-\ye^2)}
+\clip (-1.25 *\a,-1.25*\b) rectangle (1.25*\a,\h+1.25*\b);
+\fill[brown!30,opacity=.5] (0:0) ellipse ({\a} and {\b});
+\fill[left color =green!30,right color=yellow!30,middle color=white, opacity=.5] (-\a,\h) --(-\a,0) arc (180:360:{\a} and {\b})--(\a,\h) arc (360:180:{\a} and {\b});
+\fill[top color=brown!30,bottom color=green!20,opacity=.5] (0,\h) ellipse ({\a} and {\b});
+\begin{scope}
+\clip (-\a,0) arc (180:360:{\a} and {\b}) --(\a,\h) arc (0:180:{\a} and {\b})--cycle;
+\fill[yellow!30,opacity=.5,rotate around={\gq:(0,.5*\h)}] (0,.5*\h) ellipse ({\ae} and {\b});
+\end{scope}
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}
+
+%%6:28:14 10/11/2020Last Modification of contents

@@ -1,0 +1,58 @@
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage[utf8]{vietnam}
+\usetikzlibrary{calc}
+\definecolor{nen}{RGB}{246, 235, 217}
+\definecolor{la}{RGB}{162, 163, 104}
+\definecolor{mauduoi}{RGB}{188, 7, 7}
+\definecolor{maugiua}{RGB}{228, 103, 41}
+\begin{document}
+	\begin{tikzpicture}
+		\path (0,0) node[opacity=0,scale=.3,xscale=1]{\includegraphics{Questoarticolo.jpg}};
+		\begin{pgfinterruptboundingbox}
+			\fill[nen]
+			(-3,-4.6) rectangle (3,4.6) ; 
+			\draw[la, line width =1.pt]
+			(.95,4.6) 
+			..controls +(-50:1.2) and +(100:.5) .. (1.82,2.1) 
+			..controls +(-80:.6) and +(50:.2) ..  (1.5,-.55)  
+			..controls +(-100:.9) and +(40:1.9) .. (-.7,-4.6) ;  
+			\draw[la, line width =.5pt]
+			(1.82,2.1)  ..controls +(-105:.9) and +(40:.6) ..  (.8,.85) 
+			(1.5,-.55)  ..controls +(0:.2) and +(-40:.1) .. (1.83,-.75) 
+			(.8,.85)  ..controls +(60:.1) and +(-40:.1) .. (1,1.25) 
+			(1.83,-.75)  ..controls +(-120:.5) and +(90:.1) .. (1.62,-1.55) ;
+			\fill[la]
+			(.15,1.5) 
+			..controls +(40:.1) and +(180:.1) .. (.36,1.58)  
+			..controls +(60:.1) and +(180:.1) .. (.6,1.67)  
+			..controls +(-10:.3) and +(140:.1) .. (1,1.25)  
+			..controls +(170:.2) and +(0:.9) .. (.15,1.5) ; 
+			\fill[la] 
+			(1.83,-.75) 
+			..controls +(-120:.1) and +(90:.1) .. (1.75,-1.2)  
+			..controls +(-90:.3) and +(90:.1) .. (2.25,-2.1)  
+			..controls +(90:1.2) and +(-40:.2) .. (1.83,-.75)  ;
+			\draw[la!150,line width=.4pt]
+			(2.15,-1.6) ..controls +(100:.3) and +(-700:.1) .. (1.86,-.9) ; 
+			\fill[la] 
+			(1.62,-1.55) 
+			..controls +(-150:.2) and +(90:.1) .. (1.4,-2.1)  
+			..controls +(-90:.3) and +(120:.1) .. (1.7,-2.9)  
+			..controls +(110:.3) and +(-90:.2) .. (1.72,-2)  
+			..controls +(90:.3) and +(-70:.2) .. (1.62,-1.55) ;
+			\fill[left color=mauduoi,right color=mauduoi,middle color=maugiua]
+			(-.3,-.1) 
+			..controls +(30:.3) and +(180:.4) .. (.4,-.2) 
+			..controls +(0:.2) and +(-170:.2) .. (.9,-.1) 
+			..controls +(20:.2) and +(-90:.2) .. (1.2,.3) 
+			..controls +(92:.1) and +(-50:.1) .. (1.15,.5) 
+			..controls +(72:.3) and +(30:.1) .. (.8,.85) --(.9,1) 
+			..controls +(120:.3) and +(-30:.1) .. (.65,1.17) 
+			..controls +(180:.4) and +(23:.2) .. (.2,1.1) 
+			..controls +(-152:.3) and +(50:.1) .. (-.05,.82) 
+			..controls +(-160:.2) and +(70:.1) .. (-.3,.3) 
+			..controls +(-90:.2) and +(80:.2) .. (-.3,-.1) ;
+			%\node at (-2,-3.5)[scale=.05]{\includegraphics{CATTUONG}};
+		\end{pgfinterruptboundingbox}
+	\end{tikzpicture}
+\end{document}

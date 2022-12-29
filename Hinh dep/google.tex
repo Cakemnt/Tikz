@@ -1,0 +1,14 @@
+\documentclass[border=5mm]{standalone}
+\usepackage{xcolor-material}
+\usepackage{tikz}
+\begin{document}
+	\begin{tikzpicture}
+		\foreach \i[count=\j from 0] in {
+			GoogleYellow,
+			GoogleGreen,
+			GoogleBlue,
+			GoogleRed}
+		\fill[\i,rotate=90*\j]
+		(0,0) {[rounded corners=2pt]arc(0:180:1)}--cycle;
+	\end{tikzpicture}
+\end{document}

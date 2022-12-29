@@ -1,0 +1,50 @@
+\documentclass[border=3pt,tikz]{standalone}
+\usepackage[utf8]{vietnam}
+\usetikzlibrary{calc,angles,intersections,shapes.geometric,arrows,decorations.markings,arrows.meta,patterns.meta,patterns}
+\usepackage{tikz-3dplot,pgfplots}
+\pgfplotsset{compat=1.15}
+\usepgfplotslibrary{polar}
+\usepackage{amsmath}
+\begin{document}
+\begin{tikzpicture}
+	
+	\draw[-stealth] (-7,0)--(8,0)node[below]{$x$};
+	
+	\draw[-stealth] (0,-6)--(0,9.5)node[left]{$y$};
+	
+	\draw[smooth,blue]
+	
+	plot[domain=-6:0.6] (\x,{((\x)^2+2)/(\x-1)});
+	
+	\draw[smooth,green]
+	
+	plot[domain=1.42:7.8] (\x,{((\x)^2+2)/(\x-1)});
+	
+	%\draw[smooth,red] (-7,1)--(8.8,1) node[below]{$y=1$};
+	
+	\draw[smooth,red] (1,-6)--(1,9.5) node[above]{$x=1$};
+	
+	\draw[smooth,red]
+	
+	plot[domain=-6:7.8] (\x,{\x+1});
+	
+	\foreach \x in {-6,...,7}\draw (\x,.05)--(\x,-.05);
+	
+	\foreach \y in {-5,...,9}\draw (.05,\y)--(-.05,\y);
+	
+	\fill[black] (1,2) circle(1.5pt);
+	
+	\fill[black] (0,-2) circle(1.5pt);\fill[red] (2,6) circle(1.5pt);
+	
+	\fill[black] (0,0) circle(1.5pt);
+	
+	\draw(0.35,0)node[above]{$O$};
+	
+	\draw[dashed,black](0,-2)--(2,6);
+	
+	\draw[dashed] (1,2) circle (2);
+	
+	\draw[smooth,red] (1,2) circle (3.76);
+	
+\end{tikzpicture}
+\end{document}

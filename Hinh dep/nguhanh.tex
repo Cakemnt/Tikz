@@ -1,0 +1,26 @@
+\documentclass[tikz]{standalone}
+\usepackage[utf8]{vietnam}
+\usetikzlibrary{calc}
+\begin{document}
+	\begin{tikzpicture}
+		\def\r{2}
+		\def\a{1.25}
+		\foreach \i/\j/\k in {
+			0/red/HỎA,
+			1/violet/MỘC,
+			2/gray/THỦY,
+			3/pink/KIM,
+			4/orange/THỔ
+		}
+		\path (\i*72+18:\r)
+		node[white,draw,circle,ball color=\j,minimum size=\a cm,scale=.8] (A\i) {\k};
+		\def\g{17}
+		\foreach \i in {0,...,4}
+		\draw[-stealth,line width=2pt,rotate=\i*72]
+		(90-\g:\r) arc(90-\g:18+\g:\r);
+		\foreach \x/\y in {A2/A0,A3/A1,A4/A2,A0/A3,A1/A4}
+		\draw[double,blue] (\x)--($(\x)!.5!(\y)$);
+		\foreach \x/\y in {A3/A1,A4/A2,A0/A3,A1/A4,A2/A0}
+		\draw[double,-latex,blue] ($(\x)!0.5!(\y)$)--(\y);
+	\end{tikzpicture}
+\end{document}

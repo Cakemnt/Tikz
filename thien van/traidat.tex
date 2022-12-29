@@ -1,0 +1,63 @@
+\documentclass[11pt,border=2mm]{standalone}
+\usepackage[utf8]{vietnam}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{amsmath,amscd,commath,mathrsfs}
+\usepackage{graphicx,tikz,tkz-tab}
+\usetikzlibrary{arrows,patterns,calc,intersections,angles,quotes}
+\usetikzlibrary{decorations.markings,backgrounds}
+\usepackage{tkz-euclide,anyfontsize}
+\usetkzobj{all}
+\begin{document}
+	\begin{tikzpicture}[font=\fontsize{7}{1}\selectfont ,scale=3]
+		%\draw[gray,thin,opacity=.5] (-2,-2) grid (2,2);
+		%====== trái đất và hai cung trong
+		\definecolor{col2}{rgb}{0,1,0.6}
+		\def\a{0.18}
+		\def\b{0.1}
+		\fill[name path =c2,fill=col2,opacity=.5] (0,0) circle(\a cm);
+		\draw[rotate=-23.5, red] (\a,0) arc(0:-180:\a cm and \b cm);
+		\draw[rotate=-23.5, red,dashed] (\a,0) arc(0:180:\a cm and \b cm);
+		%========= ellipse ngang
+		\def\aa{1}
+		\def\bb{0.3}
+		\draw[dashed,blue,thick,name path =ar1] (\aa,0) arc(0:180:\aa cm and \bb cm);
+		\draw[blue,thick,name path =ar2] (\aa,0) arc(0:-180:\aa cm and \bb cm);
+		%=========ellipse chéo
+		\draw[dashed,red,thick,rotate=-23.5,name path =ar3] (\aa,0) arc(0:180:\aa cm and \bb cm);
+		\draw[red,thick,rotate=-23.5,name path=ar4] (\aa,0) arc(0:-180:\aa cm and \bb cm);
+		%===========vòng tròn ngoài
+		\definecolor{col1}{rgb}{0,0.5,1}
+		\shade[name path = c1,ball color=col1,opacity=.6] (0,0) circle(1cm);
+		%=============== các điểm vàng
+		\fill[yellow](\aa,0) circle(0.8pt);
+		\fill[yellow](-\aa,0) circle(0.8pt);
+		\path[name intersections={of =ar1 and ar3,by=X}]; % bắc
+		\fill[yellow](X) circle(.8pt);
+		\path[name intersections={of =ar2 and ar4,by=Y}]; % nam
+		\fill[yellow](Y) circle(.8pt);
+		%======= Các cung 23.5
+		\coordinate (A) at ($(0,0)+(-60:\aa cm and \bb cm)$);
+		\pgfmathsetmacro{\q}{sqrt(3)/2}
+		\draw[<->] (A) arc(0:-14:\q) node[right,pos=.5,align=center]{$23.5^\circ$} ;
+		\coordinate (B) at ($(0,0)+(120:\aa cm and \bb cm)$);
+		\draw[<->] (B) arc(180:166:\q) node[left,pos=.5,align=center]{$23.5^\circ$} ;
+		\draw[<->] (1.04,0) arc(0:-47:1.04 cm);
+		\node[right] at (1.04,0) {$(+)$};
+		\node[right] at (-47:1.04) {$(-)$};
+		%========== Các điểm thiên cực
+		\coordinate[label=above right: Thiên cực bắc] (C) at (68:\aa cm);
+		\coordinate[label=below left: Thiên cực nam] (D) at (248:\aa cm);
+		\draw [dashed] (D)--(C);
+		\draw (C)--($(D)!1.1!(C)$) (D) -- ($(C)!1.1!(D)$);
+		\draw[<-] (X) -- (-0.1,1.1) node[above]{Thu phân} ;
+		\draw[<-] (X) -- (-0.8,0.9) node[above,align=center]{Mặt trời \\ trong năm};
+		\draw[<-] (-1,0) --(-1.2,0.3) node[above,align=center]{Đông chí};
+		\draw[<-] (Y) --(0.2,-1.1) node[below,align=center]{Xuân phân};
+		\draw[<-] (1,0) --(1.2,0.3) node[above,align=center]{Hạ chí};
+		\node at (1.1,-0.5) {Xích vĩ};
+		\draw[<-] ($(-160:\aa cm and \bb cm)$)--(-1.15,-0.4) node[below]{Hoàng đạo};
+		\draw[<-] (-0.8,0.48) --(-1.2,0.6)node[above]{Quỹ đạo trời};
+		\draw[<-] ($(D)!0.8!(C)$) --(0.9,0.62)node[right]{Địa trục};
+		\fill(-23.5:1.04) circle(0.4pt) node[right]{$0^\circ$};
+	\end{tikzpicture}
+\end{document}

@@ -1,0 +1,42 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{animate}
+\begin{document}
+%==================
+%\pagecolor{green}
+\def\a{3}
+\def\h{5}
+\def\ga{60}
+\pgfmathsetmacro\xa{\a *cos(\ga)}
+\pgfmathsetmacro\ya{\a *sin(\ga)/3}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{16}
+\multiframe{180}{i=0+1}{
+%\foreach \i in {0,...,179,180,179,...,0}{
+\begin{tikzpicture}[join=round,cap=round]
+\pgfmathsetmacro\gb{int(\ga+2*\i)}
+\pgfmathsetmacro\xb{\a *cos(\gb)}
+\pgfmathsetmacro\yb{\a *sin(\gb)/3}
+\clip (-1.25*\a,-.5*\a) rectangle (1.25*\a,1.5*\h);
+\draw[dotted]
+(\a,0) arc (0:180:{\a} and {\a/3})
+(0,-.5*\h)--(0,\h)
+(\a,\h)--(\a,0) arc (360:180:{\a} and {\a/3}) --(-\a,\h)
+(0,\h) ellipse ({\a} and {\a/3})
+;
+\fill[brown,opacity=.25] (0,0)--(\xa,\ya)--++(0,\h)--(0,\h)--cycle ;
+\fill[top color=gray,bottom color=white,opacity=.5] (0,\h)--(\xa,\ya+\h) arc (\ga:\gb:{\a} and {\a/3})--cycle;
+\ifnum \gb<181
+\else
+\ifnum \gb<361
+\fill[left color=brown, right color=white, opacity=.5] (-\a,\h)--(-\a,0) arc (180:\gb:{\a} and {\a/3})--(\xb,\h+\yb) arc (\gb:180:{\a} and {\a/3});
+\else
+\fill[left color=brown, right color=white, opacity=.5] (-\a,\h)--(-\a,0) arc (180:360:{\a} and {\a/3})--(\a,\h) arc (360:180:{\a} and {\a/3});
+\fi
+\fi
+\fill[yellow,opacity=.25] (0,0)--(\xb,\yb)--++(0,\h)--(0,\h)--cycle;
+\draw[dotted] (0,\h)--(0,1.25*\h)node[above]{$\Delta$};
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

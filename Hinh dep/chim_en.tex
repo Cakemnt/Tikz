@@ -1,0 +1,69 @@
+10.11.2020
+Huế ngày hôm nay mưa suốt. Chỉ còn biết ngồi nhà một mình. Chảng gì hơn nữa, vé hình thư giản. Em không định vẽ mắt cho nó vì cứ sợ nó bay mất! Nhưng thui để hoàn thành tác phẩm em đành phải điểm nhãn cho nó vậy! Em mời các Thầy Cô chiêm ngưỡng
+Code em vẽ:
+%\documentclass[tikz,border=1mm,convert={outfile=\jobname.jpg}]{standalone}
+\documentclass[tikz,border=5mm]{standalone}
+\usetikzlibrary{calc}
+\definecolor{nen}{RGB}{245, 244, 240}
+\definecolor{luc}{RGB}{0, 160, 189}
+\definecolor{vang}{RGB}{238, 214, 135}
+\definecolor{dau}{RGB}{214, 43, 66}
+\definecolor{canhduoi}{RGB}{198, 55, 57}
+\definecolor{canhtren}{RGB}{239, 142, 115}
+\definecolor{giaotrenduoi}{RGB}{225, 93, 62}
+\definecolor{canhgiua}{RGB}{236, 201, 80}
+\begin{document}
+	\begin{tikzpicture}
+		\fill[nen]
+		(-4.47,-5.38)rectangle (4.25,5.15);
+		\fill[luc]
+		(3.5,3.2)
+		..controls +(-157:3.9) and +(58:2.45)..(1.65,-.5)
+		..controls +(75:1.2) and +(-160:4.2)..(3.5,3.2) ;
+		\fill[vang]
+		(1.65,1.5)
+		..controls +(-115:2) and +(40:2.)..(.3,-1.45)
+		..controls +(30:2.5) and +(-90:1.4)..(1.65,1.5) ;
+		\fill[dau]
+		(1.43,2.45)
+		..controls +(-170:1.1) and +(50:.9)..(.42,.9)
+		..controls +(50:.9) and +(180:1.4)..(1.43,2.45) ;
+		\fill[black]
+		(1.16,2.03) circle (3.5pt);
+		\fill[white]
+		(1.16,2.03) circle (1pt);
+		\def\A{
+			(.95,.-.1)
+			..controls +(180:1.7) and +(-50:1.9)..(-3.65,2.5)
+			..controls +(-42:1.4) and +(120:1.4)..(.95,.-.1)}
+		\def\B{
+			(.7,-.18)
+			..controls +(187:1.4) and +(-45:1.2)..(-2.9,1)
+			..controls +(-23:1.1) and +(120:1.4)..(.7,-.18)}
+		\fill\A[canhduoi];
+		\fill\B[canhtren];
+		\begin{scope}
+			\clip \A;
+			\fill[giaotrenduoi] \B;
+		\end{scope};
+		\def\C{
+			(-1.6,-2.68)
+			..controls +(20:1) and +(-115:.9)..(.52,-.85)
+			..controls +(-170:1) and +(25:.4)..(-1.6,-2.68)}
+		\def\D{
+			(-1.53,-2.08)
+			..controls +(10:.6) and +(-100:.9)..(.23,-1)
+			..controls +(-160:.9) and +(50:.6)..(-1.53,-2.08)}
+		\fill\C[canhduoi];
+		\fill\D[canhtren];
+		\begin{scope}
+			\clip \C;
+			\fill[giaotrenduoi] \D;
+		\end{scope}
+		\fill[vang]
+		(.5,-.46)
+		..controls +(-140:.5) and +(-30:.4)..(-1.05,-.6)
+		..controls +(30:.4) and +(150:.5)..(.5,-.46);
+		%\node at (2.5,-1.5)[scale=.05]{\includegraphics{MYANH}};
+	\end{tikzpicture}
+\end{document}

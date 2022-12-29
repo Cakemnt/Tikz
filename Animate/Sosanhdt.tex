@@ -1,0 +1,32 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{animate}
+\begin{document}
+%==================
+%\pagecolor{green}
+\def\r{3}
+\def\sfa{100}
+\pgfmathsetmacro\l{\sfa *pi *\r/180}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{16}
+\multiframe{\sfa}{i=0+1}{
+%\foreach \i in {0,...,99,100,99,...,0}{
+\begin{tikzpicture}[join=round,cap=round]
+\pgfmathsetmacro\k{\i/\sfa}
+\pgfmathsetmacro\hm{\r-\k *\r}
+\pgfmathsetmacro\a{sqrt(\r^2-\hm^2)}
+\pgfmathsetmacro\b{sqrt(\r^2-\a^2)}
+\pgfmathsetmacro\hh{sqrt(\r^2-\b^2)}
+\path
+(0:0) coordinate (O)
+(90:\hm) coordinate (O_1)
+(-90:\hh) coordinate (O_2)
+;
+\clip (O) circle (1.1*\r);
+\draw[fill=yellow] (O) circle (\r);
+\draw[fill=blue] (O_1)+(0:\a) arc (360:180:\a) --cycle;
+\draw[fill=blue] (O_2)+(0:\b) arc (0:180:\b) --cycle;
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

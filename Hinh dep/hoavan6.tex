@@ -1,0 +1,26 @@
+\documentclass[border=1mm,20cm]{standalone}%,convert={density=600,outfile=TronVuong.png}
+\usepackage{tikz}
+\begin{document}
+	\begin{tikzpicture}[line join=round, line cap=round]
+		\foreach \goc in {0,90,180,270}{
+			\begin{scope}[rotate=\goc]
+				\filldraw[fill=yellow, even odd rule] (-2,0) arc (180:0:1)--(0,2)--(-2,0);
+		\end{scope}}
+	\end{tikzpicture}
+	%%%==========================================%%%
+	\begin{tikzpicture}[line join=round, line cap=round]
+		\foreach \goc in {0,90,180,270}{
+			\begin{scope}[rotate=\goc]
+				\filldraw[fill=yellow] (0,0)--(0,2)--(-1,1)--cycle;
+				\draw (0,0) arc (0:180:1)--(-1,1);
+		\end{scope}}
+	\end{tikzpicture}
+	%%%==========================================%%%
+	\begin{tikzpicture}[line join=round, line cap=round]
+		\fill[fill=yellow] (-2,0)--(2,0)--(0,2)--cycle;
+		\foreach \goc in {0,90,180,270}{
+			\begin{scope}[rotate=\goc]
+				\draw (0,0) arc (0:180:1)--(-1,1) (0,0)--(0,2)--(-1,1)--cycle;
+		\end{scope}}
+	\end{tikzpicture}
+\end{document}

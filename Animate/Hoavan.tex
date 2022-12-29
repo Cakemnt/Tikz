@@ -1,0 +1,41 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\r{3}
+\def\sfa{16}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{2}
+\multiframe{\sfa}{i=8+1}{
+%\foreach \i in {8,9,...,24,24,23,...,8}{
+\begin{tikzpicture}[join=round,cap=round]
+\pgfmathsetmacro\n{\i}
+\pgfmathsetmacro\goc{180/\n}
+\pgfmathsetmacro\ra{\r *sin(.5*\goc)}
+\pgfmathsetmacro\h{\r *cos(.5*\goc)}
+\pgfmathsetmacro\rb{(\h+\ra)*sin(.5*\goc)/(1-sin(.5*\goc))}
+\clip (-2*\r,-1) rectangle (2*\r,2*\r);
+
+\foreach \j in {1,...,\n}{
+\pgfmathsetmacro\goca{(\j-1)*\goc}
+\pgfmathsetmacro\gocb{\j *\goc}
+\draw[double] 
+(\goca:.25*\r)--(\goca:\r) arc (-90+\goca+.5*\goc:90+\goca+.5*\goc:\ra)
+(\goca:\h+\ra) arc (180+\goca:\goca:\rb)
+arc (270+\goca:180+\goca:\rb) arc (360+\goca:270+\goca:\rb)
+(\gocb:\h+\ra) arc (180+\gocb:360+\gocb:\rb)
+arc (90+\gocb:180+\gocb:\rb) arc (\gocb:90+\gocb:\rb)
+;
+}
+\draw[double] 
+(0:.25*\r) arc (0:180:.25*\r)
+(0:.6*\r) arc (0:180:.6*\r)
+(0:\r) arc (0:180:\r)
+(0:\h+\ra) arc (0:180:\h+\ra)
+(0:\h+\ra+2*\rb)--(180:\h+\ra+2*\rb)
+arc (180:0:\h+\ra+2*\rb)
+;
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

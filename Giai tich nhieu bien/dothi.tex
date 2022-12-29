@@ -1,0 +1,19 @@
+\documentclass[border=5]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+\begin{document}
+	\begin{tikzpicture}[>=stealth]
+		%Định nghĩa đường cong (Hàm số có công thức cụ thể)
+		\def\f(#1){-.075*(#1)*(#1+1)*(#1-1)*(#1-4)+2}
+		\def\a{1.5} %Điểm hiển thị có thể thay đổi giá trị
+		%Vẽ hệ trục
+		\draw[->] (-2,0) -- (0,0) node[below left]{$O$}--(4,0) node[below]{$x$};
+		\draw[->] (0,-1)--(0,0)--(0,4) node[right]{$y$};
+		%Vẽ đường cong
+		\draw[thick,magenta,smooth,samples=100] plot[domain=-1.5:3.5] (\x,{\f(\x)});
+		%Vẽ các dấu móc nhọn và các đường gióng, tô điểm
+		\draw[dashed] (0,{\f(\a)})node[left]{$f(\a)$}-|(\a,0)node[below]{$\a$};
+		\draw[decorate,decoration={brace,amplitude=5pt}] (\a,{\f(\a)})--(\a,0) node[midway, right]{$f(\a)$};
+		\fill[ball color=orange] (\a,{\f(\a)}) circle (1.5pt);
+	\end{tikzpicture}
+\end{document}

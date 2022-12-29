@@ -1,0 +1,38 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\r{3}\def\gA{-40}\def\gB{-140}
+\begin{animateinline}[controls,autoplay,loop]{8}
+\multiframe{360}{i=0+1}{
+%\foreach \i in {0,...,359}{
+\begin{tikzpicture}[thick]
+\clip (0:0) circle (1.5*\r);
+\pgfmathsetmacro{\gC}{\i}
+\path(0:0) coordinate(O) 
+(\gA:\r) coordinate(A) 
+(\gB:\r) coordinate(B)
+(\gC:\r) coordinate(C)
+($(B)!.5!(A)$) coordinate(I)
+($(C)!2/3!(I)$) coordinate(G)
+($(I)!1/3!(O)$) coordinate(O')
+;
+\draw (O)circle(\r);
+\draw[red]($(O')+(0:\r/3)$) arc(0:\i:\r/3);
+\draw(A)--(B)--(C)--cycle (A)--(I)--(O);
+\foreach \x in {A,B,C,G,I,O,O'}{\fill[blue] (\x) circle (1pt);}
+\path 
+($(A)+(\gA:2mm)$) node{$A$}
+($(B)+(\gB:2mm)$) node{$B$}
+($(C)+(\gC:2mm)$) node{$C$}
+($(G)+(\i:2mm)$) node{$G$}
+(O) node[above]{$O$}
+(O') node[left]{$O'$}
+(I)node[below]{$I$}
+;
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

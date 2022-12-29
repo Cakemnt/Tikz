@@ -1,0 +1,50 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\a{1}%
+\def\n{8}
+\pgfmathsetmacro{\r}{\a *sqrt(2)}
+\pgfmathsetmacro{\goc}{90/(\n-1)}%Góc chia
+\pgfmathsetmacro{\m}{4*(\n-1)}%Số điểm chia
+\pgfmathsetmacro{\b}{\a *(1+sqrt(2)) *sin(0.5*\goc)*sec(\goc)}%Độ dài cạnh hình bình hành ngoài
+\pgfmathsetmacro{\s}{\n-1}
+\begin{animateinline}[controls,autoplay,loop]{8}
+\multiframe{90}{i=0+4}{
+%\foreach \i in {0,1,...,359}{
+\begin{tikzpicture}[line cap=round,line width=2]
+\pgfmathsetmacro{\h}{sqrt(\r^2-\a^2 *(cos(-\i))^2)+\a *(sin(-\i))}
+\path 
+(0:0) coordinate (O)
+(-\i:\a) coordinate (A)
+(-\i+90:\a/16) coordinate (A1)
+(-\i-90:\a/16) coordinate (A2)
+;
+\foreach \k in {1,...,\m}{
+\path 
+(\k *\goc:\h) coordinate (B\k)
+;
+}
+\clip (O) circle (3*\r);
+\fill[black] (O) circle (3*\r);
+\foreach \k in {1,...,\m}{
+\pgfmathsetmacro{\gm}{\k *\goc}
+\draw[blue] (B\k) arc (180-\i-\gm:-\i-\gm:\a/3) coordinate(C\k);
+\draw[red] (C\k) arc (180-\i-\gm:360-\i-\gm:\a/3);
+%\draw[red] (C\k) arc (180+\i-\gm:360+\i-\gm:\a/3);
+}
+
+\foreach \k in {1,...,\m}{
+\fill[white] (B\k) circle (0.8pt);
+\fill[white] (C\k) circle (0.8pt);
+}
+\fill[blue!50!red!50] (-\i :1.5*\a)--(-\i+90:\a/8)--(-\i+180:\a/8)--(-\i-90:\a/8)--cycle;
+\foreach \x in {A1,A2}{\fill[white] (\x) circle (0.8pt);}
+\draw[gray] (A)--(B\s);
+\foreach \x in {A,B\s}{\fill[white] (\x) circle (0.8pt);}
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

@@ -1,0 +1,214 @@
+\documentclass[tikz,border=1mm,convert={outfile=\jobname.jpg}]{standalone}
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage[utf8]{vietnam}
+\usetikzlibrary{calc}
+\definecolor{nenng}{RGB}{38, 35, 34}
+\definecolor{nentr}{RGB}{56, 51, 51}
+\definecolor{vangdam}{RGB}{99, 51, 0}
+\definecolor{vanglat}{RGB}{227, 199, 128}
+\definecolor{vangbien}{RGB}{202, 174, 110}
+\begin{document}
+	\begin{tikzpicture}
+		\fill[black]
+		(-4,-5) rectangle (4,5);
+		\shade[shading= ball, ball color=vangdam]
+		(-1.05,-3.48)
+		..controls +(15:.75) and +(0:.6)..(-1,-4.18)
+		..controls +(185:1.1) and +(175:.75)..(-1.2,-2.52)
+		..controls +(200:.4) and +(110:.5)..(-1.58,-3.56)
+		..controls +(90:.5) and +(150:.6)..(-.9,-2.9)
+		..controls +(175:.1) and +(65:.2)..(-1.36,-3)
+		..controls +(-120:.2) and +(-110:.25)..(-1.2,-3)
+		..controls +(-90:.1) and +(30:.1)..(-1.32,-3.3)
+		..controls +(-150:.3) and +(180:.5)..(-1,-4.06)
+		..controls +(0:.5) and +(10:.6)..(-1.05,-3.48) ;
+		\shade[shading= ball, ball color=vanglat]
+		(-1,4.45)
+		..controls +(-15:.6) and +(95:.5)..(.85,3.13)
+		..controls +(-13:.42) and +(95:.2)..(1.28,2.5)
+		..controls +(-85:.2) and +(140:.2)..(1.54,2.1)
+		..controls +(120:.2) and +(-100:.2)..(1.52,2.52)
+		..controls +(-72:.2) and +(160:.2)..(2,2.15)
+		..controls +(-25:.4) and +(85:.37)..(2.48,1.63)
+		..controls +(80:.1) and +(-120:.2)..(2.65,1.97)
+		..controls +(130:.2) and +(-87:.2)..(2.4,2.5)
+		..controls +(175:.36) and +(-50:.4)..(1.7,3.25)
+		..controls +(140:.5) and +(-90:.5)..(1.22,4.57)
+		..controls +(-105:.4) and +(120:.2)..(1.26,3.52)
+		..controls +(125:.5) and +(-20:.5)..(.2,4.6)
+		..controls +(-40:.4) and +(90:.2)..(.83,3.7)
+		..controls +(125:.5) and +(-5:.3)..(-1,4.45) ;
+		% Mắt
+		%%\draw[red]
+		%\fill[black]
+		%(1.51,3.05)
+		%..controls +(-87:.1) and +(85:.1)..(1.55,2.9)
+		%..controls +(0:.1) and +(120:.1)..(1.84,2.62)
+		%..controls +(100:.1) and +(-40:.1)..(1.51,3.05) ;
+		\fill[black]
+		%(1.61,2.86) circle(1.7pt);
+		(1.62,2.86) ellipse[x radius = 6pt, y radius=3pt, rotate=130];\fill[green]
+		%(1.61,2.86) circle(1.7pt);
+		(1.62,2.86) ellipse[x radius = 2pt, y radius=2pt, rotate=130];
+		\fill[left color = vangdam,right color = vanglat]
+		(1.7,2.05)
+		..controls +(8:.6) and +(180:.6)..(2.76,.92)
+		..controls +(3:.1) and +(-95:.2)..(3.07,1.22)
+		..controls +(-120:.4) and +(-80:.4)..(2.38,1.44)
+		..controls +(-20:.25) and +(-70:.25)..(2.72,1.7)
+		..controls +(-100:.2) and +(-40:.2)..(2.4,1.56)
+		..controls +(140:.2) and +(10:.55)..(1.7,2.05) ;
+		\shade[shading= ball, ball color=vangdam]
+		(.22,2.64)
+		..controls +(-50:.5) and +(160:.2)..(1.2,2.14)
+		..controls +(-20:.5) and +(0:.2)..(1.6,1.6)
+		..controls +(-30:.3) and +(-170:.1)..(2.12,1.63)
+		..controls +(175:.2) and +(-50:.1)..(1.81,1.7)
+		..controls +(115:.4) and +(-80:.4)..(1.18,2.54)
+		..controls +(-160:.4) and +(-30:.4)..(.22,2.64) ;
+		\shade[left color = vangdam,right color = vanglat]
+		(.9,3.03)
+		..controls +(-85:.4) and +(-40:.35)..(.42,2.77)
+		..controls +(-60:.4) and +(-120:.3)..(1.19,2.76)
+		..controls +(115:.2) and +(-25:.2)..(.9,3.03) ;
+		\shade[left color = vangdam,right color = vanglat]
+		(.71,2.9)
+		..controls +(135:.4) and +(30:.35)..(-.4,3)
+		..controls +(-130:.7) and +(160:.4)..(.1,2)
+		..controls +(-10:.4) and +(130:.4)..(1.13,1.72)
+		..controls +(175:.1) and +(0:.1)..(.82,1.78)
+		..controls +(-25:.6) and +(95:.45)..(1.76,.92)
+		..controls +(95:.1) and +(-20:.1)..(1.46,1.18)
+		..controls +(-55:.4) and +(75:.5)..(1.68,.3)
+		..controls +(90:.1) and +(-50:.1)..(1.6,.6)
+		..controls +(-95:.4) and +(40:.4)..(1.1,-.4)
+		..controls +(95:.1) and +(-50:.1)..(.93,-.07)
+		..controls +(55:.4) and +(-50:.35)..(1.1,1)
+		..controls +(115:.45) and +(-20:.35)..(0,1.75)
+		..controls +(165:.7) and +(-125:.7)..(-.7,3)
+		..controls +(55:.45) and +(115:.6)..(.71,2.9) ;
+		Bụng dưới
+		\shade[left color = vangdam,right color = vanglat]
+		(-.28,-.35)
+		..controls +(175:.2) and +(15:.1)..(-1,-.36)
+		..controls +(165:.2) and +(85:.4)..(-2.01,-1)
+		..controls +(-120:.25) and +(195:2.25)..(0,-1.65)
+		..controls +(6:.6) and +(90:.5)..(1.2,-2.4)
+		..controls +(1-90:.6) and +(-20:.9)..(0,-2.88)
+		..controls +(160:.6) and +(65:.9)..(-1.55,-3)
+		..controls +(60:.9) and +(160:.4)..(0,-3.05)
+		..controls +(-20:.7) and +(-110:.6)..(1.53,-2.7)
+		..controls +(-90:.1) and +(85:.1)..(1.51,-3)
+		..controls +(60:.5) and +(-65:.4)..(1.5,-2.1)
+		..controls +(-40:.1) and +(120:.1)..(1.68,-2.3)
+		..controls +(85:.35) and +(-15:.2)..(.9,-1.52)
+		..controls +(0:.1) and +(175:.1)..(1.18,-1.56)
+		..controls +(130:.65) and +(5:.4)..(-1,-1.66)
+		..controls +(-170:.5) and +(-115:.5)..(-1.8,-1)
+		..controls +(60:.6) and +(175:.4)..(-.38,-.64)
+		..controls +(80:.1) and +(95:.1)..(-.28,-.35) ;
+		\shade[left color = vangdam,right color = vanglat]
+		(-.2,-.9)
+		..controls +(90:.1) and +(-140:.1)..(-.07,-.66)
+		..controls +(-90:.3) and +(140:.3)..(.18,-1.16)
+		..controls +(100:.3) and +(-140:.2)..(.26,-.75)
+		..controls +(-90:.1) and +(150:.1)..(.38,-1)
+		..controls +(70:.32) and +(125:.32)..(.93,-1)
+		..controls +(-25:.2) and +(-165:.2)..(1.28,-1)
+		..controls +(15:.1) and +(120:.1)..(1.42,-1)
+		..controls +(-110:.4) and +(150:.35)..(1.73,-1.58)
+		..controls +(135:.2) and +(-130:.2)..(1.65,-1.2)
+		..controls +(35:.1) and +(-45:.1)..(1.8,-1)
+		..controls +(0:.12) and +(-110:.1)..(2,-.84)
+		..controls +(50:.2) and +(140:.22)..(2.4,-.9)
+		..controls +(-40:.1) and +(180:.1)..(2.62,-.9)
+		..controls +(-25:.3) and +(85:.2)..(2.88,-1.4)
+		..controls +(60:.32) and +(-25:.2)..(2.7,-.7)
+		..controls +(70:.2) and +(12:.2)..(2.38,-.5)
+		..controls +(40:.2) and +(102:.2)..(2.46,-.26)
+		..controls +(-10:.1) and +(-150:.1)..(2.78,-.17)
+		..controls +(-20:.2) and +(115:.2)..(3.23,-.6)
+		..controls +(95:.35) and +(-25:.35)..(2.64,.09)
+		..controls +(195:.1) and +(-15:.1)..(2.43,.09)
+		..controls +(-160:.2) and +(40:.2)..(2.18,-.3)
+		..controls +(90:.1) and +(-30:.1)..(2.06,-.1)
+		..controls +(130:.1) and +(-85:.1)..(2.03,.03)
+		..controls +(60:.32) and +(180:.2)..(2.67,.38)
+		..controls +(160:.3) and +(35:.3)..(2,.26)
+		..controls +(-150:.1) and +(-15:.1)..(1.83,.18)
+		..controls +(-150:.1) and +(90:.1)..(1.72,0)
+		..controls +(-120:.1) and +(165:.1)..(1.72,-.2) --(1.84,-.3)
+		..controls +(-40:.14) and +(45:.15)..(1.77,-.6)
+		..controls +(-135:.2) and +(-25:.1)..(1.5,-.65)
+		..controls +(165:.1) and +(15:.1)..(1.3,-.66)
+		..controls +(-130:.3) and +(85:.1)..(1,-.4)
+		..controls +(100:.9) and +(115:.9)..(-.2,-.9) ;
+		\shade[left color = vangdam,right color = vanglat]
+		(.8,2.9)
+		..controls +(110:1) and +(15:1.3)..(-1.5,3.9)
+		..controls +(0:.2) and +(140:.3)..(-.42,3.62)
+		..controls +(180:.3) and +(35:.3)..(-1.45,3.3)
+		..controls +(10:.1) and +(180:.1)..(-1,3.35)
+		..controls +(-150:.3) and +(85:.4)..(-1.55,2.5)
+		..controls +(65:.15) and +(-135:.15)..(-1.35,2.75)
+		..controls +(-110:.4) and +(125:.5)..(-1.25,1.55)
+		..controls +(95:.2) and +(-120:.1)..(-1.24,1.9)
+		..controls +(-85:.25) and +(155:.32)..(-.68,1.3)
+		..controls +(120:.1) and +(-85:.2)..(-.92,1.62)
+		..controls +(-30:.6) and +(140:.4)..(.42,1)
+		..controls +(-50:.6) and +(-20:.5)..(-.2,.4)
+		..controls +(-70:.1) and +(180:.2)..(.1,.18)
+		..controls +(-160:.32) and +(-35:.32)..(-1,.3)
+		..controls +(-60:.1) and +(155:.1)..(-.82,.1)
+		..controls +(180:.5) and +(15:.7)..(-1.9,.16)
+		..controls +(5:.1) and +(150:.1)..(-1.43,.05)
+		..controls +(180:.32) and +(45:.4)..(-2.1,-.3)
+		..controls +(10:.1) and +(180:.1)..(-2.1,-.3)
+		..controls +(-150:.32) and +(85:.4)..(-2.6,-1)
+		..controls +(60:.1) and +(-120:.1)..(-2.45,-.88)
+		..controls +(-100:.4) and +(140:.7)..(-2,-2.15)
+		..controls +(90:.1) and +(-90:.1)..(-2.03,-1.95)
+		..controls +(-50:.3) and +(160:.3)..(-1.45,-2.43)
+		..controls +(120:.1) and +(-80:.1)..(-1.6,-2.16)
+		..controls +(-30:.32) and +(-170:.4)..(0,-2.05)
+		..controls +(10:1) and +(10:.9)..(.48,-3)
+		..controls +(0:.9) and +(-20:.4)..(.8,-2)
+		..controls +(140:.5) and +(10:.5)..(-1,-2)
+		..controls +(185:1) and +(-95:.4)..(-2.15,-1)
+		..controls +(90:.9) and +(180:.5)..(-.18,-.15)
+		..controls +(50:.2) and +(150:.3)..(.7,.05)
+		..controls +(50:.4) and +(-60:.4)..(.82,1)
+		..controls +(120:.9) and +(-45:.5)..(-.8,2)
+		..controls +(135:.4) and +(-115:.5)..(-.97,3.05)
+		..controls +(45:.6) and +(120:1)..(.8,2.9) ;
+		\shade[left color = vangdam,right color = vanglat]
+		(-1.45,1.75)
+		..controls +(120:.2) and +(-95:.2)..(-1.54,2.38)
+		..controls +(160:.1) and +(-65:.1)..(-1.82,2.58)
+		..controls +(90:.3) and +(-135:.4)..(-1.77,3)
+		..controls +(45:.2) and +(-15:.2)..(-1.8,3.46)
+		..controls +(90:.4) and +(-5:.2)..(-2.45,3.94)
+		..controls +(-20:.2) and +(125:.2)..(-2,3.58)
+		..controls +(-55:.1) and +(25:.1)..(-2.,3.4)
+		..controls +(-150:.05) and +(165:.05)..(-2,3.25)
+		..controls +(-120:.2) and +(85:.2)..(-2.1,2.95)
+		..controls +(130:.1) and +(-65:.1)..(-2.26,3.25)
+		..controls +(170:.6) and +(75:.3)..(-3.22,2.78)
+		..controls +(60:.2) and +(180:.2)..(-2.58,3.08)
+		..controls +(90:.1) and +(175:.1)..(-2.5,2.95)
+		..controls +(0:.1) and +(120:.1)..(-2.3,2.9)
+		..controls +(-60:.1) and +(-25:.1)..(-2.32,2.7)
+		..controls +(120:.1) and +(0:.1)..(-2.6,2.82)
+		..controls +(-140:.1) and +(15:.1)..(-2.8,2.68)
+		..controls +(-165:.325) and +(115:.3)..(-2.92,1.74)
+		..controls +(90:.2) and +(-150:.2)..(-2.74,2.42)
+		..controls +(-10:.1) and +(-140:.1)..(-2.5,2.47)
+		..controls +(40:.1) and +(120:.1)..(-2.2,2.35)
+		..controls +(-40:.1) and +(160:.2)..(-2,2)
+		..controls +(-60:.2) and +(0:.1)..(-2.18,1.9)
+		..controls +(-50:.4) and +(-70:.25)..(-1.83,2)
+		..controls +(120:.3) and +(140:.25)..(-1.62,2)
+		..controls +(-40:.1) and +(130:.1)..(-1.45,1.75) ;
+		%\node at (2.7,-2.5)[scale=.05]{\includegraphics{GIAO}};
+	\end{tikzpicture}
+\end{document}

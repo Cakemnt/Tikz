@@ -1,0 +1,15 @@
+\documentclass[tikz,border=2mm]{standalone}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{shadings}
+\begin{document}
+	\tdplotsetmaincoords{60}{120}
+	\tdplotsetrotatedcoords{0}{0}{30}
+	\def\k{-0.35}
+	\begin{tikzpicture}[declare function={r=5;h=3+r;},
+		tdplot_rotated_coords,thick]
+		\draw (0,-r,h-r*\k)--(0,-r,0) arc (-90:90:r)--(0,r,h+r*\k);
+		\draw[densely dashed] (0,-r,0)arc (270:90:r);
+		\draw plot[domain=0:360,samples=200]
+		({r*cos(\x)},{r*sin(\x)},{r*sin(\x)*\k+h});
+	\end{tikzpicture}
+\end{document}

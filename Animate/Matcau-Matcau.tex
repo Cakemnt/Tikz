@@ -1,0 +1,50 @@
+\documentclass[border=2mm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections,angles,quotes}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\r{1.5}
+\def\sfa{80}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\sfa}{i=0+1}{
+%\foreach \i in {0,1,...,79,80,79,...,0}{
+\begin{tikzpicture}[font=\scriptsize,blue]
+\def\r{4}
+\def\rr{3}
+\pgfmathsetmacro\xn{\r/40}
+\pgfmathsetmacro\d{\i * \xn}
+\path
+(0:0) coordinate (O_1)
+(0:\d) coordinate (O_2)
+;
+\clip (-\r-.25,-\r-.25) rectangle (\r+2*\rr+.5,\r+.25);
+\fill[ball color=blue!20,opacity=.5] (O_1) circle (\r);
+\fill[ball color=brown!50,opacity=.5] (O_2) circle (\rr);
+\draw[dotted] 
+(O_1)--(O_2)node[pos=.5,above]{$d$}
+(O_1)--++(120:\r)node[pos=.5,left]{$r_{1}$}
+(O_2)--++(-30:\rr)node[pos=.5,below]{$r_{2}$}
+;
+\ifnum \i<11
+\else
+	\ifnum \i <71
+	\path[name path=c1] (O_1) circle (\r);
+	\path[name path=c2] (O_2) circle (\rr);
+	\path[name intersections={of =c1 and c2,by={M,N}}]
+			($(O_1)!(M)!(O_2)$) coordinate (H)
+	;
+	\begin{scope}
+	\clip (O_1) circle (\r);
+	\fill[orange!50,opacity=.5] (H) let\p1=($(H)-(M)$), \n1={scalar(veclen(\x1,\y1)/1cm)} in ellipse ({\n1/8} and {\n1});
+	\end{scope}
+	\draw[dotted] (H)--(M);
+	\foreach \x in {H,M}\fill[ball color=brown] (\x) circle (.02);
+	\else
+	\fi
+\fi
+\foreach \x/\g in {O_1/180,O_2/45}\fill[ball color=brown] (\x) circle (.02)+(\g:.3)node{$\x$};
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

@@ -1,0 +1,43 @@
+\documentclass[tikz,border=10mm]{standalone}
+		\usetikzlibrary{matrix}
+		\pagecolor{yellow!10}
+		\usepackage[utf8]{vietnam}
+		\begin{document}
+			\begin{tikzpicture}[thick]
+				\matrix (m) [matrix of nodes,
+				nodes in empty cells,
+				row sep=-\pgflinewidth,
+				column sep=-\pgflinewidth,
+				nodes={align=center,minimum width=2.5cm,minimum height=1.25cm,draw=cyan,anchor=center,inner sep=0,outer sep=0},
+				row 1/.style={minimum height=1cm,magenta},
+				row 2/.style={minimum height=1cm},
+				row 5/.style ={nodes={minimum height=0.85cm}},
+				row 6/.style={nodes= {minimum height=0.85cm}},
+				column 1/.style={minimum width=1cm},
+				column 3/.style={minimum width=2cm},
+				column 5/.style={minimum width=2.5cm, text width=2cm},
+				column 6/.style={minimum width=2.5cm, text width=2cm},
+				column 7/.style={minimum width=2.5cm, text width=2cm}]{
+					&&&&&&\\
+					\textbf{Ngày}&Buổi &&&Thời gian làm bài& Giờ phát đề cho thí sinh&Giờ bắt đầu làm bài\\
+					&SÁNG&&&&&\\
+					&CHIỀU&&&&&\\
+					&SÁNG&&&120 phút & $7$h$30$&$7$h$35$\\
+					&CHIỀU&&&$90$ phút & $14$h$20$&$14$h$30$\\
+					&&&Vật lý&$50$ phút&$7$h$30$&$7$h$35$\\
+					&&&Hóa&$50$ phút&$8$h$30$&$8$h$35$\\
+					&&&Sinh&$50$ phút&$9$h$30$&$9$h$35$\\
+					&&&Sử&$50$ phút&$7$h$30$&$7$h$35$\\
+					&&&Địa&$50$ phút&$8$h$30$&$8$h$35$\\
+					&&&GDCD&$50$ phút&$9$h$30$&$9$h$35$\\
+					&CHIỀU&&&$60$ phút&$14$h$20$&$14$h$30$\\
+					&SÁNG&{\color{red}DỰ PHÒNG}&&&&\\
+				};
+				\fill[violet!40,draw=cyan]
+				(m-7-3.north west) rectangle (m-9-3.south east);
+				\path
+				(m-7-3.north west)--(m-9-3.south east)
+				node[pos=0.5]{Bài thi KHTN}
+				;
+			\end{tikzpicture}
+		\end{document}

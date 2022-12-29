@@ -1,0 +1,71 @@
+%\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+\documentclass{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{tikz,ifthen}
+\usetikzlibrary{calc,shadings}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\a{3}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{16}
+\multiframe{360}{iChay=1+1}{
+%\foreach \iChay in {1,...,360}{
+\begin{tikzpicture}[line join=round]
+\pgfmathsetmacro{\am}{\a *sqrt(2)}
+\pgfmathsetmacro{\bm}{\am/3}
+\pgfmathsetmacro{\g}{int(\iChay)}
+\pgfmathsetmacro{\xa}{\am *cos(\g)/2}
+\pgfmathsetmacro{\ya}{\bm *sin(\g)/2}
+\pgfmathsetmacro{\xb}{\am *cos(\g+90)/2}
+\pgfmathsetmacro{\yb}{\bm *sin(\g+90)/2}
+\coordinate (a) at (\xa,\ya);
+\coordinate (b) at (\xb,\yb);
+\coordinate (c) at (-\xa,-\ya);
+\coordinate (d) at (-\xb,-\yb);
+\coordinate (a1) at (\xa,\ya+\a);
+\coordinate (b1) at (\xb,\yb+\a);
+\coordinate (c1) at (-\xa,-\ya+\a);
+\coordinate (d1) at (-\xb,-\yb+\a);
+\coordinate (o) at (0,0);
+\coordinate (o1) at (0,\a);
+\coordinate (m) at ($(a)!0.5!(b1)$);
+\coordinate (n) at ($(b)!0.5!(c1)$);
+\coordinate (p) at ($(c)!0.5!(d1)$);
+\coordinate (q) at ($(d)!0.5!(a1)$);
+%
+\clip (-0.6*\am,-0.6*\bm) rectangle (0.6*\am,0.8*\am+0.8*\bm);
+\foreach \i in {m,n,p,q}{\draw[dashed,orange] (o)--(\i) (o1)--(\i);}
+\draw[dashed,orange] (m)--(n)--(p)--(q)--cycle;
+\draw[blue] (a1)--(b1)--(c1)--(d1)--cycle;
+\foreach \i in {m,n,p,q,o,o1}{\fill[ball color=red] (\i) circle (0.075);}
+%
+\ifthenelse{\g<45}{
+\def\neta{solid}\def\netb{dashed}\def\netc{solid}\def\netd{solid}
+\def\netab{dashed}\def\netbc{dashed}\def\netcd{solid}\def\netda{solid}
+}{ 
+\ifthenelse{\g<135}{
+\def\neta{dashed}\def\netb{solid}\def\netc{solid}\def\netd{solid}
+\def\netab{dashed}\def\netbc{solid}\def\netcd{solid}\def\netda{dashed}
+}{
+\ifthenelse{\g<225}{
+\def\neta{solid}\def\netb{solid}\def\netc{solid}\def\netd{dashed}
+\def\netab{solid}\def\netbc{solid}\def\netcd{dashed}\def\netda{dashed}
+}{
+\ifthenelse{\g<315}{
+\def\neta{solid}\def\netb{solid}\def\netc{dashed}\def\netd{solid}
+\def\netab{solid}\def\netbc{dashed}\def\netcd{dashed}\def\netda{solid}
+}{
+\def\neta{solid}\def\netb{dashed}\def\netc{solid}\def\netd{solid}
+\def\netab{dashed}\def\netbc{dashed}\def\netcd{solid}\def\netda{solid}
+}
+}
+}
+}
+%
+\foreach \i/\j in {a/\neta,b/\netb,c/\netc,d/\netd}{\draw[\j,blue](\i)--(\i1);}
+\foreach \i/\j/\k in {a/b/\netab,b/c/\netbc,c/d/\netcd,d/a/\netda}{\draw[\k,blue] (\i)--(\j);}
+\foreach \i in {a,b,c,d,a1,b1,c1,d1}{\fill[ball color=red] (\i) circle (0.075);}
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

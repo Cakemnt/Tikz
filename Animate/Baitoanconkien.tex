@@ -1,0 +1,91 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{animate}
+\begin{document}
+%==================
+%\pagecolor{green}
+\def\a{3}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{130}{i=0+1}{
+%\foreach \i in {0,...,129,130,129,...,0}{
+\begin{tikzpicture}[join=round,cap=round]
+\path
+(0:0) coordinate (A)
+--++(0:\a) coordinate (B)
+--++(135:.75*\a) coordinate (C)
+--++(180:\a) coordinate (D)
+\foreach \x in {A,B,C,D}{(\x)--++(90:\a) coordinate (\x1)}
+(intersection of A--C and B--D) coordinate (O)
+;
+\ifnum \i<20 
+	\path 
+		(180:\a) coordinate (A11)
+		--++(180:\a) coordinate (A12)
+		(A11)--++(135:.75*\a) coordinate (D11)
+		--++(180:\a) coordinate (D12)
+		($(A)!.4!(D)$) coordinate (X1)
+		($(A11)!.2!(D11)$) coordinate (X2)
+	;
+		\draw[dashed] (A12)--(X2)--(X1)--(O);
+\else
+	\ifnum \i<65 \pgfmathsetmacro\k{\i-20}
+		\path
+			(180-2*\k:\a) coordinate (A11)
+			--++(180:\a) coordinate (A12)
+			(A11)--++(135:.75*\a) coordinate (D11)
+			--++(180:\a) coordinate (D12)
+			($(A)!.4!(D)$) coordinate (X1)
+			($(A11)!.2!(D11)$) coordinate (X2)
+		;
+		\draw[dashed] (A12)--(X2)--(X1)--(O);
+		\draw[red] (A12)--($(A12)!\k/45!(X2)$);
+		\fill[ball color=blue] ($(A12)!\k/45!(X2)$) circle (.03);
+	\else 
+		\ifnum \i<110
+		\pgfmathsetmacro\k{\i-65}
+		\path
+			(90:\a) coordinate (A11)
+			--++(180+2*\k:\a) coordinate (A12)
+			(A11)--++(135:.75*\a) coordinate (D11)
+			--++(180+2*\k:\a) coordinate (D12)
+			($(A)!.4!(D)$) coordinate (X1)
+			($(A11)!.2!(D11)$) coordinate (X2)
+		;
+		\draw[dashed] (A12)--(X2)--(X1)--(O);
+		\draw[red] (A12)--(X2) -- ($(X2)!\k/45!(X1)$);
+		\fill[ball color=blue] ($(X2)!\k/45!(X1)$) circle (.03);
+		\else \pgfmathsetmacro\k{\i-110}
+		\path
+			(90:\a) coordinate (A11)
+			--++(-90:\a) coordinate (A12)
+			(A11)--++(135:.75*\a) coordinate (D11)
+			--++(-90:\a) coordinate (D12)
+			($(A)!.4!(D)$) coordinate (X1)
+			($(A11)!.2!(D11)$) coordinate (X2)
+		;
+		\draw[dashed] (A12)--(X2)--(X1)--(O);
+		\draw[red] (A12)--(X2) -- (X1)--($(X1)!\k/20!(O)$);
+		\fill[ball color=blue] ($(X1)!\k/20!(O)$) circle (.03);
+		\fi
+	\fi
+\fi
+\clip (-2.75*\a,-1) rectangle (\a+1,1.75*\a);
+\draw[dashed] (D)--(C)--(B) (A)--(C) (B)--(D) (C)--(C1);
+\draw
+(A1)--(B1)--(C1)--(D1)--cycle
+(A)--(A1) (B)--(B1) (D)--(D1)
+(D)--(A)--(B)
+(A)--(A11)--(A12)--(D12)--(D11)--(D) (A11)--(D11)
+;
+\path
+(A)+(-90:.4) node{$A$}
+(A12)++(-135:.4) node{$A_2$}
+(A11)++(-135:.4) node{$A_1$}
+(O)++(-90:.4) node{$O$}
+;
+\foreach \x in {A,O,X1,X2,A12,A11}\draw[fill=white] (\x) circle (.02);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

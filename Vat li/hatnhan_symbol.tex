@@ -1,0 +1,4 @@
+\documentclass[tikz]{standalone}
+\begin{document}
+	\tikz{\fill[cyan] circle(2)foreach\i in{0,120,240}{[rotate=\i](60:3)arc(60:0:3)--(0:10)arc(0:60:10)};
+}\end{document}

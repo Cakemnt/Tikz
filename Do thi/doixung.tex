@@ -1,0 +1,14 @@
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage[utf8]{vietnam}
+\begin{document}
+	%------------------
+	\begin{tikzpicture}
+		\draw[->] (-2.5,0)--(2,0) node[below]{$x$};
+		\draw[->] (0,-1.5)--(0,2.5) node[left]{$y$};
+		\def\f(#1){abs(((#1)-1)*exp(2*(#1)))}
+		\def\g(#1){((#1)-1)*exp(2*(#1))}
+		\draw[smooth,blue] plot[domain=-2:1.2] (\x,{\f(\x)});
+		\draw[smooth,dashed,red] plot[domain=-2:1.2] (\x,{\g(\x)});
+	\end{tikzpicture}
+	%------------------
+\end{document}

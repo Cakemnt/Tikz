@@ -1,0 +1,37 @@
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\begin{document}
+	\foreach \i in {45,50,...,135,130,125,...,50}{
+		\begin{tikzpicture}
+			\pagecolor{white}
+			\def\r{3}
+			\clip (-1.5*\r,-1.1*\r) rectangle (1.5*\r,1.6*\r);
+			\coordinate (A) at (-\r,0);
+			\coordinate (B) at (\r,0);
+			\coordinate (M) at (\i:\r);
+			\coordinate (I) at ($(A)!.5!(M)$);
+			\coordinate (J) at ($(B)!.5!(M)$);
+			\tkzCalcLength[cm](A,M) \tkzGetLength{dAM}
+			\tkzCalcLength[cm](B,M) \tkzGetLength{dBM}
+			% tô màu
+			\fill[green!50] (0,0) circle(\r);
+			\fill[blue!30] (I) circle(\dAM/2) (J) circle(\dBM/2);
+			\begin{scope}
+				\clip (0,0) circle(\r);
+				\fill[white] (I) circle(\dAM/2) (J) circle(\dBM/2);
+			\end{scope}
+			\fill[yellow!30] (A)--(B)--(M)--cycle;
+			\begin{scope}
+				\clip (I) circle(\dAM/2);
+				\fill[blue!30] (J) circle(\dBM/2);
+			\end{scope}
+			% đánh dấu góc, vẽ, và điền nhãn
+			\tkzMarkRightAngle(A,M,B)
+			\draw
+			(A)--(B)--(M)--cycle (0,0) circle(\r)
+			(I) circle(\dAM/2) (J) circle(\dBM/2);
+			\path (0,-.7*\r) node{$S_4$}
+			(M)--(M|-A) node[pos=.5,blue]{$S_2$};
+	\end{tikzpicture}}
+\end{document}

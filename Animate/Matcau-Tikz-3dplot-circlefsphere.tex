@@ -1,0 +1,52 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{tikz-3dplot-circleofsphere}
+\usetikzlibrary{calc,angles}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\sfa{180}
+\def\a{4}
+\def\b{4}
+\def\h{5}
+\pgfmathsetmacro\r{sqrt(\a^2+\b^2+\h^2)/2}
+\pgfmathsetmacro\goc{atan(\a/\b)}
+\pgfmathsetmacro\gocb{atan(\h/sqrt(\a^2+\b^2))}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{16}
+\multiframe{\sfa}{i=0+1}{
+%\foreach \i in {0,1,...,\sfa}{
+\tdplotsetmaincoords{70}{2*\i}
+\begin{tikzpicture}[tdplot_main_coords,scale=.75]
+\path
+(0,0,0) coordinate (A)
+(\a,0,0) coordinate (B)
+(0,\b,0) coordinate (C)
+(0,0,\h) coordinate (S)
+($(A)!.5!(S)$) coordinate (N)
+($(B)!.5!(C)$) coordinate (M)
+($(M)+(N)-(A)$) coordinate (O)
+;
+\pgfresetboundingbox
+\clip[tdplot_screen_coords] (N) circle (1.8*\r);
+\draw[dashed] 
+(A)--(B)--(C)--cycle
+(A)--(S)--(B) (S)--(C)
+(S)--(M) -- (O)--(N) (O)--(A)--(M)
+;
+\path[opacity=.5]
+pic[draw,fill=blue!30,angle radius=2mm]{right angle=S--A--B}
+pic[draw,fill=yellow!30,angle radius=2mm]{right angle=S--A--C}
+pic[draw,fill=pink!30,angle radius=2mm]{right angle=B--A--C}
+;
+\begin{scope}[shift={(O)}]
+\draw[tdplot_screen_coords] (0,0,0) circle (\r);
+\tdplotCsDrawLatCircle{\r}{0}
+\tdplotCsDrawLonCircle{\r}{\goc}
+\tdplotCsDrawLonCircle{\r}{180-\goc}
+\tdplotCsDrawLatCircle{\r}{-\gocb}
+\end{scope}
+\foreach \x/\g in {A/120,B/-135,C/0,S/90,M/-120,N/45,O/30}\fill[tdplot_screen_coords] (\x) circle (.03) +(\g:.3) node{\scriptsize $\x$};
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

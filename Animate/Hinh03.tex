@@ -1,0 +1,73 @@
+%\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+\documentclass{standalone}
+%\usepackage[utf8]{vietnam}
+\usepackage{tikz,ifthen}
+\usetikzlibrary{calc}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\h{6}
+\def\a{2}
+\def\cm{3}
+\def\g{20}
+\def\n{100}
+\def\mucnuoc{
+\fill[white,opacity=0.5] (C2)--(C)--(D)--(D2)--cycle
+(D2)--(D)--(A)--(A2)--cycle
+(A2)--(B2)--(C2)--(D2)--cycle;
+}
+\def\b{1}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\n}{ic=0+1}{
+%\foreach \ic in {1,...,\n}{
+\begin{tikzpicture}[line join=round]
+\pgfmathsetmacro{\cao}{\ic/\n}
+\pgfmathsetmacro{\yh}{int((\cm-1+\cao)/\cm)}
+\ifthenelse{\yh=0}{\pgfmathsetmacro{\c}{\cm-\cao/2}}{\pgfmathsetmacro{\c}{\cm}}
+\clip (-\a-1,-\a/2) rectangle (\a+1,\h+2.5);
+\fill[gray!30](0:0) ellipse ({\a} and {\a/3});
+\fill[blue!30,opacity=0.5] (180:\a) arc(-180:0:{\a} and {\a/3})--++(90:\c) arc (0:180:{\a} and {\a/3})--cycle;
+\fill[violet!50,opacity=0.5] (90:\c) ellipse({\a} and {\a/3});
+\path 
+(90:\c-1+\cao) coordinate (O1)
+(90:\c+\cao)coordinate(O2)
+(90:\c) coordinate(O)
+($(O1)+(\g:\b)$)coordinate(A1)
+--++(180:1.5*\b) coordinate(B1)
+($(O1)+(-180+\g:\b)$)coordinate(C1)
+--++(0:1.5*\b) coordinate(D1)
+($(O2)+(\g:0.5*\b)$)coordinate(A2)
+--++(180:0.75*\b) coordinate(B2)
+($(O2)+(-180+\g:0.5*\b)$)coordinate(C2)
+--++(0:0.75*\b) coordinate(D2)
+($(O)+(\g:0.5*\b)$)coordinate(u1)
+--++(180:0.75*\b) coordinate(u2)
+($(O)+(-180+\g:0.5*\b)$)coordinate(u3)
+--++(0:0.75*\b) coordinate(u4)
+(intersection of A1--A2 and O--u1)coordinate(A)
+(intersection of C1--C2 and O--u3)coordinate(C)
+(intersection of D1--D2 and O--u4)coordinate(D)
+;
+\draw[dashed](B1)--(B2) (C1)--(B1)--(A1);
+\pgfmathsetmacro{\y}{int((\c+\cao)/\c)}
+\pgfmathsetmacro{\ym}{int((\c-1+\cao)/\c)}
+\ifthenelse{\ym=0}{\ifthenelse{\y=1}{\mucnuoc
+}{\ifthenelse{\y>1}{\mucnuoc}{}}}{
+\fill[white,opacity=0.5] (C2)--(C1)--(D1)--(D2)--cycle
+(D2)--(D1)--(A1)--(A2)--cycle
+(A2)--(B2)--(C2)--(D2)--cycle;
+}
+\draw (A2)--(B2)--(C2)--(D2)--cycle
+(A1)--(D1)--(C1)
+(A1)--(A2)  (C1)--(C2) (D1)--(D2);
+\draw (O2)--(90:\h+1.5);
+\draw (0:0) ellipse ({\a} and {\a/3})
+(90:\h) ellipse ({\a} and {\a/3})
+(90:\c) ellipse ({\a} and {\a/3});
+\draw (0:\a)--++(90:\h)
+(180:\a)--++(90:\h);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}
+

@@ -1,0 +1,37 @@
+\documentclass[tikz,border=2mm,convert={density=960,outfile=\jobname.png}]{standalone}
+\usepackage[utf8]{vietnam}
+\begin{document}
+	\begin{tikzpicture}
+		\pagecolor{yellow!30}
+		\def\n{10}
+		\draw[gray,line width=.3mm] (-1,1) grid (\n,-\n);
+		\foreach \i in {1,...,\n}
+		\draw (\i-.5,.5) node[font=\bfseries,blue]{\i};
+		\foreach \j in {1,...,\n}
+		\draw (-.5,-\j+.5) node[font=\bfseries,blue]{\j};
+		\foreach \i in {1,...,\n}{
+			\foreach \j in {1,...,\n}
+			\pgfmathsetmacro{\tich}{\i*\j}
+			\draw (\i-.5,-\j+.5) node{\pgfmathprintnumber{\tich}};
+		}
+		\draw (current bounding box.north) node[above=.5cm]{\bfseries BẢNG NHÂN PYTHAGORE};
+	\end{tikzpicture}
+	\begin{tikzpicture}[yscale=.75]
+		\pagecolor{yellow!30}
+		\def\n{10}
+		\foreach \i in {1,...,\n}
+		\fill[red!50] (\i-1,-\i+1) rectangle (\i,-\i);
+		\draw (-.5,.5) node[red,scale=2]{$\times$};
+		\draw[gray,line width=.3mm] (-1,1) grid (\n,-\n);
+		\foreach \i in {1,...,\n}
+		\draw (\i-.5,.5) node[font=\bfseries,blue]{\i};
+		\foreach \j in {1,...,\n}
+		\draw (-.5,-\j+.5) node[font=\bfseries,blue]{\j};
+		\foreach \i in {1,...,\n}{
+			\foreach \j in {1,...,\n}
+			\pgfmathsetmacro{\tich}{\i*\j}
+			\draw (\i-.5,-\j+.5) node{\pgfmathprintnumber{\tich}};
+		}
+		\draw (current bounding box.north) node[above=.5cm]{\bfseries BẢNG NHÂN PYTHAGORE};
+	\end{tikzpicture}
+\end{document}

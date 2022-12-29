@@ -1,0 +1,28 @@
+%\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+\documentclass{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{animate}
+\begin{document}
+\def\n{100}
+\def\a{5}
+\pgfmathsetmacro{\r}{\a/sqrt(3)}
+%==================
+\begin{animateinline}[controls,autoplay,loop]{4}
+\multiframe{\n}{i=2+1}{
+%\foreach \i in {1,...,\n}{
+
+\begin{tikzpicture}
+\clip (0:0) circle (\r+0.5);
+\draw (-150:\r) coordinate (A) -- (90:\r) coordinate (B)--(-30:\r)coordinate(C)--cycle;
+\foreach \x in {0,...,\i}{
+\pgfmathsetmacro{\b}{\x *\a/\i}
+\draw[orange] ($(A)+(60:\b)$)--($(C)+(180:\b)$);
+\draw[blue] ($(B)+(-60:\b)$)--($(A)+(60:\b)$);
+\draw[violet] ($(C)+(180:\b)$)--($(B)+(-60:\b)$);
+}
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

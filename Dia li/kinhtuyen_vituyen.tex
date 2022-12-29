@@ -1,0 +1,24 @@
+\documentclass[tikz,border=2mm]{standalone}
+\usepackage[utf8]{vietnam}
+\begin{document}
+	\begin{tikzpicture}
+		\def\r{4} \def\h{2}
+		\pgfmathsetmacro\a{sqrt(\r^2-\h^2)}
+		\path(0,0,0)coordinate(O) (0,.835*\r,0)coordinate(A)
+		(0,-.835*\r,0)coordinate(B)[x={(0,1,1)}]arc(-90:-150:.835*\r)coordinate(K)
+		(-\a,.95*\h,0)arc(-180:-90:{\a} and {\a/5})coordinate(V);
+		\draw[dashed,very thin](-\a,.95*\h,0) arc (180:-76:{\a} and {\a/5});
+		\draw[dashed,very thin](-\r,0,0) arc (180:-72:{\r} and {\r/4});
+		\draw[dashed](0,\r,0) arc (90:-80:\r);
+		\draw(-\a,.95*\h,0) arc (-180:-76:{\a} and {\a/5});
+		\draw(-\r,0,0) arc (-180:-72:{\r} and {\r/4});
+		\draw(0,\r,0) arc (90:280:\r);
+		\draw[x={(0,1,1)},dotted] (B) arc (-90:-120:.835*\r)(B) arc (-90:60:.835*\r);
+		\draw[x={(0,1,1)}] (A) arc (90:240:.835*\r)(A) arc (90:60:.835*\r);
+		\draw[dashed] (A)--(0,-\r,0) ;
+		\draw[-stealth] (K)--++(-30:\r/2)node[below]{kinh tuyến};
+		\draw[-stealth] (V)--++(120:\r)node[above]{vĩ tuyến};
+		\draw(0,-\r,0)--++(-90:.25*\r)--++(-20:1.25*\r)--++(90:2.5*\r)--++(160:1.25*\r)--(A);
+		\foreach \x/\g in {A/200,B/200,O/200}\fill[black] (\x) circle (1pt)+(\g:.3)node{$\x$};
+	\end{tikzpicture}
+\end{document}

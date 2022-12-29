@@ -1,0 +1,109 @@
+\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+%\documentclass[tikz,border=5]{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{mathpazo}
+\usetikzlibrary{calc, intersections}
+\begin{document}
+	\begin{tikzpicture}
+		\def\ra{4}
+		\def\rb{2}
+		\def\n{10}
+		\pgfmathsetmacro\gB{asin((\ra-\rb)/(\ra+\rb))}
+		\pgfmathsetmacro\rx{\ra}
+		\pgfmathsetmacro\ry{\rb}
+		\path 
+		(0:0) coordinate (O)
+		(-90:\ra) coordinate (A)
+		(180+\gB:\ra+\rb) coordinate (O1)
+		(-\gB:\ra+\rb) coordinate (O2)
+		(O1)+(-90:\rb) coordinate (B)
+		;
+		\draw[thick] 
+		(O) circle (\ra) (O1) circle (\rb) (O2) circle (\rb)
+		(A)--++(180:\ra+2*\rb) (A)--++(0:\ra+2*\rb)
+		;
+		%\fill[ball color=orange] (O) circle (\ra);
+		%\fill[ball color=orange] (I) circle (\rb);
+		%%%%%%%%%%%%
+		\foreach \i in {1,...,\n}{
+			\pgfmathsetmacro\g{asin((\rx-\ry)/(\rx+\ry))}
+			\pgfmathsetmacro\rz{(\rx *\ry)/((sqrt(\rx)+sqrt(\ry))^2)}
+			\pgfmathsetmacro\tl{\ry/\rx}
+			\path
+			(O)+(180+\g:\rx+\ry) coordinate (I1)
+			(O)+(-\g:\rx+\ry) coordinate (I2)
+			(I1)+(-90:\ry) coordinate (B1)
+			(I2)+(-90:\ry) coordinate (B2)
+			($(O)!1/(1-\tl)!(I1)$) coordinate (K1)
+			($(O)!1/(1-\tl)!(I2)$) coordinate (K2)
+			($(A)!1/(1+sqrt(\tl))!(B1)$) coordinate (P1)
+			($(A)!1/(1+sqrt(\tl))!(B2)$) coordinate (P2)
+			($(P1)!\rz cm!90:(A)$) coordinate (J1)
+			($(P2)!\rz cm!-90:(A)$) coordinate (J2)
+			;
+			\draw (J1) circle (\rz) (J2) circle (\rz);
+			%\fill[ball color=orange] (J) circle (\rc);
+			\global\let\ry=\rz
+		}
+	\end{tikzpicture}
+	
+	\begin{tikzpicture}
+		\def\ra{10}
+		\def\rb{4}
+		\def\n{5}%Số đường tròn nhỏ
+		\pgfmathsetmacro\gB{asin((\ra-\rb)/(\ra+\rb))}
+		\pgfmathsetmacro\rx{\ra}
+		\pgfmathsetmacro\ry{\rb}
+		\path 
+		(0:0) coordinate (O)
+		(-90:\ra) coordinate (A)
+		(180+\gB:\ra+\rb) coordinate (O1)
+		(-\gB:\ra+\rb) coordinate (O2)
+		(O1)+(-90:\rb) coordinate (B)
+		;
+		\pgfresetboundingbox
+		\clip (-\ra-2*\rb,-\ra-1) rectangle (0,0);
+		\draw[thick] 
+		(O) circle (\ra) (O1) circle (\rb) (O2) circle (\rb)
+		(A)--++(180:\ra+2*\rb) (A)--++(0:\ra+2*\rb)
+		;
+		%%%%%%%%%%%%
+		\foreach \i in {1,...,\n}{
+			\pgfmathsetmacro\g{asin((\rx-\ry)/(\rx+\ry))}
+			\pgfmathsetmacro\rz{(\rx *\ry)/((sqrt(\rx)+sqrt(\ry))^2)}
+			\pgfmathsetmacro\tl{\ry/\rx}
+			\path
+			(O)+(180+\g:\rx+\ry) coordinate (I1)
+			(I1)+(-90:\ry) coordinate (B1)
+			($(O)!1/(1-\tl)!(I1)$) coordinate (K1)
+			($(A)!1/(1+sqrt(\tl))!(B1)$) coordinate (P1)
+			($(P1)!\rz cm!90:(A)$) coordinate (J1)
+			;
+			\draw (J1) circle (\rz);
+			\global\let\ry=\rz
+		}
+		%%%%%%%%%%%%%
+		\pgfmathsetmacro\rx{\rb}
+		\pgfmathsetmacro\ry{(\ra *\rb)/((sqrt(\ra)+sqrt(\rb))^2)}
+		
+		\path
+		(180+\gB:\ra+\rb) coordinate (O)
+		(O)+(-90:\rx) coordinate (A)
+		;
+		\foreach \i in {1,...,\n}{
+			\pgfmathsetmacro\g{asin((\rx-\ry)/(\rx+\ry))}
+			\pgfmathsetmacro\rz{(\rx *\ry)/((sqrt(\rx)+sqrt(\ry))^2)}
+			\pgfmathsetmacro\tl{\ry/\rx}
+			\path
+			(O)+(-\g:\rx+\ry) coordinate (I2)
+			(I2)+(-90:\ry) coordinate (B2)
+			($(O)!1/(1-\tl)!(I2)$) coordinate (K2)
+			($(A)!1/(1+sqrt(\tl))!(B2)$) coordinate (P2)
+			($(P2)!\rz cm!-90:(A)$) coordinate (J2)
+			;
+			\draw (J2) circle (\rz);
+			\global\let\ry=\rz
+		}
+		
+	\end{tikzpicture}
+\end{document}

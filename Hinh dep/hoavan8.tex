@@ -1,0 +1,32 @@
+%\documentclass[magick={density=600,outfile=\jobname.png}]{standalone}
+\documentclass[tikz,border=2mm]{standalone}
+\usetikzlibrary{calc}
+\begin{document}
+	
+	% màu hoa hồng Bungary
+	\definecolor{bulgarianrose}{rgb}{0.28, 0.02, 0.03}
+	
+	\begin{tikzpicture}
+		\def\a{2} % nửa cạnh hình vuông
+		\pgfmathsetmacro{\r}{sqrt(2)*\a} % bán kính cung tròn
+		\pgfmathsetmacro{\d}{(2*sqrt(2)-2)*\a} % độ dài chân miền tô màu
+		
+		% các tọa độ và nhãn ban đầu
+		\coordinate (O) at (0,0);
+		\coordinate [label=above left:{\textbf A}] (A) at (-\a,\a);
+		\coordinate [label=above right:{\textbf B}] (B) at (\a,\a);
+		\coordinate [label=below right:{\textbf C}] (C) at (\a,-\a);
+		\coordinate [label=below left:{\textbf D}] (D) at (-\a,-\a);
+		
+		% tô màu 4 miền con
+		\foreach \i/\mau in {0/lime,90/red!80,180/brown!80,270/cyan!80}
+		\filldraw[draw=bulgarianrose, fill=\mau, rotate=\i]
+		(O) arc(-45:0:\r) -- ++(-\d,0) arc(-180:-135:\r)--cycle;
+		
+		% nối các nét vẽ
+		\draw[color=bulgarianrose, line width=1pt, line join=round, line cap=round] (A)--(B)--(C)--(D)--cycle;
+		\draw[bulgarianrose, opacity=.5] (A)--(C) (B)--(D);
+		
+		\draw (O) node[below=.1cm] {\textbf O};
+	\end{tikzpicture}
+\end{document}

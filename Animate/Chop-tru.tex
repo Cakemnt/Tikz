@@ -1,0 +1,34 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{animate}
+\begin{document}
+%==================
+%\pagecolor{green}
+\def\h{5}
+\def\a{2}
+\def\b{4}
+\def\gB{260}
+\def\sfa{100}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\sfa}{i=0+1}{
+%\foreach \i in {0,...,\sfa}{
+\begin{tikzpicture}[join=round,cap=round,thick,blue]
+\path
+(0:0) coordinate (A)
+--++(\gB:\a) coordinate (B)
+--++(0:\b) coordinate (C)
+--++(\gB+180:\a) coordinate (D)
+(A)--++(90:\h) coordinate (S)
+($(A)!\i/\sfa!(S)$) coordinate (M)
+($(B)!\i/\sfa!(S)$) coordinate (N)
+($(C)!\i/\sfa!(S)$) coordinate (P)
+($(D)!\i/\sfa!(S)$) coordinate (Q)
+($(M)!.5!(P)$) coordinate (I)
+;
+\foreach \x/\y in {S/A,S/B,S/C,S/D,A/B,B/C,C/D,D/A,M/N,N/P,P/Q,Q/M}\draw (\x)--(\y);
+\foreach \x in {A,B,C,D,S,M,N,P,Q}\draw[fill=white] (\x) circle (.03);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

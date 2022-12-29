@@ -1,0 +1,114 @@
+\documentclass[tikz,border=1mm,convert={outfile=\jobname.jpg}]{standalone}
+%\documentclass[tikz,border=5mm]{standalone}
+\usetikzlibrary{calc}
+\definecolor{nen}{RGB}{245, 235, 210}
+\begin{document}
+	\begin{tikzpicture}
+		%\draw
+		\fill[nen]
+		(-2,-5)rectangle(8,6);
+		\def\A{
+			%\draw
+			%\fill[black]
+			(-1.9,-.75)
+			..controls +(-55:.6) and +(100:.72)..(-.46,-1.18)
+			..controls +(140:.6) and +(-70:.7)..(-1.9,-.75)
+			%\draw
+			%\fill[black]
+			(-.35,.25)
+			..controls +(17:.2) and +(90:.3)..(-.95,.12)
+			..controls +(-90:.4) and +(140:.2)..(-.23,-1.2)
+			..controls +(130:.6) and +(185:.5)..(-.35,.25)
+			%\draw
+			%\fill[black]
+			(-.25,-.6)
+			..controls +(-70:.75) and +(120:.4)..(.52,-1.18)
+			..controls +(140:.4) and +(-80:.9)..(-.25,-.6)
+			%\draw
+			%\fill[black]
+			(1.2,-.35)
+			..controls +(-120:.4) and +(30:.4)..(.3,-1)
+			..controls +(10:.45) and +(-130:.45)..(1.5,-.36) --(1.2,-.35)
+			%\draw[
+			%\fill[black]
+			(1,-.87)
+			..controls +(-90:.1) and +(130:.1)..(1.2,-1.15)
+			..controls +(150:.15) and +(-100:.1)..(1,-.87)
+			%\draw
+			%\fill[black]
+			(1.22,-.75)
+			..controls +(-60:.5) and +(150:.4)..(1.7,-1.1)
+			..controls +(160:.2) and +(-75:.4)..(1.22,-.75)
+			% Miệng
+			%\draw
+			%\fill[black]
+			(.32,.6)
+			..controls +(-70:.9) and +(197:.9)..(1.92,0)
+			..controls +(-30:.1) and +(170:.1)..(2.3,-.15)
+			..controls +(-160:.9) and +(-85:.9)..(.32,.6)
+			% Vành Mõm Tai nhỏ
+			%\draw
+			%\fill[black]
+			(2,0.03)
+			..controls +(8:.1) and +(-150:.1)..(2.4,.17)
+			to[out=40,in=-60] (2.45,.37)
+			..controls +(105:.9) and +(35:.65)..(.92,1.18)
+			..controls +(105:.4) and +(-140:.4)..(1.05,2.05)
+			..controls +(-20:.2) and +(111:.3)..(1.45,1.37)
+			..controls +(-10:.6) and +(120:.4)..(2.7,.4)
+			to[out=-40,in=20] (2.63,.1)
+			..controls +(-140:.3) and +(-20:.2)..(2,0.03)
+			% Tai to
+			%\draw
+			%\fill[black]
+			(.6,.72)
+			..controls +(180:.9) and +(-90:.4)..(-.43,1.4)
+			..controls +(90:.2) and +(180:.2)..(0,1.86)
+			..controls +(0:.5) and +(120:.4)..(.95,1)
+			to[out=-140,in=-40] (.6,1)
+			..controls +(100:.5) and +(0:.4)..(0,1.9)
+			..controls +(180:.1) and +(90:.1)..(-.3,1.4)
+			..controls +(-90:.1) and +(160:1.2)..(.6,.72)
+			% Mắt
+			%\draw
+			%\fill[black]
+			(1.35,.65)
+			..controls +(60:.3) and +(120:.2)..(1.83,.72)
+			..controls +(-130:.3) and +(-40:.2)..(1.35,.65)
+			%\draw
+			%\fill[brown]
+			(1.6,.74) circle (2pt)
+			%\fill[white]
+			(1.6,.74) circle (1pt)
+			% Râu
+			%\draw[black,thick]
+			%\fill[black]
+			(1.55,.4) ..controls +(-30:.1) and +(-120:.1)..(2.1,.35)
+			(1.5,.3) ..controls +(-30:.1) and +(-150:.1)..(2.1,.25)
+			(1.6,.15) ..controls +(-30:.1) and +(-130:.1)..(2.2,.2)}
+		\fill [black, shift = {(5,-2)}]\A;
+		\def\C{
+			% Đuôichuột đen
+			%\draw[red]
+			%\fill[black]
+			(-.5,1.47)
+			..controls +(180:1) and +(90:1.6)..(-2.52,-.35)
+			..controls +(-88:2.2) and +(-140:2.5)..(2.95,-1)
+			..controls +(-145:2.2) and +(-90:2.5)..(-2.2,0)
+			..controls +(90:1) and +(-170:1)..(-.5,1.47)}
+		\fill [black, shift = {(4.5,-2)}]\C;
+		\def\B{[red,xscale=-1] \A} % Vẽ ảnh đối xứng thân đầu chuột đen qua oy(Thân, đầu chuột đỏ)
+		\fill [red, shift = {(1,2.9)}]\B;
+		% Đuôichuột đỏ
+		\def\D{
+			% Đuôi chuột đỏ
+			%\draw
+			%\fill[red]
+			(-1.45,5.28)
+			..controls +(-5:1.5) and +(65:1)..(-.13,3.05)--(4.4,3.07)
+			..controls +(189:.2) and +(-15:.5)..(.25,3.3)
+			..controls +(90:1.7) and +(-1:1.2)..(-1.45,5.28)}
+		\fill [red, shift = {(3.2,-1)}]\D; %Đuôi chuột đỏ
+		\node at (1,.5)[scale=.05]{\includegraphics{CATTUONG}};
+	\end{tikzpicture}
+\end{document}

@@ -1,0 +1,44 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{animate}
+\begin{document}
+%==================
+%\pagecolor{green}
+\def\r{5}
+\def\b{.5}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{2}
+\multiframe{12}{i=3+1}{
+%\foreach \i in {3,...,14,15,14,...,3}{
+\begin{tikzpicture}[join=round,cap=round]
+\def\n{\i}
+\pgfmathsetmacro\goc{360/\n}
+\clip (0:0) circle (1.25*\r);
+\foreach \j in {0,...,\n}{
+\begin{scope}[rotate=\j *\goc]
+\path
+(90+\goc:\r) coordinate (X)
+(90:\r) coordinate (A1)
+(90:\r+\b) coordinate (A2)
+(90-\goc:\r) coordinate (B1)
+(90-\goc:\r+\b) coordinate (B2)
+(90-\goc:\r+2*\b) coordinate (B3)
+(90-2*\goc:\r) coordinate (C1)
+(90-2*\goc:\r+\b) coordinate (C2)
+(90-2*\goc:\r+2*\b) coordinate (C3)
+(90-3*\goc:\r+\b) coordinate (D2)
+(90-3*\goc:\r+2*\b) coordinate (D3)
+(intersection of A1--B1 and B2--C2) coordinate (X1)
+(intersection of B2--C2 and C3--D3) coordinate (X2)
+(intersection of B3--C3 and C2--D2) coordinate (X3)
+(intersection of A2--B2 and B3--C3) coordinate (X4)
+(intersection of A2--B2 and A1--X) coordinate (X5)
+;
+\draw[blue,left color=purple,right color=yellow!50] (A1)--(X1)--(X2)--(X3)--(X4)--(X5)--cycle;
+\end{scope}
+}
+\path (0:0) node[blue,opacity=.1,scale=7]{BQ};
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

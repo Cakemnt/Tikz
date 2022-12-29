@@ -1,0 +1,17 @@
+\documentclass[tikz,border=5mm]{standalone}
+\begin{document}
+	\begin{tikzpicture}[declare function={a=5;b=1.5;h=4;}]
+		\path (0,0)coordinate(O)node[above left]{$O$};
+		\draw(0,h)ellipse(a and b);
+		\draw(a,0)arc(0:-180:a and b);
+		\draw[dashed](a,0)arc(0:180:a and b);
+		\draw(a,-h)arc(0:-180:a and b);
+		\draw[dashed](a,-h)arc(0:180:a and b);
+		\draw(a,h)--(a,-h) (-a,h)--(-a,-h);
+		\draw[dashed](a,0)--(0,0)--(-120:a and b) (0,h)--(0,-h) (0,0)--(-60:a and b);
+		\draw[-stealth,blue](-120:a/4 and b/4)arc(-120:-60:a/4 and b/4);
+		\draw[-stealth](a,0)--(1.5*a,0)node[below right]{$y$};
+		\draw[-stealth](0,h)--(0,1.5*h)node[above left]{$z$};
+		\draw[-stealth](-120:a and b)--(-120:2.2*a and 2.2*b)node[below left]{$x$};
+	\end{tikzpicture}
+\end{document}

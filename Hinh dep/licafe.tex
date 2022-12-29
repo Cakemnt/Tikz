@@ -1,0 +1,39 @@
+\documentclass[tikz,border=1mm,convert={outfile=\jobname.png}]{standalone}
+%\documentclass[tikz,border=5mm]{standalone}
+\usepackage[utf8]{vietnam}
+\begin{document}
+	\begin{tikzpicture}
+		%nền
+		\draw[red]
+		(-4,-5) rectangle (4,5);
+		\draw[line width = 1.2pt]
+		(-.4,3.3)
+		..controls +(-58:.5) and +(70:.6)..(-.2,2.4)
+		..controls +(-120:1) and +(135:.5)..(0,1)
+		(.32,2)
+		..controls +(-90:.4) and +(85:.5)..(.66,1)
+		..controls +(-95:.2) and +(60:.1)..(.4,.6)
+		..controls +(-140:.5) and +(140:.4)..(.48,-.2);
+		\fill[black]
+		(-1.2,-.66)
+		..controls +(25:.3) and +(168:.4)..(.85,-.6)
+		..controls +(-12:.3) and +(5:1.4)..(.4,-.93)
+		..controls +(8:.38) and +(-15:.5)..(.8,-.68)
+		..controls +(165:.5) and +(15:.15)..(-1.2,-.66);
+		\fill[black]
+		(.05,-3.32)
+		..controls +(0:.9) and +(-95:.3)..(1.09,-2.4)
+		..controls +(85:.1) and +(-92:.9)..(1.24,-.9)
+		..controls +(-100:1) and +(5:1.2)..(.05,-3.32);
+		\fill[black]
+		(1.08,-2.6)
+		..controls +(65:.3) and +(-125:.2)..(1.5,-2)
+		..controls +(55:.25) and +(-85:.34)..(2.09,-1)
+		..controls +(115:.32) and +(48:.3)..(1.3,-1.1)
+		..controls +(32:.6) and +(91:.1)..(1.95,-1.1)
+		..controls +(-89:.1) and +(45:.2)..(1.69,-1.6)
+		..controls +(-135:.05) and +(60:.1)..(1.4,-2)
+		..controls +(-120:.2) and +(60:.1)..(1.08,-2.6);
+		%\node at (3,2)[scale=.09]{\includegraphics{CATTUONG}};
+	\end{tikzpicture}
+\end{document}

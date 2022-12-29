@@ -1,0 +1,30 @@
+%\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+\documentclass{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{animate}
+\begin{document}
+
+%==================
+\begin{animateinline}[controls,autoplay,loop]{8}
+\multiframe{180}{i=0+4}{
+\begin{tikzpicture}
+\def\r{3}
+\pgfmathsetmacro{\xmin}{1.5*\r}
+\pgfmathsetmacro{\xmax}{(4*pi+1.5)*\r}
+\pgfmathsetmacro{\gocrad}{\i *pi/180}
+\pgfmathsetmacro{\xtam}{\gocrad *\r}
+\pgfmathsetmacro{\xdiem}{\xtam +\r *cos(-90-\i)}
+\pgfmathsetmacro{\ydiem}{\r *sin(-90-\i)}
+\fill[black ] (-\xmin,-\xmin) rectangle (\xmax,\xmin);
+\draw[white] (-\xmin,-\r)-- (\xmax,-\r);
+\draw[white,domain=0:\i,smooth,samples=200,variable=\t] plot({\r *\t *pi/180 +\r *cos(-90-\t)},{\r * sin(-90-\t)});
+\begin{scope}[shift={(\xtam,0)},rotate=-\i ]
+\draw[white] (0,0) circle (\r);
+\fill[ball color=red] (0,-\r) circle (0.2);
+\end{scope}
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

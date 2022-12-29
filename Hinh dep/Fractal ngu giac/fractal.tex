@@ -1,0 +1,29 @@
+\documentclass[tikz,border=2mm]{standalone}
+\usepackage[utf8]{vietnam}
+\begin{document}
+	\newcommand{\sao}[1]{
+		\ifnum#1=0
+		\else
+		\begin{scope}[join=round,cap=round,ultra thin,brown]
+			\draw 
+			(90:1)--(234:1)--(18:1)--(162:1)--(306:1)--cycle
+			(90:1)--(162:1)--(234:1)--(306:1)--(18:1)--cycle
+			;
+		\end{scope}
+		\pgfmathtruncatemacro{\k}{#1-1}
+		\pgfmathsetmacro{\tile}{2/(1+sqrt(5))}
+		\pgfmathsetmacro{\tilenguoc}{1-\tile}
+		\foreach \i in {0,...,4}{
+			\begin{scope}[shift={(18+72*\i:\tile)},scale=\tilenguoc]
+				\sao{\k}
+			\end{scope}
+			\begin{scope}[shift={(-18+72*\i:\tile)},scale=\tile *\tilenguoc]
+				\sao{\k}
+			\end{scope}
+		}
+		\fi
+	}
+	\begin{tikzpicture}
+		\sao{4}
+	\end{tikzpicture}
+\end{document}

@@ -1,0 +1,55 @@
+\documentclass[border=2mm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections,angles,quotes}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\r{2}
+\def\sfa{80}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\sfa}{i=0+1}{
+%\foreach \i in {0,1,...,39,40,39,...,0}{
+\begin{tikzpicture}[join=round,cap=round,font=\scriptsize,blue]
+\def\r{1.5}
+\pgfmathsetmacro\d{\i/20}
+\pgfmathsetmacro{\rr}{sqrt(abs(\r^2-\d^2))}
+\path
+(0:0) coordinate (O)
+(-90:\d) coordinate (H)
+($(H)+(180:\rr)$) coordinate (A)
+($(H)+(0:\rr)$) coordinate (B)
+($(H)+(180:\r+.25)$) coordinate (H1)
+($(H1)+(0:2*\r+.5)$) coordinate (H2)
+;
+\clip (-2.5,-2.5) rectangle (2.5,2);
+\fill[ball color=blue!30,opacity=.5] (O) circle (\r);
+\draw[dotted] 
+($(O)+(90:\r)$) arc (90:-90:{\r/5} and {\r})
+($(O)+(180:\r)$) arc (180:0:{\r} and {\r/5})
+;
+\draw
+($(O)+(90:\r)$) arc (90:270:{\r/5} and {\r})
+($(O)+(180:\r)$) arc (180:360:{\r} and {\r/5})
+(O) circle (\r)
+;
+\ifnum\i<30
+\begin{scope}
+\clip (O) circle (\r);
+\draw[dotted] (O)--(H)node[midway,right]{$d$}
+(A)--(B)
+(A)--(O)node[midway,sloped,above]{$R$}
+;
+\end{scope}
+\draw (H1)--(A) (H2)--(B);
+\foreach \x in {A,B}\fill[ball color =red] (\x) circle (1pt);
+\else
+\draw[dotted] (O)--($(O)+(-90:\r)$);
+\draw ($(O)+(-90:\r)$)--(H);
+\draw (H1)--(H2);
+\fi
+
+\foreach \x in {O,H}\fill[ball color=red] (\x) circle (1pt);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

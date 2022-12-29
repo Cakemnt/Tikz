@@ -1,0 +1,68 @@
+\documentclass[tikz, border=5pt]{standalone}
+\usetikzlibrary{shadows}
+\usepackage[utf8]{vietnam}
+\usepackage{amsmath}
+\tikzstyle{mynodeone}=[
+align=center,
+anchor=center,
+rounded corners=4pt,
+drop shadow=gray]
+\tikzstyle{mynodetwo}=[%shape=cloud,
+below,
+minimum height=1cm,
+minimum width=4cm,
+align=center,
+anchor=center,
+rounded corners=4pt,
+drop shadow=gray]
+\tikzstyle{mynodethree}=[below,
+rounded corners=4pt,
+drop shadow=gray]
+\begin{document}
+	\mathversion{bold}
+	\begin{tikzpicture}[ultra thick, cap=round,join=round]
+		\path(0,0)node[mynodeone,fill=orange]
+		(a){$AX=B$, $B\neq \theta$};
+		\path(a.south)--+(3,-2)
+		node[mynodetwo,
+		outer color=red!80!white,
+		inner color=red!20!white](a1)
+		{Hệ vô nghiệm\\
+			$\mathrm{rank}(A)\neq\mathrm{rank}(A|B)$
+		};
+		\path(a.south)--+(-3,-2)
+		node[mynodetwo,
+		outer color=cyan!80!white,
+		inner color=cyan!20!white](a2)
+		{Hệ có nghiệm\\
+			$\mathrm{rank}(A)=\mathrm{rank}(A|B)$
+		};
+		\path(a2.south)--+(3,-1)
+		node[mynodethree,
+		outer color=green!80!white,
+		inner color=green!20!white](a21)
+		{\begin{minipage}
+				{4 cm}
+				Hệ có vô số nghiệm\\
+				$\underbrace{\mathrm{rank}(A)=\mathrm{rank}(A|B)}_{=r< n \text{ (số ẩn)} }$\\
+				Nghiệm của hệ phụ thuộc $n-r$ tham số.
+			\end{minipage}
+		};
+		\path(a2.south)--+(-3,-1)
+		node[mynodethree,
+		outer color=yellow!80!white,
+		inner color=yellow!20!white](a22)
+		{\begin{minipage}
+				{4cm}
+				Hệ có nghiệm duy nhất\\
+				$\underbrace{\mathrm{rank}(A)=\mathrm{rank}(A|B)}_{= n \text{ (số ẩn)} }$
+			\end{minipage}
+		};
+		%vẽ các đường mũi tên
+		\draw[->](a)--++(-90:1)-|(a1.north);
+		\draw[->](a)--++(-90:1)-|(a2.north);
+		%
+		\draw[->](a2)--++(-90:1)-|(a21.north);
+		\draw[->](a2)--++(-90:1)-|(a22.north);
+	\end{tikzpicture}
+\end{document}

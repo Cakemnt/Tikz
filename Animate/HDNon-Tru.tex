@@ -1,0 +1,55 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\a{4}
+\def\h{5}
+%\def\n{5}
+\def\hs{.4}
+\pgfmathsetmacro\b{\a/3}
+\pgfmathsetmacro\yo{(\b ^2)/\h}
+\pgfmathsetmacro\go{asin(\yo/\b)}
+\pgfmathsetmacro\xo{\a *cos (\go)}
+\pgfmathsetmacro\ax{\a *\hs}
+\pgfmathsetmacro\bx{\b *\hs}
+\def\sfa{180}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\sfa}{i=0+1}{
+%\foreach \i in {0,1,...,\sfa}{
+\begin{tikzpicture}[join=round,cap=round,brown]
+\pgfmathsetmacro\n{int(div(2*\i,60)+3)}
+\pgfmathsetmacro\goc{360/\n}
+\pgfmathsetmacro\m{int(\n+1)}
+\path
+(0:0) coordinate (O)
+(90:\h) coordinate (S)
+\foreach \j in {1,...,\n}{
+(0:\a) arc (0:2*\i+\j *\goc:{\a} and {\b}) coordinate (A\j)
+(0:\ax) arc (0:2*\i+\j *\goc:{\ax} and {\bx}) coordinate (B\j)
+(B\j)--++(90:\h-\h *\hs) coordinate (C\j)
+}
+(B1) coordinate (B\m)
+(C1) coordinate (C\m)
+;
+\clip (-\a-1,-\b-1) rectangle (\a+1,\h+1);
+\draw[dotted] (\xo,\yo) arc (\go:180-\go:{\a} and {\b});
+\foreach \j in {1,...,\n}{
+\pgfmathsetmacro\k{int(\j+1)}
+\draw[dotted] 
+(A\j)--(B\j)--(C\j)
+(B\j)--(B\k) (C\j)--(C\k)
+;
+}
+\foreach \j in {1,...,\n}{
+\pgfmathsetmacro\ktra{int(mod(2*\i+\j *\goc,360))}
+\pgfmathsetmacro\ktm{int(180-\go)}
+\ifnum \ktra >\go \ifnum \ktra < \ktm \draw[dotted] (S)--(A\j);  \else \draw (S)--(A\j); \fi \else \draw (S)--(A\j);\fi
+}
+\draw (S)--(-\xo,\yo) arc (180-\go:360+\go:{\a} and {\b})--cycle;
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}
+

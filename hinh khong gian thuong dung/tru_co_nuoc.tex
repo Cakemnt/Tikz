@@ -1,0 +1,20 @@
+\documentclass[tikz,border=5mm]{standalone}
+\begin{document}
+	\begin{tikzpicture}[join=round]
+		\def\a{2}
+		\def\b{.5}
+		\def\h{4}
+		\def\k{2.5}
+		\draw[fill=blue!20]
+		(\a,0) arc(0:-180:{\a} and {\b})--
+		+(90:\k) arc(-180:0:{\a} and {\b})--cycle;
+		\draw[dashed]
+		(\a,0) arc (0:180:{\a} and {\b})
+		(\a,\k) arc (0:180:{\a} and {\b})
+		;
+		\draw
+		(\a,\h) arc (0:-180:{\a} and {\b})
+		(\a,\k) arc(0:-180:{\a} and {\b})--
+		+(90:\h-\k) arc(180:0:{\a} and {\b})--cycle;
+	\end{tikzpicture}
+\end{document}

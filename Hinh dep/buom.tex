@@ -1,0 +1,31 @@
+\documentclass[tikz,border=5mm]{standalone}
+\usetikzlibrary{calc}
+\definecolor{nen}{RGB}{249, 233, 241}
+\definecolor{ct}{RGB}{242, 156, 193}
+\definecolor{pnr}{RGB}{247, 198, 219}
+\definecolor{hong}{RGB} {247,178,193}
+\begin{document}
+	\begin{tikzpicture}[blend mode=multiply]
+		% Nền
+		\draw
+		(-4,-5) rectangle(4,5) ;
+		\fill[hong]
+		(2.05,-1) ..controls +(90:1.15) and +(60:1)..(-.31,-2)
+		..controls +(-110:.6) and +(35:.6)..(-.84,-3.4)
+		..controls +(-40:.9) and +(-90:.9)..(2.05,-1) ;
+		\fill[ct]
+		(2.05,-1) ..controls +(90:1.4) and +(30:1)..(-1.25,-1)
+		..controls +(-150:.6) and +(15:.6)..(-2.95,-2.54)
+		..controls +(-60:1.4) and +(-100:1.4)..(2.05,-1) ;
+		\fill[ct]
+		(1,-1.72) ..controls +(0:2.2) and +(-8:3)..(-1.28,3.5)
+		..controls +(-120:2.2) and +(180:2.6)..(1,-1.72) ;
+		\fill[pnr]
+		(1.42,-1.58) ..controls +(10:1.4) and +(-40:1.6)..(1.46,3.37)
+		..controls +(-150:2.2) and +(170:2.3)..(1.42,-1.58) ;
+		\fill[pnr]
+		(2.05,-1) ..controls +(40:.6) and +(-70:1)..(2.8,2.5)
+		..controls +(-60:1) and +(30:.6)..(2.05,-1) ;
+		\node at (2,-3)[scale=.05]{\includegraphics{CATTUONG}};
+	\end{tikzpicture}
+\end{document}

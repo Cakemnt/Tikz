@@ -1,0 +1,38 @@
+\documentclass[tikz,border=5mm]{standalone}
+%\documentclass[12pt,a4paper]{article}
+%\usepackage{tikz}
+\begin{document}
+	\begin{tikzpicture}[very thin]
+		\def\r{10} 
+		\pgfmathsetmacro\rA{\r/2}
+		\pgfmathsetmacro\rB{\r/8}
+		\pgfmathsetmacro\rC{\r/18}
+		\pgfmathsetmacro\rD{\r/32}
+		\pgfmathsetmacro\rE{\r/50}
+		\pgfmathsetmacro\rF{\r/72}
+		\pgfmathsetmacro\rG{\r/96}
+		\path (0:\r)coordinate(A) 
+		(0:\r/2)coordinate(B) 
+		(0:\r*2/3)coordinate(C) 
+		(0:\r*3/4)coordinate(D)
+		(0:\r*4/5)coordinate(E)
+		(0:\r*5/6)coordinate(F)
+		(0:\r*6/7)coordinate(G)
+		(0:\r*3/5)coordinate(H)
+		(0:\r*4/7)coordinate(I)
+		(0:\r*5/7)coordinate(J);
+		\draw (0:\rA-\rB)--(0:\r+\rB)
+		(B)+(90:\rA)arc(-180:-75:\rA) 
+		(B)+(90:\rB)circle(\rB)
+		(C)+(90:\rC)circle(\rC) 
+		(D)+(90:\rD)circle(\rD)
+		(E)+(90:\rE)circle(\rE)
+		(F)+(90:\rF)circle(\rF)
+		(G)+(90:\rG)circle(\rG)
+		(H)+(90:\rE)circle(\rE)
+		(I)+(90:\rG)circle(\rG)
+		(J)+(90:\rG)circle(\rG);
+		\foreach \p/\x/\y in {A/1/1,B/1/2,C/2/3,D/3/4,E/4/5,F/5/6,G/6/7,H/3/5,I/4/7,J/5/7} 
+		\draw[fill=white] (\p)circle(.5pt)node[below,scale=.7]{$\frac\x\y$};
+	\end{tikzpicture}
+\end{document}

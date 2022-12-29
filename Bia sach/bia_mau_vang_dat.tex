@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,lipsum}
+\usepackage{tikz}
+\definecolor{VDorange}{RGB}{213,156,23}
+\begin{document}
+	\pagecolor{VDorange}
+	\begin{tikzpicture}[remember picture,overlay]
+		\path (current page.north) +(-90:2)
+		node[text=white,draw=white,xscale=2,yscale=3,inner sep=2mm]
+		{Walt Disney Pictures and Mandeville Films};
+		\fill[top color=VDorange,bottom color=white] (current page.south west) rectangle +(\paperwidth,\paperheight/2);
+		\path (current page.center) node[scale=4,fill=white,yscale=1.2,font=\sffamily\bfseries,minimum width=\paperwidth,minimum height=1cm] (BB) {BEAUTY and the BEAST};
+		\path (current page.south)
+		++(90:2) node[scale=3,font=\bfseries]
+		{Springer - 2020}
+		++(90:5) node[scale=5]{$x^n+y^n=z^n,\;n\geqslant 2$};
+		\path (BB.16) node[above=5mm,scale=3,text=white]{\bfseries Episode 1};
+	\end{tikzpicture}
+	\newpage
+	\nopagecolor{white}
+	\lipsum
+\end{document}

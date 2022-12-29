@@ -1,0 +1,63 @@
+\documentclass[border=3pt,tikz]{standalone}
+\usepackage[utf8]{vietnam}
+\usetikzlibrary{calc,angles,intersections,shapes.geometric,arrows,decorations.markings,arrows.meta,patterns.meta,patterns}
+\usepackage{tikz-3dplot,pgfplots}
+\pgfplotsset{compat=1.15}
+\usepgfplotslibrary{polar}
+\usepackage{amsmath}
+\begin{document}
+	\begin{tikzpicture}[xscale=3.5,yscale=.8]
+		\foreach \i in {2,...,6}{
+			\pgfmathsetmacro{\j}{\i-1.5}
+			\path (\j,0) node[above=2mm,scale=1.2]{\bfseries Thứ \i};
+		}
+		\begin{scope}
+			\draw (0,0) grid (5,-5);
+			\foreach \i in {1,...,6}{
+				\pgfmathsetmacro{\j}{int(\i+6)}
+				\path (0,-\i+1) node[left=2mm]{\bfseries \j h};
+			}
+			\draw[fill=cyan!50] (1,-3) rectangle +(1,-2);
+			\path (1.5,-4) node[align=center]
+			{PTVP - 504T3\\Tài năng Hóa\\(bài tập)};
+			\draw[fill=cyan!50] (3,0) rectangle +(1,-2);
+			\path (3.5,-1) node[align=center]
+			{PTVP - 504T3\\Tài năng Hóa\\(lý thuyết)};
+		\end{scope}
+		\path (2.5,-5.5) node[xscale=2]{\bfseries NGHỈ TRƯA};
+		\begin{scope}[shift={(0,-6)}]
+			\draw (0,0) grid (5,-5);
+			\foreach \i in {1,...,6}{
+				\pgfmathsetmacro{\j}{int(\i+12)}
+				\path (0,-\i+1) node[left=2mm]{\bfseries \j h};
+			}
+			\draw[fill=brown!50] (0,0) rectangle +(1,-3);
+			\path (.5,-1.5) node[align=center]
+			{PTVP\\ 304T4 - K63A1T\\Toán học\\(lý thuyết)};
+			\draw[fill=green!50] (1,-2) rectangle +(1,-3);
+			\path (1.5,-3.5) node[align=center]
+			{Diff. Eqs. Appl.\\ 501T3 - TTKH \\Môi trường};
+			\draw[fill=violet!50] (2,0) rectangle +(1,-3);
+			\path (2.5,-1.5) node[align=center]
+			{Giải tích\\ 204T4 - K64A3\\MT \& KHTT\\(lý thuyết)};
+		\end{scope}
+		\path
+		(current bounding box.north)
+		node[above,blue,scale=1.5,xscale=1.5,align=center]
+		{\bfseries THỜI KHÓA BIỂU\\
+			03 Sep - 14 Dec 2019}
+		(current bounding box.south west)
+		+(-90:1) node[right,align=left]
+		{{\bfseries Note}:
+			\quad \textcolor{cyan}{Nhiên: bài tập TNH}
+			\quad \textcolor{brown}{Dũng: bài tập PTVP-A1T}
+			\quad \textcolor{violet}{Nga + Thương: bài tập Giải tích A3}}
+		([shift={(-.3,-.8)}]current bounding box.north east)
+		node[circle,fill=yellow,text=violet]
+		{\texttt{tikz.vn}}
+		([shift={(.5,-.8)}]current bounding box.north west)
+		node[align=left]
+		{\bfseries Lê Huy Tiễn\\
+			Bộ môn PTVP \& Hệ động lực\\Khoa Toán-cơ-tin học\\ĐHKHTN-ĐHQGHN};
+	\end{tikzpicture}
+\end{document}

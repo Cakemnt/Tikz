@@ -1,0 +1,46 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\m{3}%Rộng
+\def\n{3}%Cao
+\def\k{4}%Dài
+\def\sfa{100}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{16}
+\multiframe{\sfa}{i=0+1}{
+%\foreach \i in {0,1,...,99,100,99,...,0}{
+\begin{tikzpicture}[join=round,cap=round]
+%\def\glp{30}
+\pgfmathsetmacro\tl{\i/\sfa}
+\pgfmathsetmacro\glp{20+\tl *50}
+\path
+(0:1) 
+--++(180+\glp:.5*\m) coordinate (B)
+--++(0:\k)--++(\glp:.5*\m)--++(90:\n) coordinate (A)
+;
+\clip (-\m,-\m) rectangle (\k+2,\n+\m);
+\draw[ultra thick, red] (A)--($(A)!\tl!(B)$);
+\foreach \x in {1,...,\k}{
+\foreach \y in {1,...,\n}{
+\begin{scope}[shift={(\x,\y)}]
+\draw 
+(0:0)--(180+\glp:.5*\m)
+(0:0)--++(-90:1)--++(180+\glp:.5*\m)
+;
+\foreach \l in {0,...,\m}\draw (180+\glp:.5*\l)--++(-90:1)--++(0:1);
+\fill[blue!50,opacity=.5] (0:0)--(180+\glp:.5*\m)--++(0:1)--++(\glp:.5*\m)--cycle;
+\fill[purple!50,opacity=.5] (180+\glp:.5*\m)--++(0:1)--++(-90:1)--++(180:1)--cycle;
+\fill[brown!50,opacity=.5] (0:1)--++(180+\glp:.5*\m)--++(-90:1)--++(\glp:.5*\m)--cycle;
+\foreach \l in {0,...,\m}\draw (180+\glp:.5*\l)--++(0:1)--++(-90:1);
+\draw (0:1)--++(180+\glp:.5*\m)--++(-90:1)--++(\glp:.5*\m);
+\end{scope}
+}
+}
+\fill[ball color=blue] (B)node[below left]{$B$} circle (.025);
+\fill[ball color=blue] (A) node[above right]{$A$} circle (.025);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

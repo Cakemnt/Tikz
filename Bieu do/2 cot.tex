@@ -1,0 +1,23 @@
+\documentclass[tikz,border=1cm]{standalone}
+\usepackage[utf8]{vietnam}
+\usetikzlibrary{patterns}
+\begin{document}
+	\begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round, >=stealth,teal]
+		\def\l{10}
+		\def\xx{3}
+		\def\r{0.35*\xx}
+		\foreach \trai/\phai/\mon [count=\x]in{2990.6/2617.9/2016,3660.4/2862.6/2017,4936.8/3553.7/2018,5720.3/3369.2/2019,5381.8/2826.1/2020}{
+			\pgfmathsetmacro{\ntrai}{int(\trai)}
+			\pgfmathsetmacro{\ttrai}{int(10*(\trai-\ntrai+0.05))}
+			\pgfmathsetmacro{\nphai}{int(\phai)}
+			\pgfmathsetmacro{\tphai}{int(10*(\phai-\nphai+0.05))}
+			\fill[pattern= dots,draw,pattern color=green](\x*\xx,0)rectangle({\x*\xx-\r},\trai/1000);
+			\fill[pattern= north west lines,draw,,pattern color=teal](\x*\xx,0)rectangle({\x*\xx+\r},\phai/1000);
+			\path({\x*\xx-0.5*\r},\trai/1000)node[above]{\color{red}$\ntrai{,}\ttrai$}({\x*\xx+0.5*\r},\phai/1000)node[above]{\color{red}$\nphai{,}\tphai$}(\x*\xx,0)node[below,text width=1.75cm,align=center]{\color{magenta}\textbf{\mon}};
+		}
+		\draw[->](0,-1)--(0,9)node[right,text width=3cm,align=center]{\textbf{Số tiền} \\(Triệu đô la Mỹ)};
+		\draw[->](-1,0)--({6*\xx},0)node[below]{\textbf{Năm}}(-1,0)--({6*\xx},0)node[pos=0.5,below=0.5 cm]{\color{blue}\textit{Nguồn: Báo cáo xuất nhập khẩu VIệt Nam 2020 NXB Công Thương 2021}};
+		\foreach \i in{1,...,8}
+		\draw[fill=black](0,\i)circle(1pt)node[left]{\color{red}$\i$ 000};
+	\end{tikzpicture}
+\end{document}

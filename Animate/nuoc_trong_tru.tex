@@ -1,0 +1,63 @@
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage{ifthen}
+\pagecolor{yellow!30}
+\begin{document}
+	\foreach \i in{1,2,...,84,85,84,...,1}{
+		\begin{tikzpicture}
+			%Định nghĩa các thông số.
+			\def\h{10}
+			\clip(-\h-5,-\h-5)rectangle(\h+5,\h+5);
+			\pgfmathsetmacro{\a}{1/2*\h*tan(60)}
+			\pgfmathsetmacro{\b}{1/6.25*\a}
+			\pgfmathsetmacro{\j}{90-\i}
+			\pgfmathsetmacro{\c}{\a/sin(\j)}
+			\pgfmathsetmacro{\d}{\b*sin(\j)}
+			\path (-\a,0)coordinate(A1)(\a,0)coordinate(A2);
+			% Định nghĩa điểm thay đổi theo góc quay \i.
+			\begin{scope}[rotate=\i]
+				\path (-\a,\h)coordinate(B1)(-\a,-\h)coordinate(B2)(\a,\h)coordinate(C1)(\a,-\h)coordinate(C2);
+				% Định nghĩa hình chữ nhật để tô phần e-lip
+				\path (intersection of A1--A2 and B1--B2)coordinate(M)(intersection of A1--A2 and C1--C2)coordinate(N)(intersection of M--N and B1--C1)coordinate(I)(intersection of M--N and B2--C2)coordinate(J);
+			\end{scope}
+			\ifthenelse{\i<50}
+			{%Vẽ phần chưa cắt đáy
+				\fill[cyan!75](M)--(B2)--(C2)--(N)--(M);
+				\fill[cyan!75,rotate=\i](B2)arc(-180:180: {\a} and {\b});
+				\draw [orange,fill=blue!45!white](M) arc (-180:180: {\c} and {\b});
+				\draw [dashed,red](M)--(N);
+			}
+			{%Bắt đầu cắt hai đáy
+				\path (I)--(J)--([turn]90+\i]:5)coordinate(E1)(I)--(J)--([turn]-90+\i]:5)coordinate(E2)(J)--(I)--([turn]90+\i:5)coordinate(E3)(J)--(I)--([turn]-90+\i:5)coordinate(E4);
+				%
+				\begin{scope}[rotate =\i]
+					\clip (C1)arc(0:360:{\a} and {\b});
+					\fill[cyan!75](B1)--(E3)--(E4)--(B1);
+				\end{scope}
+				\begin{scope}[rotate =\i]
+					\clip(B2)++(-90:\b)--(E2)--(E1)--(B2);
+					\fill[cyan!75](C2)arc(0:360:{\a} and {\b});
+				\end{scope}
+				\begin{scope}
+					\fill[cyan!75](B1)--(B2)--(J)--(I)--(B1);
+					\clip (E1)--(E2)--(E3)--(E4)--(E1);
+					\clip (M) arc (-180:180: {\c} and {\d});
+					\draw[fill=blue!45!white,draw=none](M) arc (-180:180: {\c} and {\d});
+					\draw[dashed,red](M) arc (180:0:{\c} and {\d});
+					\draw[line width =3pt,orange](M) arc (-180:0: {\c} and {\d});
+					\draw [blue](E1)--(E2)(E3)--(E4);
+					\draw [dashed,red](M)--(N);
+				\end{scope}
+			}
+			% Vẽ các điểm, đường không thay đổi trong ifthenelse{\i<50}.
+			\draw[fill=red](0,0)circle(1.5pt);
+			\begin{scope}[rotate=\i]
+				\draw[dashed,red] (0,-\h)--(0,\h)(B1)--(C1)(B2)--(C2);
+				\path (-\a,\h)coordinate(B1)(-\a,-\h)coordinate(B2)(\a,\h)coordinate(C1)(\a,-\h)coordinate(C2);
+				\draw(B2) arc (-180:0: {\a} and {\b});
+				\draw [dashed](B2) arc (180:0: {\a} and {\b});
+				\draw(B1)arc(-180:180:{\a} and {\b});
+				\draw (B1)--(B2)(C1)--(C2);
+			\end{scope}
+		\end{tikzpicture}
+	}
+\end{document}

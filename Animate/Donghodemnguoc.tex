@@ -1,0 +1,18 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\n{120}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{1}
+\multiframe{\n}{i=0+1}{
+%\foreach \i in {0,...,\n}{
+\begin{tikzpicture}[join=round,cap=round]
+\pgfmathsetmacro\phut{int(div(\n-\i,60))}
+\pgfmathsetmacro\giay{int(mod(\n-\i,60))}
+\ifnum\giay<10\def\hienthi{0\phut :0\giay}\else \def\hienthi{0\phut :\giay}\fi
+\path (0:0) node[blue,rectangle, rounded corners=3,thick,draw,fill=black,scale=5]{\bfseries\color{white}\hienthi};
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

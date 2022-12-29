@@ -1,0 +1,30 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{animate}
+\begin{document}
+%==================
+%\pagecolor{green}
+\def\r{1}
+\def\sfa{360}
+\pgfmathsetmacro\l{\sfa *pi *\r/180}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\sfa}{i=0+1}{
+%\foreach \i in {0,...,179,180,179,...,0}{
+\begin{tikzpicture}[join=round,cap=round]
+\pgfmathsetmacro\la{\i *pi*\r/180}
+\pgfmathsetmacro\tl{(\l-\la)/\r}
+\clip (-\r-2,-\r-2) rectangle (\r+2,\r+2);
+\draw[-stealth] (-\r-.5,0)--(\r+1,0) node[below]{$x$};
+\draw[-stealth] (0,-\r-.5)--(0,\r+.5) node[left]{$y$};
+\draw[dashed] (0,0) coordinate (O) node[below left]{$O$}--(\i:\r) ++(\i:.3)node{$M$};
+\draw (O) circle (\r);
+\ifnum \i=0
+\draw[blue,thick,-stealth] (0:\r)node[below right]{$A$}--++(90:\l);
+\else
+\draw[blue,thick,-stealth] (0:\r)node[below right]{$A$} arc (0:\i:\r) coordinate (M)--($(M)!\tl!-90:(O)$);
+\fi
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

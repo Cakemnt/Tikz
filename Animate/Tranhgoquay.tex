@@ -1,0 +1,35 @@
+%\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+\documentclass{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{tikz,ifthen}
+\usetikzlibrary{calc,shadings}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\n{180}
+\def\r{5}%bán kính đồng hồ
+\pgfmathsetmacro{\a}{\r/5}
+\pgfmathsetmacro{\goc}{acos(\a/\r)}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\n}{i=0+1}{
+%\foreach \ic in {1,...,\n}{
+%\pgfmathsetmacro{\i}{\ic *4}
+\pgfmathsetmacro{\x}{3*\i}
+\pgfmathsetmacro{\y}{2*\i}
+\begin{tikzpicture}[line join=round]
+\clip (0:0) circle (1.5*\r);
+\begin{scope}[rotate=\x]
+\draw[red,line width=3] (0:\a) arc(\goc:-\goc:\r/2) arc(-\goc:-180:\r);
+\foreach \k in {-10,-20,...,-170}{\draw[orange,line width=2] (\k:\a) arc (\k-\goc:\k+\goc:\r/2);}
+\end{scope}
+
+\begin{scope}[rotate=-\y]
+\draw[red,line width=3] (0:\a) arc(-\goc:\goc:\r/2) arc(\goc:180:\r);
+\foreach \k in {10,20,...,170}{\draw[orange,line width=2] (\k:\a) arc (\k+\goc:\k-\goc:\r/2);}
+\end{scope}
+\draw[blue,line width=5] (0:0) circle (\a);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}
+

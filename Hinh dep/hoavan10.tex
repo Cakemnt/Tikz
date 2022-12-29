@@ -1,0 +1,11 @@
+\documentclass[tikz,border=5mm]{standalone}
+\begin{document}
+	\begin{tikzpicture}
+		\def\r{1}
+		\foreach \i in {1,...,6}
+		\draw[line width=2pt,orange]
+		(\i*60:2*\r) circle(\r)
+		(\i*60+30:2*\r) circle(\r)
+		;
+	\end{tikzpicture}
+\end{document}

@@ -1,0 +1,45 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{animate}
+\begin{document}
+%==================
+%\pagecolor{green}
+\def\a{3}
+\def\h{4}
+\def\ga{70}
+\pgfmathsetmacro\b{\a/3}
+\pgfmathsetmacro\xa{\a *cos(\ga)}
+\pgfmathsetmacro\ya{\b *sin(\ga)}
+\pgfmathsetmacro\xo{\a *sqrt( \h^2-\b^2)/\h}
+\pgfmathsetmacro\yo{(\b^2)/\h}
+\pgfmathsetmacro\go{acos(\xo/\a)}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{16}
+\multiframe{180}{i=0+1}{
+%\foreach \i in {0,...,179,180,179,...,0}{
+\begin{tikzpicture}[join=round,cap=round]
+\pgfmathsetmacro\gb{int(\ga+2*\i)}
+\pgfmathsetmacro\xb{\a *cos(\gb)}
+\pgfmathsetmacro\yb{\b *sin(\gb)}
+\pgfmathsetmacro\ktr{int(181-\go)}
+\pgfmathsetmacro\ktra{int(361+\go)}
+\clip (-1.25*\a,-1.25*\b) rectangle (1.25*\a+1,1.5*\h);
+\draw[dotted] 
+(0,-.5*\h)--(0,1.25*\h) node[above]{$\Delta$}
+(\xo,\yo) -- (0,\h)--(-\xo,\yo) arc (180-\go:360+\go:{\a} and {\b})
+(0,0) ellipse ({\a} and {\b})
+;
+\fill[brown,opacity=.5] (\xa,\ya)--(0,\h)--(0,0)--cycle;
+\ifnum \gb<\ktr
+\else
+\ifnum \gb<\ktra
+\fill[ball color=orange,opacity=.25] (0,\h)--(-\xo,\yo) arc (180-\go:\gb:{\a} and {\b})--cycle;
+\else
+\fill[ball color=orange,opacity=.25] (0,\h)--(-\xo,\yo) arc (180-\go:360+\go:{\a} and {\b})--cycle;
+\fi
+\fi
+\fill[yellow,opacity=.25] (0,0)--(\xb,\yb)--(0,\h);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

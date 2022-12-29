@@ -1,0 +1,37 @@
+\documentclass[tikz,border=2mm]{standalone}
+\definecolor{metallicRed}{RGB}{135,22,20}
+\definecolor{metallicBlue}{RGB}{44, 88, 128}
+\begin{document}
+	\begin{tikzpicture}
+		\fill[
+		left color = metallicRed,
+		right color = metallicRed,
+		middle color = white,
+		shading angle = 135
+		] (0,0) circle (2);
+		\fill[
+		left color = lightgray,
+		right color = lightgray,
+		middle color = white,
+		shading angle = 45
+		] (0,0) circle (1.6);
+		\fill[
+		left color = metallicRed,
+		right color = metallicRed,
+		middle color = white,
+		shading angle = 135
+		] (0,0) circle (1.2);
+		\fill[
+		left color = metallicBlue,
+		right color = metallicBlue,
+		middle color = white,
+		shading angle = 45
+		] (0,0) circle (0.8);
+		\fill[
+		left color = lightgray,
+		right color = lightgray,
+		middle color = white,
+		shading angle = 135
+		] (18:.8)--(162:.8)--(-54:.8)--(90:.8)--(-126:.8);
+	\end{tikzpicture}
+\end{document}

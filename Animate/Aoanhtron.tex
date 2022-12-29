@@ -1,0 +1,24 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage[utf8]{vietnam}
+\usepackage{animate}
+\usetikzlibrary{calc,intersections}
+\begin{document}
+%==================
+\def\n{360}
+\def\r{2}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{16}
+\multiframe{\n}{i=0+1}{
+%\foreach \i in {0,...,99,100,99,...,0}{
+\begin{tikzpicture}[join=round,cap=round]
+\pgfmathsetmacro\kt{int(mod(\i,10))}
+\clip (-1.5*\r,-1.5*\r) rectangle (4.5*\r,1.5*\r);
+\foreach \j in {0,...,5}\fill[rotate around ={\i+60*\j:(\i+60*\j:\r)}] (\i+60*\j:\r) ellipse ({.3*\r} and {.2*\r});
+\ifnum \kt<5\def\mau{blue!20}\else\def\mau{black}\fi
+\begin{scope}[shift={(0:3*\r)}]
+\foreach \j in {0,...,5}\fill[\mau,rotate around ={\i+60*\j:(\i+60*\j:\r)}] (\i+60*\j:\r) ellipse ({.3*\r} and {.2*\r});
+\end{scope}
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

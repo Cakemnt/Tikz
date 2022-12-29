@@ -1,0 +1,21 @@
+\documentclass[tikz, border=5mm]{standalone}
+%\documentclass[convert={outfile=\jobname.png}]{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\begin{document}
+	\begin{tikzpicture}
+		\def\r{5}
+		\def\n{10}%Số cột hoa văn
+		\def\m{5}%Số dòng hoa văn
+		\colorlet{mau}{black}
+		\foreach \j in {1,...,\m}{
+			\foreach \i in {1,...,\n}{
+				\pgfmathsetmacro{\shx}{(2*\i -2)*\r *sqrt(3)+(-1)^\j *\r *sqrt(3)/2}
+				\pgfmathsetmacro{\shy}{\j *\r *3}
+				\coordinate (o\i\j) at (\shx,\shy);
+				\fill[shift={(o\i\j)},mau] (150:2*\r) arc (150:30:\r) arc (-150:-30:\r) arc(30:-90:\r) arc(90:210:\r) arc(270:150:\r) arc(-30:90:\r);
+			}
+		}
+	\end{tikzpicture}
+\end{document}

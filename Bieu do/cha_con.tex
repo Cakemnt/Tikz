@@ -1,0 +1,54 @@
+\documentclass[border=3pt,tikz]{standalone}
+\usepackage[utf8]{vietnam}
+\usetikzlibrary{calc,angles,intersections,shapes.geometric,arrows,decorations.markings,arrows.meta,patterns.meta,patterns}
+\usepackage{tikz-3dplot,pgfplots}
+\pgfplotsset{compat=1.15}
+\usepgfplotslibrary{polar}
+\usepackage{amsmath}
+\begin{document}
+	
+\begin{tikzpicture}[font=\footnotesize,block/.style={draw=#1,text=#1,minimum height=8mm,font=\bfseries,minimum width=2cm}]
+	\path
+	(0,0) node[block=red] (O) {ĐỀ THAM KHẢO}
+	(3,-1) node[block=blue] (11) {LỚP 11}
+	(2.5,-3) node[block=blue] (111) {QHVG}
+	(5,-3) node[block=blue] (112) {DS - CS}
+	(7.5,-3) node[block=blue] (113) {TH - XS}
+	(-6,-1) node[block=teal] (12) {LỚP 12}
+	(-8,-6) node[block=teal] (121) {$ Oxyz $}
+	(-5,-6) node[block=teal] (122) {TRÒN XOAY}
+	(-2,-6) node[block=teal] (123) {ĐA DIỆN}
+	(0.5,-6) node[block=teal] (124) {SỐ PHỨC}
+	(3,-6) node[block=teal] (125) {NG-TP}
+	(5.5,-6) node[block=teal] (126) {MŨ-LÔGA}
+	(8,-6) node[block=teal] (127) {KSHS}
+	;
+	\path
+	(O.north) node[above,red]{50 câu}
+	(11.north) node[above,blue]{5 câu}
+	(111.north) node[above left,blue]{2 câu}
+	(112.north) node[above right,blue]{1 câu}
+	(113.north) node[above right,blue]{1 câu}
+	(12.north) node[above,teal]{45 câu}
+	(121.north) node[above right,teal]{6 câu}
+	(122.north) node[above right,teal]{5 câu}
+	(123.north) node[above right,teal]{3 câu}
+	(124.north) node[above right,teal]{5 câu}
+	(125.north) node[above right,teal]{5 câu}
+	(126.north) node[above right,teal]{9 câu}
+	(127.north) node[above right,teal]{12 câu}
+	;
+	\draw[->,blue] (O.south)--(11.west);
+	\draw[->,blue] (11.south)--(111.north);
+	\draw[->,blue] (11.south)--(112.north);
+	\draw[->,blue] (11.south)--(113.north);
+	\draw[->,teal] (O.south)--(12.east);
+	\draw[->,teal] (12.south)--(121.north);
+	\draw[->,teal] (12.south)--(122.north);
+	\draw[->,teal] (12.south)--(123.north);
+	\draw[->,teal] (12.south)--(124.north);
+	\draw[->,teal] (12.south)--(125.north);
+	\draw[->,teal] (12.south)--(126.north);
+	\draw[->,teal] (12.south)--(127.north);
+\end{tikzpicture}
+\end{document}

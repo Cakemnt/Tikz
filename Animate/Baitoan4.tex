@@ -1,0 +1,43 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{ifthen}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\r{2}
+\begin{animateinline}[controls,autoplay,loop]{8}
+\multiframe{360}{i=0+1}{
+%\foreach \i in {0,...,359}{
+\begin{tikzpicture}[thick,line join=round]
+\clip (0:0) circle (2.5*\r);
+\path(0:0) coordinate(O) 
+(180:\r) coordinate(A) 
+(0:\r) coordinate(B)
+(180+\i:\r) coordinate(C)
+($(B)!1!60:(A)$) coordinate (A1)
+($(B)!1!-60:(A)$) coordinate (A2)
+($(B)!0.5!(A1)$) coordinate (O1)
+($(B)!0.5!(A2)$) coordinate (O2)
+;
+\ifthenelse{\i<180}{
+\pgfmathsetmacro{\k}{\i-120}
+\path ($(B)!1!60:(C)$) coordinate(M);
+\draw[red] (A1) arc (-120:\k:\r);
+}{
+\pgfmathsetmacro{\k}{\i-240}
+\path ($(B)!1!-60:(C)$) coordinate(M);
+\draw[red] 
+(A1) arc (-120:60:\r)
+(B) arc (-60:\k:\r);
+}
+\draw (O)circle(\r);
+\draw (A)--(B)--(C)--cycle;
+\draw (B)--(M)--(C);
+\draw[red] (A1)--(B)--(A2);
+\foreach \x/\g in {A/180,B/0,A1/-150,A2/150,C/\i+180,M/\k,O1/120,O2/-120}{\path ($(\x)+(\g:3mm)$) node{\x};}
+\foreach \x in {A,B,C,M,A1,A2,O1,O2}{\fill[orange] (\x) circle (1pt);}
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

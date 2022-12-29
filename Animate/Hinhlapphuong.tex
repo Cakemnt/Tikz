@@ -1,0 +1,41 @@
+\documentclass[border=2mm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections,angles,quotes}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\sfa{80}
+\def\a{1.5}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\sfa}{i=0+1}{
+%\foreach \i in {0,1,...,179,180,179,...,0}{
+\begin{tikzpicture}[font=\scriptsize,blue]
+\pgfmathsetmacro\xa{\a * cos(2*\i)}
+\pgfmathsetmacro\za{\a *sin(2*\i)}
+\pgfmathsetmacro\xd{\a * cos(2*\i+90)}
+\pgfmathsetmacro\zd{\a *sin(2*\i+90)}
+\path
+(0,0,0) coordinate (O)
+(\xa,0,\za) coordinate (A)
+(\xd,0,\zd) coordinate (D)
+($(A)!.5!(D)$) coordinate (Ot)
+(O)--(Ot)--([turn]0:\a) coordinate (t)
+($(A)+(t)-(Ot)$) coordinate (B)
+($(D)+(t)-(Ot)$) coordinate (C)
+\foreach \x in {A,B,C,D}{(\x)++(0,\a,0) coordinate (\x_1)}
+;
+\clip (-3*\a-1,-2*\a) rectangle (3*\a+1,3*\a);
+\draw[fill=green,opacity=.5] (A)--(B)--(C)--(D)--cycle;
+\draw[fill=blue,opacity=.5] (A_1)--(B_1)--(C_1)--(D_1)--cycle;
+\draw[fill=purple,opacity=.5] (A)--(B)--(B_1)--(A_1)--cycle;
+\draw[fill=yellow,opacity=.5] (B)--(C)--(C_1)--(B_1)--cycle;
+\draw[fill=brown,opacity=.5] (C)--(D)--(D_1)--(C_1)--cycle;
+\draw[fill=pink,opacity=.5] (A)--(D)--(D_1)--(A_1)--cycle;
+\draw[-stealth] (0,0,0)--(3*\a,0,0) node[above]{$x$};
+\draw[-stealth] (0,0,0)--(0,2*\a,0) node[right]{$y$};
+\draw[-stealth] (0,0,0)--(0,0,3*\a) node[below]{$z$};
+\foreach \x/\g in {A/-90,B/-90,C/-90,D/-90,A_1/90,B_1/90,C_1/90,D_1/90} \path (\x)+(\g:.4) node{$\x$};
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

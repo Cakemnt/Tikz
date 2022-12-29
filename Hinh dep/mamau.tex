@@ -1,0 +1,29 @@
+\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+
+\documentclass[tikz,border=5mm]{standalone}
+
+\usepackage[utf8]{vietnam}
+
+\usepackage{xcolor}
+
+\usepackage{mathpazo}
+
+\begin{document}
+	
+	\begin{tikzpicture}[line cap=round]
+		
+		\foreach \mau[count=\i] in {{9967ce},{ba9cf6},{cfb7ff},{a8c0f9},{a0a8f3}}{
+			
+			\definecolor{mau}{HTML}{\mau}
+			
+			\fill[mau] (\i,0) circle (.4);
+			
+			\draw[line width=.8cm,mau] (\i,1)--++(0,3)node[pos=.3,sloped,white]{\#\MakeUppercase{\mau}};
+			
+		}
+		
+		\path (3,-1)node[orange!50!red]{\bfseries\Large BÙI QUỸ};
+		
+	\end{tikzpicture}
+	
+\end{document}

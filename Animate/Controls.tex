@@ -1,0 +1,24 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{animate}
+\begin{document}
+%==================
+\begin{animateinline}[controls,autoplay,palindrome,loop]{16}
+\multiframe{200}{i=0+1}{
+%\foreach \i in {90,...,179,180,...,90}{
+\begin{tikzpicture}[thick]
+\ifnum \i<101
+\pgfmathsetmacro\k{\i}
+\pgfmathsetmacro\luckeo{2*\k/50}
+\clip (-1,-4) rectangle (6,4);
+\draw[dotted] (0,2)--(0,-2) (-1,0)--(2,0) (4,0)--(6,0) (5,-2)--(5,2);
+\draw[orange] (0,0) .. controls +(60:\luckeo) and +(-120:\luckeo) .. (5,0);
+\draw[-stealth] (0,0)--++(60:\luckeo);
+\draw[-stealth] (5,0)--++(-120:\luckeo);
+\else
+\fi
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

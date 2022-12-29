@@ -1,0 +1,29 @@
+\documentclass[border=5mm,convert={density=600,outfile=\jobname.png}]{standalone}
+%\documentclass[border=5mm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\begin{document}
+	\begin{tikzpicture}
+		\def\R{4}
+		\def\x{4.5}
+		\coordinate (O) at (0,0);
+		\coordinate (A) at (\R,0);
+		\coordinate (B) at (\R+\x,0);
+		\fill (O) circle (0.1);
+		\draw[thick] (A) arc(0:25:\R)
+		(A) arc(0:-25:\R);
+		\draw (A) --+(0,1.9) (\R,0) --+(0,-1.8);
+		\draw[->,>=latex] (O)--+(20:\R) node[above,midway]{$R$};
+		\draw[->,>=latex, thick,blue] (B)--+(-1.4,0) node[above,midway,black]{$\dfrac{mgR}{(R+x)^2}$};
+		\draw[dashed, opacity=0.5]
+		(O)--(\R+\x-1.5,0) (B)--+(1,0);
+		\draw[-latex] (\R+\x+1.5,0)--++(.8,0);
+		\filldraw[fill=gray] (B) circle(0.1)
+		node[below right]{$m$};
+		%\node[inner sep=2pt, draw,fill=gray,circle,label={-45:$m$}] at (B) {};
+		
+		\draw[decorate,decoration={brace,mirror,raise=5pt,amplitude=6pt}]
+		(A) -- (B) node [black,midway, below=10pt] {\footnotesize $x$};
+	\end{tikzpicture}
+\end{document}

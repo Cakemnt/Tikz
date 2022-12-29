@@ -1,0 +1,27 @@
+\documentclass[border=10]{standalone}
+\usepackage{asymptote}
+\begin{document}
+	\begin{asy}
+	unitsize(1cm);
+	defaultpen(fontsize(8pt));
+	real a=4, b=2, h=6;
+	pair O=(0,0), B=(a,0), S=(0,h);
+	path el=ellipse(O,a,b);
+	pair A=intersectionpoint(O--rotate(-30,O)*B,el);
+	pair I=(A+B)/2;
+	pair H=(O+reflect(S,I)*O)/2;
+	filldraw(el,fillpen=lightgrey,drawpen=black);
+	filldraw(S--O--A--cycle,fillpen=lightyellow,drawpen=black);
+	filldraw(S--A--B--cycle,fillpen=lightcyan,drawpen=black);
+	draw(yscale(b/a)*arc(O,a,40,90),dashed);
+	draw(S--I);
+	draw(B--O--I^^O--H,dashed);
+	dot("$O$",O,dir(-135),.5+black,Fill(white));
+	dot("$B$",B,dir(0),.5+black,Fill(white));
+	dot("$A$",A,dir(-45),.5+black,Fill(white));
+	dot("$S$",S,dir(90),.5+black,Fill(white));
+	dot("$I$",I,dir(0),.5+black,Fill(white));
+	dot("$H$",H,dir(0),.5+black,Fill(white));
+	add(bbox(5mm,Fill(white)));
+	\end{asy}
+\end{document}

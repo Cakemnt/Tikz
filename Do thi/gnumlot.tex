@@ -1,0 +1,55 @@
+\documentclass[10pt]{article}
+\usepackage{pgf,tikz,pgfplots,amsmath,amssymb}
+\usepackage[utf8]{vietnam}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\pagestyle{empty}
+\begin{document}
+	
+	\begin{tikzpicture}%[x=10,y=20]
+		[xscale=.1,yscale=.3]
+		\pagecolor{yellow!30}
+		\draw[thin,gray!30] 
+		(0,-10) grid[xstep=20,ystep=5] (140,10);
+		\draw (0,-10) rectangle (140,10);
+		\foreach \j in {-10,-5,0,5,10}
+		\draw (0,\j) node[left]{$\j$};
+		\foreach \i in {20,40,60,80,100,120}
+		\draw (\i,-10) node[below]{$\i$};
+		
+		\draw[blue] 
+		plot[raw gnuplot, id=func0] function{set samples 2000; set xrange [0:140]; plot 200/21*sin(x/20)*sin(21*x/20)};
+		\draw[dashed] 
+		plot[raw gnuplot, id=func1] function{set samples 500; set xrange [0:140]; plot 200/21*sin(x/20)};
+		
+		\draw[dashed] 
+		plot[raw gnuplot, id=func2] function{set samples 500; set xrange [0:140]; plot -200/21*sin(x/20)};
+		
+		\draw (current bounding box.north) node[above,blue]
+		{Đồ thị hàm $y=\dfrac{200}{21}\sin\dfrac{t}{20}\sin\dfrac{21t}{20}$};
+	\end{tikzpicture}
+	
+	
+	\begin{tikzpicture}%[x=10,y=20]
+		[xscale=.1,yscale=.3]
+		\pagecolor{yellow!30}
+		\draw[thin,gray!30] 
+		(0,-10) grid[xstep=20,ystep=5] (140,10);
+		\draw (0,-10) rectangle (140,10);
+		\foreach \j in {-10,-5,0,5,10}
+		\draw (0,\j) node[left]{$\j$};
+		\foreach \i in {20,40,60,80,100,120}
+		\draw (\i,-10) node[below]{$\i$};
+		
+		\draw[blue,domain=0:140,samples=2000,smooth] 
+		plot (\x,{200/21*sin(\x/20 r)*sin(21*\x/20 r)});
+		\draw[dashed,domain=0:140,samples=100] 
+		plot (\x,{200/21*sin(\x/20 r)})
+		plot (\x,{-200/21*sin(\x/20 r)});
+		
+		\draw (current bounding box.north) node[above,blue]
+		{Đồ thị hàm $y=\dfrac{200}{21}\sin\dfrac{t}{20}\sin\dfrac{21t}{20}$};
+	\end{tikzpicture}
+	
+\end{document}

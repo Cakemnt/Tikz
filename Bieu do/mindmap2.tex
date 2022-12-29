@@ -1,0 +1,57 @@
+\documentclass[12pt,A4paper,landscape]{article}
+%\documentclass[border=5mm]{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage[top=1cm, bottom=1cm, left=1cm, right=1cm] {geometry}
+\parindent=0pt
+\pagestyle{empty}
+%==============
+\begin{document}
+	\begin{tikzpicture}[>=stealth,line join=round,line cap=round,scale=1]
+		\begin{scope}[xshift=0cm]
+			\draw (-1,0) node(O)[fill=cyan!10,right,text width=1.7cm,draw,rounded corners=4pt]{
+				\centerline{\textbf{TÍNH}}
+				\centerline{\textbf{ĐƠN}}
+				\centerline{\textbf{ĐIỆU}}
+				\centerline{\textbf{CỦA}}
+				\centerline{\textbf{HÀM}}
+				\centerline{\textbf{SỐ}}
+			};
+		\end{scope}
+		\begin{scope}[xshift=3cm]
+			\draw (-1,4.5) node(A)[fill=yellow!20, right, text width=5.5cm, draw, rounded corners= 4pt]{\centerline{\textbf{BÀI TOÁN 1}}\\
+				Tìm $m$ để hàm số $y= f(x, m)$ đồng biến (hoặc nghịch biến)};
+			\draw[->, thick] (4.8,4.5)--++(60:1.7) node[fill=green!20, right, text width=4.2cm, rounded corners=4pt] {\centerline{trên $\mathbb{R}\Leftrightarrow$}\\ \centerline{$f'(x, m) \ge (\le)\, 0, \, \forall x\in \mathbb{R}$}};
+			\draw[->, thick] (4.8,4.5)--++(-60:1.7) node[fill=green!20, right, text width=4.2cm, rounded corners=4pt] {\centerline{trên từng khoảng}\\ \centerline{xác định của hàm số}};
+			\draw[->, thick] (10.2,6.)--++(60:1) node[right] {Trực tiếp: $ax^2 + bx+ c\ge (\le)\, 0$ $\forall x\in \mathbb{R}$ $\Leftrightarrow \left[\begin{aligned}&\left\{\begin{aligned}&a=b=0\\ &c>0\; (c<0)\end{aligned}\right.\\ &\left\{\begin{aligned}&a>0 \; (a<0)\\ &\Delta\le 0\end{aligned}\right.\end{aligned}\right.$};
+			\draw[->, thick] (10.2,6.)--++(-60:1) node[right] {Gián tiếp: Cô lập $m$};
+			\draw[->, thick] (14.7,5.1)--++(60:.5) node[right] {Bảng biến thiên};
+			\draw[->, thick] (14.7,5.1)--++(-60:.5) node[right] {$\min$, $\max$};
+			\draw[->, thick] (10.2,3)--++(0:2.4) node[above, midway] {Thường gặp} node[right] {$f(x,m)= \dfrac{ax+b}{cx+d}$};
+			\draw[->, thick] (16,3)--++(0:1) node[right] {$ad-bc<\, (>)\; 0$};
+		\end{scope}
+		\begin{scope}[xshift=3cm]
+			\draw (-1,0) node[fill=yellow!20, right, text width=5.5cm, draw, rounded corners= 4pt]{
+				\centerline{\textbf{BÀI TOÁN 2}}\\
+				Tìm $m$ để hàm số $y= f(x, m)$ đồng biến (hoặc nghịch biến)};
+			\draw[->,thick] (4.8,0)--++(0:1.5) node[above, midway] {trên $D$};
+			\draw (6.3,0) node[fill=green!20, right, text width=3cm, rounded corners=4pt] {\textbullet\ $D= (-\infty; b)$\\ \textbullet\ $D= (a; +\infty)$\\ \textbullet\ $D= (a;b)$};
+			\draw[->, thick] (9.6,0)--++(60:1.7) node[fill=red!5, right, text width=9cm, draw, rounded corners=4pt] {Dạng 1. $f(x,m)= \dfrac{ax+b}{cx+d}\to \left\{\begin{aligned}&ad-bc>0 \; (<0)\\ &x=- \dfrac{d}{c}\notin D\end{aligned}\right.$};
+			\draw[->, thick] (9.6,0)--++(0:.85) node[fill=red!5, right, text width=9cm, draw, rounded corners=4pt] {Dạng 3. $y= f(x,m)$ lượng giác, chứa căn};
+			\draw[->, thick] (9.6,0)--++(-60:1.7) node[fill=red!5, right, text width=9cm, draw, rounded corners=4pt] {Dạng 2. $y= f(x,m)$ đa thức $\to$ Cô lập $m$};
+		\end{scope}
+		\begin{scope}[xshift=3cm]
+			\draw (-1,-4.5) node[fill=yellow!20, right, text width=2cm, draw, rounded corners= 4pt]{
+				\centerline{\textbf{CHÚ Ý}}};
+			\draw[->, thick] (1.3,-4.5)--++(60:1.7) node[right] {$y= f(x,m)= \dfrac{ax+b}{cx+d}$ thì điều kiện $y'$ không có dấu ``$=$''};
+			\draw[->, thick] (1.3,-4.5)--++(0:.85) node[right] {$y= f(x,m)+\dfrac{ax+b}{cx+d}$ thì điều kiện $y'=0$ có hữu hạn nghiệm};
+			\draw[->, thick] (1.3,-4.5)--++(-60:1.7) node[right] {$y= f(x,m)= a_nx^n+ a_{n-1}x^{n-1}+ \cdots + a_1x+a_0$ mà $a_n$ chứa $m$ cần xét $a_n=0$};
+		\end{scope}
+		% Nối
+		\draw[->, thick] (O)--++(66:4.9);
+		\draw[->, thick] (O)--++(0:2);
+		\draw[->, thick] (O)--++(-66:4.9);
+	\end{tikzpicture}
+\end{document}

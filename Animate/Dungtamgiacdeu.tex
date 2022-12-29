@@ -1,0 +1,55 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections,angles,quotes}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\sfa{100}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{\sfa}{i=1+1}{
+%\foreach \i in {1,...,99,100,99,...,1}{
+\begin{tikzpicture}
+\pgfmathsetmacro\tl{\i/\sfa}
+\path
+(0,0) coordinate (x)
+--++(10,0) coordinate (x')
+(0,-3) coordinate (z)
+--++(10,0) coordinate (z')
+($(x)!\tl!(z)$) coordinate (y)
+($(x')!\tl!(z')$) coordinate (y')
+($(x)!.4!(x')$) coordinate (A)
+($(y)!(A)!(y')$) coordinate (I)
+($(A)!1!60:(I)$) coordinate (K)
+($(K)!.1!90:(A)$) coordinate (Kt)
+(intersection of K--Kt and z--z') coordinate (C)
+($(A)!1!-60:(C)$) coordinate (B)
+($(z)!(A)!(z')$) coordinate (H)
+($(C)!2!(H)$) coordinate (C_1)
+($(A)!1!60:(C_1)$) coordinate (B_1)
+;
+\clip (-1,-4) rectangle (11,4);
+\foreach \i in {x,y,z}\draw (\i) node[left]{$\i$}--(\i') node[right]{$\i'$};
+\draw[dashed] 
+(A)--(I)--(K) --cycle (Kt)--(C) (I)--(H)
+(A) let\p1=($(A)-(C)$) in circle ({veclen(\x1,\y1)})
+;
+\draw[thick,blue]
+(A)--(B)--(C)--cycle
+(A)--(B_1)--(C_1)--cycle
+pic[draw,angle radius=2mm,fill=magenta]{right angle =A--I--y}
+pic[draw,angle radius=2mm,fill=magenta]{right angle =A--K--C}
+;
+\foreach \x/\g in {A/90,B/135,C/-90,I/-45,K/-45,H/-90,B_1/45,C_1/-45} \draw[fill=white] (\x) circle (.03) + (\g:.3) node{$\x$};
+%\path
+%(current bounding box.south west) node[below right,align=left]{
+%{\bfseries Dựng tam giác đều có ba đỉnh $A$, $B$, $C$ lần lượt trên ba đường thẳng song song $xx'$, $yy'$, $zz'$} \\
+%B1: Lấy điểm $A$ bất kỳ trên $xx'$. Lấy $I$ trên $yy'$ sao cho $AI\perp yy'$. \\
+%B2: Quay $I$ quanh $A$ một góc $60^{\circ}$ được $K$. \\
+%B3: Qua $K$ vẽ đường vuông góc với $AK$ cắt $zz'$ tại $C$. \\
+%B4: Vẽ đường tròn tâm $A$ bán kính $AC$ cắt $yy'$ tại $B$. \\
+%Bài toán có hai nghiệm hình đối với mỗi điểm $A$.
+%};
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

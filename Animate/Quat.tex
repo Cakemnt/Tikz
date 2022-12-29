@@ -1,0 +1,31 @@
+%\documentclass[tikz,border=5mm,convert={outfile=\jobname.png}]{standalone}
+\documentclass{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{animate}
+
+\begin{document}
+\definecolor{cham}{RGB}{75, 0, 130} % chàm, 
+\begin{animateinline}[controls,autoplay,loop]{360}
+\multiframe{360}{i=0+10}{
+\begin{tikzpicture}
+\def\r{3} 
+\draw[gray] (-2.1*\r,-2.1*\r) rectangle (2.1*\r,2.1*\r); %Khung gia
+\pagecolor{gray}
+\path (0,0) circle(1.5*\r);
+\foreach \k/\iwing in {0/red,1/orange,2/yellow,3/green,
+4/blue,5/cham,6/violet}{
+\begin{scope}[rotate=\k *360/7-\i]
+\fill[\iwing!50] 
+(0,0) arc(-180:0:\r) to[bend left=20] cycle;
+\fill[\iwing!80!black] 
+(0,0) to[bend right=40] 
+(0:2*\r) to[bend left=20] cycle;
+\end{scope}}
+\fill[gray] (0,0) circle(1);
+\draw[line width=2mm] (0,0) circle(1) circle(.5);
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}

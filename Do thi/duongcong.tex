@@ -1,0 +1,17 @@
+\documentclass[border=3pt,tikz]{standalone}
+\usepackage[utf8]{vietnam}
+\usetikzlibrary{calc,angles,intersections,shapes.geometric,arrows,decorations.markings,arrows.meta,patterns.meta,patterns}
+\usepackage{tikz-3dplot,pgfplots}
+\pgfplotsset{compat=1.15}
+\usepgfplotslibrary{polar}
+\usepackage{amsmath}
+\begin{document}
+	\begin{tikzpicture}[>=stealth,line join=round,line cap=round,font=\footnotesize,scale=1]
+		\draw[->](-2,0)--(0,0)node[above left]{$O$}--(3,0)node[below]{$x$};
+		\draw[->](0,-1)--(0,3)node[right]{$y$};
+		\draw(-1.1,-1).. controls (-.7,3.5) and (-.27,2.7) .. (0,2).. controls (0.7,-0.2) and (1.3,-0.3)..(1.605,-0.125).. controls (2.25,0.16) and (2.2,-0.1)..(2.4,-1);
+		\foreach\x/\y in{-1/0,1/0,2/0,0/1,0/2,0/0}
+		\fill(\x,\y)circle(1.2pt);
+		\foreach\i/\j/\goc/\diem in{-1/0/130/x_1,1/0/45/x_2,2/0/45/x_3}\path(\i,\j) node[shift={(\goc:7pt)}]{$\diem$};
+	\end{tikzpicture}
+\end{document}

@@ -1,0 +1,109 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{animate}
+\begin{document}
+%==================
+\def\tamngoaitiep(#1,#2,#3)(#4){
+\path
+($(#1)!.5!(#2)$) coordinate (#1#2)
+($(#1)!.5!(#3)$) coordinate (#1#3)
+($(#1#2)!1mm!90:(#1)$) coordinate (#1#2t)
+($(#1#3)!1mm!90:(#1)$) coordinate (#1#3t)
+(intersection of #1#2--#1#2t and #1#3--#1#3t) coordinate (#4)
+;
+}
+\def\chanphangiac(#1,#2,#3)(#4){
+\path
+($(#2)!1mm!(#1)$) coordinate (#2#1)
+($(#2)!1mm!(#3)$) coordinate (#2#3)
+($(#2#1)!.5!(#2#3)$) coordinate (#2tpg)
+(intersection of #2--#2tpg and #1--#3) coordinate (#4)
+;
+}
+\def\tructam(#1,#2,#3)(#4){
+\path
+($(#1)!(#2)!(#3)$) coordinate (#1#2#3)
+($(#2)!(#3)!(#1)$) coordinate (#2#3#1)
+(intersection of #2--#1#2#3 and #3--#2#3#1) coordinate (#4)
+;
+}
+
+%\pagecolor{green}
+\def\r{3}
+\begin{animateinline}[controls,autoplay,palindrome,loop]{8}
+\multiframe{50}{i=0+1}{
+%\foreach \i in {0,...,49,50,49,...,0}{
+\begin{tikzpicture}[join=round,cap=round,transform shape]
+\path
+(0:0) coordinate (O)
+(95+\i:\r) coordinate (A)
+(210:\r) coordinate (B)
+(-30:\r) coordinate (C)
+($(B)!.5!(C)$) coordinate (L)
+($(C)!.5!(A)$) coordinate (M)
+($(A)!.5!(B)$) coordinate (N)
+(L) coordinate (X)
+(M) coordinate (Y)
+(N) coordinate (Z)
+($(Y)!.5!(Z)$) coordinate (Txy)
+($(X)!.5!(Z)$) coordinate (Txz)
+;
+%%%%%%%%%%%%
+\tamngoaitiep (X,Y,Z)(Oxyz)
+\chanphangiac(Z,X,Y)(X_1)
+\chanphangiac(X,Y,Z)(Y_1)
+\path
+($(X)!1mm!90:(X_1)$) coordinate (Xt)
+($(Y)!1mm!90:(Y_1)$) coordinate (Yt)
+(intersection of X--Xt and Y--Z) coordinate (X_2)
+(intersection of Y--Yt and X--Z) coordinate (Y_2)
+($(X_1)!2!(Txy)$) coordinate (X_1')
+($(X_2)!2!(Txy)$) coordinate (X_2')
+($(Y_1)!2!(Txz)$) coordinate (Y_1')
+($(Y_2)!2!(Txz)$) coordinate (Y_2')
+($(X_1')!.5!(X_2')$) coordinate (tamx)
+($(Y_1')!.5!(Y_2')$) coordinate (tamy)
+;
+\path[name path=cirax] (tamx) let\p1=($(tamx)-(X_1')$) in circle ({veclen(\x1,\y1)});
+\path[name path=ciray] (tamy) let\p1=($(tamy)-(Y_1')$) in circle ({veclen(\x1,\y1)});
+\path[name intersections={of=cirax and ciray}] (intersection-2) coordinate (P);
+%%%%%%%%%%%%
+\path
+($(A)!(O)!(P)$) coordinate (Oa)
+($(B)!(O)!(P)$) coordinate (Ob)
+($(C)!(O)!(P)$) coordinate (Oc)
+($(A)!2!(Oa)$) coordinate (D)
+($(B)!2!(Ob)$) coordinate (E)
+($(C)!2!(Oc)$) coordinate (F)
+;
+\tamngoaitiep(A,P,E)(O_1)
+\tamngoaitiep(A,P,F)(O_2)
+\tamngoaitiep(B,P,F)(O_3)
+\tamngoaitiep(B,P,D)(O_4)
+\tamngoaitiep(C,P,D)(O_5)
+\tamngoaitiep(C,P,E)(O_6)
+\tamngoaitiep(O_1,O_2,O_3)(tamo)
+%%%%%%%%%%%%
+\pgfresetboundingbox
+\clip (O) circle (1.5*\r);
+\draw[red] (O_1) let\p1=($(O_1)-(P)$) in circle ({veclen(\x1,\y1)});
+\draw[red] (O_2) let\p1=($(O_2)-(P)$) in circle ({veclen(\x1,\y1)});
+\draw[red] (O_3) let\p1=($(O_3)-(P)$) in circle ({veclen(\x1,\y1)});
+\draw[red] (O_4) let\p1=($(O_4)-(P)$) in circle ({veclen(\x1,\y1)});
+\draw[red] (O_5) let\p1=($(O_5)-(P)$) in circle ({veclen(\x1,\y1)});
+\draw[red] (O_6) let\p1=($(O_6)-(P)$) in circle ({veclen(\x1,\y1)});
+\draw[blue] (tamo) let\p1=($(tamo)-(O_1)$) in circle ({veclen(\x1,\y1)});
+\draw[red]
+(O) circle (\r)
+;
+\draw 
+(A)--(B)--(C)--cycle 
+(A)--(D) (B)--(E) (C)--(F)
+;
+\foreach \x/\g in {A/90,B/180,C/0,O/90,P/70}\draw[blue,fill=white] (\x) circle (.05) +(\g:.3) node{$\x$};
+\foreach \x/\g in {D/-90,E/0,F/180,O_1/90,O_2/120,O_3/180,O_4/240,O_5/-90,O_6/0}\draw[fill=white] (\x) circle (.05) +(\g:.3) node{$\x$};
+\end{tikzpicture}
+}
+\end{animateinline}
+\end{document}
