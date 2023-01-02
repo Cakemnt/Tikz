@@ -1,0 +1,39 @@
+\documentclass[tikz,border=1cm]{standalone}
+\usepackage[utf8]{vietnam}
+\pagecolor{yellow!10}
+\usepackage{fancyhdr}
+\begin{document}
+	\begin{tikzpicture}[transform shape,yscale=0.75]
+		\def\a{2}
+		\def\b{\a}
+		\tikzset{s/.style={outer sep=0,rounded corners=2mm,rectangle,draw,minimum  height=1.5cm,align=center,line width=2pt,right}};
+		\tikzset{van/.pic={
+				\draw(\a,0)arc(0:360:{\a});
+				\foreach \i in {0,10,...,360}
+				\fill[draw=teal](\i:{\a})..controls++(\i:1) and++({\i+10}:1)..({\i+10}:{\a})arc(\i+10:\i: {\a});
+				\fill[white](\a,0)arc(0:360:{\a});
+		}}
+		\def\x{0.1}
+		\path(-1,0)node(A){}++(4,5)node(A1)[s,magenta]{\color{teal}\fontfamily{qag}\fontsize{12pt}{5pt}\selectfont KHÁI NIỆM}(A)++(6,2)node[s,teal!50!green](A2){\color{red}\fontfamily{qag}\fontsize{12pt}{5pt}\selectfont CÁCH MÔ TẢ}(A)++(6,-2)node[s,magenta](A3){\color{blue}\fontfamily{qag}\fontsize{12pt}{5pt}\selectfont BIỂU DIỄN TẬP HỢP BẰNG SƠ ĐỒ VEN}(A)++(5,-6)node[s,green](A4){\color{orange}\fontfamily{qag}\fontsize{12pt}{5pt}\selectfont MỘT SỐ PHÉP BIẾN ĐỔI TẬP HỢP}(A)++(4,-8)node[s,blue](A5){\color{red}\fontfamily{qag}\fontsize{12pt}{5pt}\selectfont SỐ PHẦN TỬ CỦA TẬP HỢP};
+		\path(A1)++(3,2)node[s,blue](A11){ \fontfamily{qag}\fontsize{12pt}{5pt}\selectfont x là phần tử của tập A}
+		(A1)++(3,-1)node[s,teal](A12){\fontfamily{qag}\fontsize{12pt}{5pt}\selectfont  x không là phần tử của tập A};
+		\path[green!30!teal](A2)++(3,0)node[s,red](A21){\color{green!80!red} \fontfamily{qag}\fontsize{12pt}{5pt}\selectfont Liệt kê các phần tử}
+		(A2)++(3,-2)node[s](A22){ \color{blue}\fontfamily{qag}\fontsize{12pt}{5pt}\selectfont Chỉ ra tính chất đặc trưng của phần tử};
+		\path[magenta](A4.east)++(1,1)node[s](A41){ \color{blue}\fontfamily{qag}\fontsize{12pt}{5pt}\selectfont x là phần tử của tập A}
+		(A4.east)++(1,-1)node[s](A42){\fontfamily{qag}\fontsize{12pt}{5pt}\selectfont x không là phần tử của tập A};
+		\begin{scope}
+			\fill[out=0,in=180,cyan](A)to([shift={(-0.25,0)}]A1.west)--++(120:0.2)--(A1.west)--++(-140:0.4)--([shift={(-0.25,-0.1)}]A1.west)[out=180,in=0]to([shift={(0.75,0)}]A);
+			\fill[out=0,in=180,magenta](A)to([shift={(-0.25,0)}]A2.west)--++(120:0.2)--(A2.west)--++(-140:0.4)--([shift={(-0.25,-0.1)}]A2.west)[out=180,in=0]to([shift={(1,0)}]A);
+			\fill[out=0,in=180,green](A)to([shift={(-0.25,0)}]A3.west)--++(120:0.2)--(A3.west)--++(-140:0.4)--([shift={(-0.25,-0.1)}]A3.west)[out=180,in=0]to([shift={(-2,0)}]A);
+			\fill[out=0,in=180,teal](A)to([shift={(-0.25,0)}]A4.west)--++(120:0.2)--(A4.west)--++(-140:0.4)--([shift={(-0.25,-0.1)}]A4.west)[out=180,in=0]to([shift={(-1,0)}]A);
+			\fill[out=0,in=180,orange](A)to([shift={(-0.25,0)}]A5.west)--++(120:0.2)--(A5.west)--++(-140:0.4)--([shift={(-0.25,-0.1)}]A5.west)[out=180,in=0]to([shift={(-1,0)}]A);
+			\draw[line width=2pt,teal](A11.east)--++(1,0)node[s](a){\textbf{\fontfamily{qag}\fontsize{12pt}{5pt}\selectfont $x\in A$}};
+		\end{scope}
+		\path(0,0)pic[cyan,scale=1.1]{van}(0,0)pic[green]{van}(0,0)pic[yellow]{van}(0,0)pic[green,scale=0.9]{van};
+		\path(0,0)node[xscale=1.5]{\color{magenta} \textbf{\fontfamily{qag}\fontsize{15pt}{5pt}\selectfont TẬP HỢP}};
+		\begin{scope}[out=0,in=180,line width =2pt]
+			\foreach \x/\y/\mau in{A1/A11/cyan,A1/A12/cyan,A2/A21/green!50!teal,A2/A22/green!50!teal,A4/A41/magenta,A4/A42/magenta}
+			\draw[\mau](\x.east)to(\y.west);
+		\end{scope}
+	\end{tikzpicture}
+\end{document}
