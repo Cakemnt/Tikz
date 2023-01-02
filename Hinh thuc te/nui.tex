@@ -1,0 +1,96 @@
+\documentclass[tikz,border=5mm]{standalone}
+%%Đánh dấu góc
+\usepackage[utf8]{vietnam}
+\usepackage[left=1.5cm,right=1cm,top=1.5cm,bottom=1.5cm]{geometry}
+\usepackage{amsmath, amsthm, amssymb,verbatim}
+\usepackage{tikz}
+\usetikzlibrary{calc,angles,quotes,arrows,angles,decorations.markings}
+\tikzset{
+	ex_markstyle/.style={},
+	ex_mark/.style  n args={1}{decoration={ markings, %
+			mark= at position 0.5 with
+			with{
+				\ifnum#1=1
+				\draw[ex_markstyle] (0pt,-2pt) -- (0pt,2pt);
+				\fi
+				\ifnum#1=2
+				\draw[ex_markstyle] (-1pt,-2pt) -- (-1pt,2pt);
+				\draw[ex_markstyle] (1pt,-2pt) -- (1pt,2pt);
+				\fi
+				\ifnum#1=3
+				\draw[ex_markstyle] (-2pt,-2pt) -- (-2pt,2pt);
+				\draw[ex_markstyle] (0pt,-2pt) -- (0pt,2pt);
+				\draw[ex_markstyle] (2pt,-2pt) -- (2pt,2pt);
+				\fi
+				\ifnum#1=4
+				\draw[ex_markstyle] (-1pt,-1pt) -- (1pt,1pt);
+				\draw[ex_markstyle] (-1pt,1pt) -- (1pt,-1pt);
+				\fi
+		} },
+		pic actions/.append code=\tikzset{postaction=decorate}},
+}
+
+\begin{document}
+	\definecolor{lightcornflowerblue}{rgb}{0.6, 0.81, 0.93}
+	\definecolor{cadmiumgreen}{rgb}{0.0, 0.42, 0.24}
+	\definecolor{trueblue}{rgb}{0.0, 0.45, 0.81}
+	\definecolor{tumbleweed}{rgb}{0.87, 0.67, 0.53}%màu cát
+	\definecolor{burntumber}{rgb}{0.54, 0.2, 0.14}
+	
+	\begin{tikzpicture}[line join=round, line cap=round,scale=2,transform shape]
+		\clip (-8,-3.5) rectangle (3.5,3.5);
+		
+		
+		\def\n{ %nước biển
+			(-8,-2.85)
+			..controls +(160:1) and +(-40:.4) ..(3.5,-2.85)--(3.5,-3.3)--(-8,-3.3)--cycle
+			;}
+		\draw \n;
+		\fill[lightcornflowerblue] \n;
+		
+		\tikzset{nui/.pic={%Núi
+				\def\N{ 
+					(3,-3.3)
+					..controls +(160:.3) and +(-20:.5) ..(1.9,-.8)
+					..controls +(160:.5) and +(-20:.4) ..(1.3,.7)
+					..controls +(160:.3) and +(-20:.3) ..(.8,1.7)
+					..controls +(160:.4) and +(-20:.2) ..
+					(.1,2.9)
+					..controls +(160:.2) and +(-30:.1) ..  (-0.3,2)
+					..controls +(160:.2) and +(-30:.2) ..  (-.7,1)
+					..controls +(160:.2) and +(-40:.2) ..  (-1.2,-.5)
+					..controls +(160:.2) and +(-40:.2) ..  (-2,-3.3)
+					--cycle
+					;}
+				\draw \N;
+				\fill[burntumber] \N;
+		}}
+		
+		\path 
+		(0,0)pic[scale=1]{nui}
+		;
+		\node[blue] at (.1,2.9) [above]{\tiny T};
+		\draw[red] (-6.5,-2.85)--(.1,2.9);
+		\node[blue] at (-6.5,-2.85) [below]{\tiny A};
+		\draw[red] (-4,-2.85)--(.1,2.9);
+		\node[blue] at (-4,-2.85) [below]{\tiny B};
+		\draw[dashed,white] (-2,-2.85)--(.1,-2.85);
+		\draw[red] (-2,-2.85)--(-6.5,-2.85);
+		\node[white] at (.1,-2.85) [above right]{\tiny $N$};
+		
+		\path (.1,2.9) coordinate (T)
+		(-4,-2.85) coordinate (A)
+		(-6.5,-2.85) coordinate (B)
+		(.1,-2.85) coordinate (N)
+		;
+		\draw[dashed,white] (.1,-2.85)--(T);
+		\draw    pic["\tiny $39{,}6^\circ$", draw=black, angle eccentricity=3, angle radius=.3cm, color=blue]
+		{angle=N--A--T};
+		\pic[draw,ex_mark=1,,ex_markstyle/.style={scale=3},color=blue] {angle = A--B--T};
+		\draw    pic["\tiny $27{,}4^\circ$", draw=black, angle eccentricity=2.2, angle radius=.5cm, color=blue]
+		{angle=A--B--T}; 			
+		\draw    pic["\tiny $90^{\circ}$", draw=black, angle eccentricity=1.5, angle radius=0.25cm,color=white]
+		{right angle=T--N--B}; %Góc vuông
+	\end{tikzpicture}
+	
+\end{document}
