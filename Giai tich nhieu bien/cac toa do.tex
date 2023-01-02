@@ -1,0 +1,95 @@
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage[utf8]{vietnam}
+\usepackage{amssymb,amsmath,amsthm}
+\usetikzlibrary{calc,angles,quotes}
+\pagecolor{yellow!15}
+\begin{document}
+	\def\r{{\color{cyan}r}}
+	\def\cphi{{\color{blue}\varphi}}
+	\def\ctheta{{\color{red}\theta}}
+	\begin{tikzpicture}
+		\path
+		(0,0) coordinate (O) node[below left]{O}
+		(3.5,0) coordinate (X) node[below]{$x$}
+		(0,2) coordinate (Y) node[left]{$y$}
+		($(X)+(Y)$) coordinate (M) node[above right]{$M$};
+		\pic[blue,-stealth,draw,"$\varphi$",angle radius=8mm, angle eccentricity=1.3]{angle=X--O--M};
+		\draw[dashed] (X)--(M) (Y)--(M);
+		\draw[cyan,thick] (O)--(M) node[midway,above]{$r$};
+		\begin{scope}[shorten >=-5mm,shorten <=-10mm,->]
+			\draw (O)--(X);
+			\draw (O)--(Y);
+		\end{scope}
+		\foreach \p in {X,Y,O,M}
+		\draw[fill=white] (\p) circle(1pt);
+		\path (current bounding box.west) +(-2,1) node[align=left,font=\sffamily,fill=gray!20,inner sep=2mm,rounded corners]{
+			Polar Coordinates\\
+			Hệ tọa độ cực $(\r,\cphi)$\\[2mm]
+			$x=\r \cos\cphi$\\
+			$y=\r \sin\cphi$\\[2mm]
+			$0\leq \r$\\
+			$0\leq\cphi< 2\pi$
+		};
+	\end{tikzpicture}
+	\begin{tikzpicture}
+		\path
+		(0,0) coordinate (O) +(150:.25) node{O}
+		(-135:1.5) coordinate (X) node[left]{$x$}
+		(0:3.5) coordinate (Y) node[above]{$y$}
+		(90:3.5) coordinate (Z) node[left]{$z$}
+		($(X)+(Y)$) coordinate (Mxy)
+		($(Mxy)+(Z)$) coordinate (M) node[above right]{$M$};
+		\pic[blue,-stealth,draw,"$\varphi$",angle radius=5mm]{angle=X--O--Mxy};
+		\draw[dashed] (O)--(M)
+		(X)--(Mxy) (Y)--(Mxy) (Mxy)--(M) (Z)--(M);
+		\draw[cyan,thick] (O)--(Mxy) node[pos=.6,above]{$r$};
+		\begin{scope}[shorten >=-5mm,->]
+			\draw (O)--(X);
+			\draw (O)--(Y);
+			\draw (O)--(Z);
+		\end{scope}
+		\foreach \p in {X,Y,Z,O,M,Mxy}
+		\draw[fill=white] (\p) circle(1pt);
+		\path (current bounding box.west) +(-1.5,1) node[align=left,font=\sffamily,fill=gray!20,inner sep=2mm,rounded corners]{
+			Cylindrical Coordinates\\
+			Hệ tọa độ trụ $(\r,\cphi,z)$\\[2mm]
+			$x=\r \cos\cphi$\\
+			$y=\r \sin\cphi$\\
+			$z=z$\\[2mm]
+			$0\leq \r$\\
+			$0\leq\cphi< 2\pi$\\
+			$z\in\mathbb{R}$
+		};
+	\end{tikzpicture}
+	\begin{tikzpicture}
+		\path
+		(0,0) coordinate (O) +(150:.25) node{O}
+		(-135:1.5) coordinate (X) node[left]{$x$}
+		(0:3.5) coordinate (Y) node[above]{$y$}
+		(90:3.5) coordinate (Z) node[left]{$z$}
+		($(X)+(Y)$) coordinate (Mxy)
+		($(Mxy)+(Z)$) coordinate (M) node[above right]{$M$};
+		\pic[blue,-stealth,draw,"$\varphi$",angle radius=5mm]{angle=X--O--Mxy};
+		\pic[red,stealth-,draw,"$\theta$",angle radius=8mm]{angle=M--O--Z};
+		\draw[dashed] (O)--(Mxy)
+		(X)--(Mxy) (Y)--(Mxy) (Mxy)--(M) (Z)--(M);
+		\draw[cyan,thick] (O)--(M) node[midway,above]{$r$};
+		\begin{scope}[shorten >=-5mm,->]
+			\draw (O)--(X);
+			\draw (O)--(Y);
+			\draw (O)--(Z);
+		\end{scope}
+		\foreach \p in {X,Y,Z,O,M,Mxy}
+		\draw[fill=white] (\p) circle(1pt);
+		\path (current bounding box.west) +(-1.5,1) node[align=left,font=\sffamily,fill=gray!20,inner sep=2mm,rounded corners]{
+			Spherical Coordinates\\
+			Hệ tọa độ cầu $(\r,\cphi,\ctheta)$\\[2mm]
+			$x=\r \cos\cphi\;\sin\ctheta$\\
+			$y=\r \sin\cphi\;\sin\ctheta$\\
+			$z=\r \cos\ctheta$\\[2mm]
+			$0\leq \r$\\
+			$0\leq\cphi< 2\pi$\\
+			$0\leq\ctheta\leq\pi$
+		};
+	\end{tikzpicture}
+\end{document}
